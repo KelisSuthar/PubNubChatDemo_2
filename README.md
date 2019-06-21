@@ -1,2 +1,0 @@
-# AddedFoodDelivery-Android
-Shruti
