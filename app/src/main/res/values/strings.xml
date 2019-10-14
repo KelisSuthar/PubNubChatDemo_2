@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">AddedFoodDelivery-User-Android</string>
+    <string name="let_s_get_started">Let\'s get started</string>
+    <string name="order_your_food_from_the_best_restaurants_near_your_area_location">Order your food from the best restaurants\nnear your area location.</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_twitter">Continue with Twitter</string>
+    <string name="continue_with_personal_email">Continue with Personal Email</string>
+    <string name="i_ll_log_in_letter">I\'ll log in letter</string>
+    <string name="by_logging_in_you_agree_to_added_terms_of_services_privacy_policy">By logging in you agree to ADDED Terms of Services,\nPrivacy Policy</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="don_t_have_an_account_create_now">
+        <font fgcolor="#000000">Don\'t have an account?</font>
+        <font fgcolor="#DB6D0B">Sign up</font>
+    </string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="val_email">Please Enter Your Email</string>
+    <string name="val_validate_email">Please Enter Validate Email</string>
+    <string name="val_password">Please Enter Your Password</string>
+    <string name="please_enter_your_email_address_you_will_receive_a_link_to_create_a_new_password_via_email">Please enter your email address. You will receive a link to create a new password via email</string>
+    <string name="send">Send</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="user_name">User Name</string>
+    <string name="bottom_signup" >
+         <font fgcolor="#000000">By clicking Sign up you agree to the following\n</font>
+        <font fgcolor="#DB6D0B">Terms and Conditions</font>
+         <font fgcolor="#000000"> without reservation</font>
+
+    </string>
+    <string name="val_name">Please Enter Your Name</string>
+    <string name="val_conf_password">Please Enter Valid Password</string>
 </resources>

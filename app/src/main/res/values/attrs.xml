@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomTextView">
+        <attr name="font_name">
+            <enum name="montserratREGULAR" value="1" />
+            <enum name="montserratSemiBold" value="2" />
+            <enum name="montserratBold" value="3" />
+            <enum name="montserratMedium" value="4" />
+        </attr>
+    </declare-styleable>
+
+</resources>
