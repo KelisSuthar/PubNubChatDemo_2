@@ -169,7 +169,7 @@
                         android:background="@drawable/et_bg"
                         android:drawableStart="@drawable/ic_form_passwordorange"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:hint="@string/password"
+                        android:hint="@string/confirm_password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:maxLines="1"

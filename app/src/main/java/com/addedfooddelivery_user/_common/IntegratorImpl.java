@@ -11,7 +11,7 @@ public class IntegratorImpl {
             loginImaplementView.emailValidation();
         } else if (TextUtils.isEmpty(password)) {
             loginImaplementView.passwordValidation();
-        } else if (password.length() < 5) {
+        } else if (password.length() < 8) {
             loginImaplementView.passwordMinValidation();
         } else {
             loginImaplementView.success();
@@ -27,7 +27,7 @@ public class IntegratorImpl {
             signUpImaplementView.emailValidation();
         } else if (TextUtils.isEmpty(edtPassword)) {
             signUpImaplementView.passwordValidation();
-        } else if (edtPassword.length() < 5) {
+        } else if (edtPassword.length() < 8) {
             signUpImaplementView.passwordMinValidation();
         } else if (TextUtils.isEmpty(edtConfirmPassword)) {
             signUpImaplementView.passwordValidation();

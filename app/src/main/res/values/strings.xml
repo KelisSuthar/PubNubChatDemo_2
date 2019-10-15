@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">AddedFoodDelivery-User-Android</string>
+    <!--validation string-->
+    <string name="val_email">Please Enter Your Email</string>
+    <string name="val_validate_email">Please Enter Validate Email</string>
+    <string name="val_password">Please Enter Your Password</string>
+    <string name="val_name">Please Enter Your Name</string>
+    <string name="val_conf_password">Password do not match</string>
+    <string name="val_min_password">Please Enter Eight Digit Password</string>
+
+
     <string name="let_s_get_started">Let\'s get started</string>
     <string name="order_your_food_from_the_best_restaurants_near_your_area_location">Order your food from the best restaurants\nnear your area location.</string>
     <string name="continue_with_facebook">Continue with Facebook</string>
@@ -18,20 +27,36 @@
         <font fgcolor="#DB6D0B">Sign up</font>
     </string>
     <string name="login_to_your_account">Login to your account</string>
-    <string name="val_email">Please Enter Your Email</string>
-    <string name="val_validate_email">Please Enter Validate Email</string>
-    <string name="val_password">Please Enter Your Password</string>
+
     <string name="please_enter_your_email_address_you_will_receive_a_link_to_create_a_new_password_via_email">Please enter your email address. You will receive a link to create a new password via email</string>
     <string name="send">Send</string>
     <string name="sign_up">Sign Up</string>
     <string name="create_an_account">Create an account</string>
     <string name="user_name">User Name</string>
-    <string name="bottom_signup" >
+    <string name="bottom_signup">
          <font fgcolor="#000000">By clicking Sign up you agree to the following\n</font>
-        <font fgcolor="#DB6D0B">Terms and Conditions</font>
+         <font fgcolor="#DB6D0B">Terms and Conditions</font>
          <font fgcolor="#000000"> without reservation</font>
-
     </string>
-    <string name="val_name">Please Enter Your Name</string>
-    <string name="val_conf_password">Please Enter Valid Password</string>
+    <string name="verify_your_phone_number">verify your\nphone number</string>
+    <string name="we_have_sent_you_an_sms_with_code_to_the_nuber_above">We have sent you an sms with code to the\nnuber above</string>
+    <string name="phone_number">Phone number</string>
+    <string name="next">Next</string>
+    <string name="phone_verification">Phone verification</string>
+    <string name="enter_your_otp_code_here">Enter your OTP code here</string>
+    <string name="done">Done</string>
+    <string name="bottom_verification">
+        <font fgcolor="#000000">Didn\'t you received any code?\n</font>
+        <font fgcolor="#DB6D0B">Resend a new code</font>
+    </string>
+    <string name="change_phone_number">Chnage Phone Number</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_profile">My Added</string>
+    <string name="trending_this_week">Trending This Week</string>
+    <string name="view_all">View all</string>
+    <string name="most_popular_reataurants">Most Popular Restaurants</string>
+    <string name="rest_name_demo">Callifornia Rolls</string>
+    <string name="demo_dish_name">Korean BBQ</string>
+    <string name="demo_prise">$ 25.00</string>
 </resources>

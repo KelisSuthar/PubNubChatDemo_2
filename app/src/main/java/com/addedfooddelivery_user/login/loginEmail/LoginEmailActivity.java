@@ -1,14 +1,19 @@
 package com.addedfooddelivery_user.login.loginEmail;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.IntegratorImpl;
@@ -18,6 +23,8 @@ import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomEditText;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.forgottPassword.ForgotPasswordActivity;
+import com.addedfooddelivery_user.home.MainActivity;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
 import com.addedfooddelivery_user.signup.SignupActivity;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,9 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class EmailLoginActivity extends AppCompatActivity {
+public class LoginEmailActivity extends AppCompatActivity {
     @BindView(R.id.ll_email_login)
-    LinearLayout llMainView;
+    CoordinatorLayout llMainView;
     @BindView(R.id.img_login_banner)
     ImageView imgLoginBanner;
     @BindView(R.id.llLogin)
@@ -42,7 +49,7 @@ public class EmailLoginActivity extends AppCompatActivity {
     CustomTextView tvForgotPassword;
     @BindView(R.id.txtSignup)
     CustomTextView txtSignup;
-    @BindView(R.id.img_back)
+    @BindView(R.id.img_back_login)
     ImageView imgBack;
 
     @Override
@@ -55,45 +62,58 @@ public class EmailLoginActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btLogin, R.id.tvForgotPassword, R.id.txtSignup})
+    @OnClick({R.id.btLogin, R.id.tvForgotPassword, R.id.txtSignup,R.id.img_back_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btLogin:
-                IntegratorImpl.LoginIntegrator(edEmail.getText().toString().trim(), edPassword.getText().toString().trim(), new LoginImaplementView() {
+               /* IntegratorImpl.LoginIntegrator(edEmail.getText().toString().trim(), edPassword.getText().toString().trim(), new LoginImaplementView() {
                     @Override
                     public void email() {
-                        ReusedMethod.showSnackBar(EmailLoginActivity.this, getResources().getString(R.string.val_email), 1);
+                        ReusedMethod.showSnackBar(LoginEmailActivity.this, getResources().getString(R.string.val_email), 1);
                     }
 
                     @Override
                     public void emailValidation() {
-                        ReusedMethod.showSnackBar(EmailLoginActivity.this, getResources().getString(R.string.val_validate_email), 1);
+                        ReusedMethod.showSnackBar(LoginEmailActivity.this, getResources().getString(R.string.val_validate_email), 1);
                     }
 
                     @Override
                     public void passwordValidation() {
-                        ReusedMethod.showSnackBar(EmailLoginActivity.this, getResources().getString(R.string.val_password), 1);
+                        ReusedMethod.showSnackBar(LoginEmailActivity.this, getResources().getString(R.string.val_password), 1);
                     }
 
                     @Override
                     public void passwordMinValidation() {
-
+                        ReusedMethod.showSnackBar(LoginEmailActivity.this, getResources().getString(R.string.val_min_password), 1);
                     }
 
                     @Override
                     public void success() {
 
                     }
-                });
+                });*/
+                startActivity(new Intent(LoginEmailActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
                 break;
             case R.id.tvForgotPassword:
-                startActivity(new Intent(EmailLoginActivity.this, ForgotPasswordActivity.class));
+                startActivity(new Intent(LoginEmailActivity.this, ForgotPasswordActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
                 break;
             case R.id.txtSignup:
-                startActivity(new Intent(EmailLoginActivity.this, SignupActivity.class));
+                startActivity(new Intent(LoginEmailActivity.this, SignupActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                break;
+            case R.id.img_back_login:
+                finish();
                 break;
 
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }

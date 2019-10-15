@@ -2,6 +2,7 @@ package com.addedfooddelivery_user.forgottPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +14,8 @@ import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.SmartUtils;
 import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomEditText;
-import com.addedfooddelivery_user.login.loginEmail.EmailLoginActivity;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
+import com.addedfooddelivery_user.signup.SignupActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,19 +37,29 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
     }
-    @OnClick(R.id.btSend)
-    public  void clickEvent(View view){
-        switch (view.getId()){
+
+    @OnClick({R.id.btSend, R.id.img_back_forgot})
+    public void clickEvent(View view) {
+        switch (view.getId()) {
             case R.id.btSend:
-                if(edForgotEmail.getText().toString().trim().equalsIgnoreCase("")){
+                if (edForgotEmail.getText().toString().trim().equalsIgnoreCase("")) {
                     ReusedMethod.showSnackBar(ForgotPasswordActivity.this, getResources().getString(R.string.val_email), 1);
-                }
-                else if(!SmartUtils.emailValidator(edForgotEmail.getText().toString().trim())){
+                } else if (!SmartUtils.emailValidator(edForgotEmail.getText().toString().trim())) {
                     ReusedMethod.showSnackBar(ForgotPasswordActivity.this, getResources().getString(R.string.val_validate_email), 1);
-                }else {
+                } else {
                     finish();
                 }
                 break;
+            case R.id.img_back_forgot:
+                onBackPressed();
+                break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ForgotPasswordActivity.this, SocialLoginActivity.class));
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
     }
 }

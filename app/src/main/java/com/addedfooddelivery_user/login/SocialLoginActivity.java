@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.login.loginEmail.EmailLoginActivity;
+import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +40,9 @@ public class SocialLoginActivity extends AppCompatActivity {
             case R.id.ll_fb:
                 break;
             case R.id.ll_email:
-                startActivity(new Intent(SocialLoginActivity.this, EmailLoginActivity.class));
-
+                startActivity(new Intent(SocialLoginActivity.this, LoginEmailActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
                 break;
             case R.id.ll_twitter:
                 break;

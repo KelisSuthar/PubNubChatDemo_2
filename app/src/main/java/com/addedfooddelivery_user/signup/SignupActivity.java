@@ -1,15 +1,16 @@
 package com.addedfooddelivery_user.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.Toolbar;
+import android.widget.TextView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.IntegratorImpl;
@@ -18,7 +19,10 @@ import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomEditText;
 import com.addedfooddelivery_user._common.views.CustomTextView;
-import com.addedfooddelivery_user.login.loginEmail.EmailLoginActivity;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
+import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
+import com.addedfooddelivery_user.verification.VerifyPhoneActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,10 +57,12 @@ public class SignupActivity extends AppCompatActivity {
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_signup:
+                startActivity(new Intent(SignupActivity.this, SocialLoginActivity.class));
+                overridePendingTransition(R.anim.leftto, R.anim.right);
                 finish();
                 break;
             case R.id.btSignup:
-                IntegratorImpl.SignUpIntegrator(etUserName.getText().toString().trim(),
+                /*IntegratorImpl.SignUpIntegrator(etUserName.getText().toString().trim(),
                         edSignupEmail.getText().toString().trim(),
                         edSignupPassword.getText().toString().trim(),
                         edConfirmPassword.getText().toString().trim(), new LoginImaplementView.SignUpImaplementView() {
@@ -77,12 +83,12 @@ public class SignupActivity extends AppCompatActivity {
 
                             @Override
                             public void passwordValidation() {
-                                ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_password), 1);
+                                 ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_password), 1);
                             }
 
                             @Override
                             public void passwordMinValidation() {
-
+                                ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_min_password), 1);
                             }
 
                             @Override
@@ -92,18 +98,36 @@ public class SignupActivity extends AppCompatActivity {
 
                             @Override
                             public void success() {
-                                startActivity(new Intent(SignupActivity.this,EmailLoginActivity.class));
+                                startActivity(new Intent(SignupActivity.this, VerifyPhoneActivity.class));
+                                overridePendingTransition(R.anim.leftto, R.anim.right);
                                 finish();
                             }
 
 
-                        });
+                        });*/
+                startActivity(new Intent(SignupActivity.this, VerifyPhoneActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
                 break;
         }
     }
 
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(SignupActivity.this, LoginEmailActivity.class));
+        overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
+    }
+    static public void showSnackBar(Activity context, String message, int length) {
+        View contextView = context.findViewById(android.R.id.content);
+
+        Snackbar snackbar = Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT);
+        View snackBarView = snackbar.getView();
+        snackBarView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorBlack));
+        TextView tv = snackBarView.findViewById(R.id.snackbar_text);
+        tv.setTextSize(12);
+        tv.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+        snackbar.show();
+
     }
 }

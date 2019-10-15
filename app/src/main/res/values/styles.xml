@@ -12,16 +12,29 @@
         <item name="materialCardViewStyle">@style/Widget.MyApp.MaterialCardView</item>
 
     </style>
+
     <style name="Widget.MyApp.MaterialCardView" parent="Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.MaterialCardView
         </item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
+
     <style name="ShapeAppearanceOverlay.MyApp.MaterialCardView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="splash_theme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@drawable/ic_splash_bg</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.MyApp.MaterialCardView.Small" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_4sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_4sdp</item>
+        <item name="cornerSizeTopRight">@dimen/_4sdp</item>
+        <item name="cornerSizeBottomLeft">@dimen/_4sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_4sdp</item>
+    </style>
 
 </resources>

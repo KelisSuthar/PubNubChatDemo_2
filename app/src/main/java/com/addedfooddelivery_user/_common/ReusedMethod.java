@@ -3,7 +3,9 @@ package com.addedfooddelivery_user._common;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -20,15 +22,23 @@ public class ReusedMethod {
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
     static public void showSnackBar(Activity context, String message, int length) {
-        View contextView = context.findViewById(android.R.id.content);
+        if(context!=null) {
+            View contextView = context.findViewById(android.R.id.content);
 
-        Snackbar snackbar = Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT);
-        View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(ContextCompat.getColor(context, R.color.text_gray));
-        TextView tv = snackBarView.findViewById(R.id.snackbar_text);
-        tv.setTextSize(12);
-        tv.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
-        snackbar.show();
+            Snackbar snackbar = Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT);
+            View snackBarView = snackbar.getView();
+            snackBarView.setBackground(context.getDrawable(R.drawable.email_rectangle));
+            TextView tv = snackBarView.findViewById(R.id.snackbar_text);
+            tv.setTextSize(12);
+            tv.setTextColor(ContextCompat.getColor(context, R.color.colorWhite));
+            tv.setGravity(Gravity.CENTER);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) snackBarView.getLayoutParams();
+
+            params.setMargins(2, params.topMargin, 2, params.bottomMargin + 0);
+
+            snackBarView.setLayoutParams(params);
+            snackbar.show();
+        }
 
     }
 }
