@@ -59,4 +59,19 @@
     <string name="rest_name_demo">Callifornia Rolls</string>
     <string name="demo_dish_name">Korean BBQ</string>
     <string name="demo_prise">$ 25.00</string>
+    <string name="demo_time">Open 8:00 AM</string>
+    <string name="filter">Filter</string>
+    <string name="clear">Clear</string>
+    <string name="sort_by">Sort by</string>
+    <string name="relvance">Relvance</string>
+    <string name="rating">Rating</string>
+    <string name="time">Time</string>
+    <string name="cost_low_high">Cost (Low to High)</string>
+    <string name="cost_high_low">Cost (High to Low)</string>
+    <string name="food_category">Food Category</string>
+    <string name="apply_fillter">Apply Filter</string>
+    <string name="prise">Price</string>
+    <string name="hint_search">Search store or restaurant</string>
+    <string name="my_added">My Added</string>
+    <string name="demo_uname">Natiliya Potts</string>
 </resources>

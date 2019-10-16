@@ -5,6 +5,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -60,9 +65,13 @@ public class LoginEmailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_email_login);
         ButterKnife.bind(this);
 
+
+
+
     }
 
-    @OnClick({R.id.btLogin, R.id.tvForgotPassword, R.id.txtSignup,R.id.img_back_login})
+
+    @OnClick({R.id.btLogin, R.id.tvForgotPassword, R.id.txtSignup, R.id.img_back_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btLogin:

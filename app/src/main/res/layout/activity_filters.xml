@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg_half_circle"
+    tools:context=".home.FiltersActivity">
+
+    <include
+        android:id="@+id/toolbar_fillter"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_fillter"
+        android:layout_marginStart="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10ssp"
+        android:orientation="vertical">
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10ssp"
+            android:text="@string/sort_by"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:font_name="montserratSemiBold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/imgRelevance"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/selectot_relvance"
+                android:drawablePadding="@dimen/_5ssp"
+                android:gravity="center"
+                android:text="@string/relvance"
+                android:textColor="@color/text_selecation_fillter"
+                android:textSize="@dimen/_10ssp" />
+
+            <CheckBox
+                android:id="@+id/imgRating"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_rating"
+                android:drawablePadding="@dimen/_5ssp"
+                android:gravity="center"
+                android:text="@string/rating"
+                android:textColor="@color/text_selecation_fillter"
+                android:textSize="@dimen/_10ssp" />
+
+            <CheckBox
+                android:id="@+id/imgTime"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_time"
+                android:drawablePadding="@dimen/_5ssp"
+                android:gravity="center"
+                android:text="@string/time"
+                android:textColor="@color/text_selecation_fillter"
+                android:textSize="@dimen/_10ssp" />
+
+            <CheckBox
+                android:id="@+id/imgCostLowToHigh"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_low_high"
+                android:drawablePadding="@dimen/_5ssp"
+                android:gravity="center"
+                android:text="@string/cost_low_high"
+                android:textColor="@color/text_selecation_fillter"
+                android:textSize="@dimen/_10ssp" />
+
+            <CheckBox
+                android:id="@+id/imgCostHighToLow"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_high_low"
+                android:drawablePadding="@dimen/_5ssp"
+                android:gravity="center"
+                android:text="@string/cost_high_low"
+                android:textColor="@color/text_selecation_fillter"
+                android:textSize="@dimen/_10ssp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:orientation="vertical">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:text="@string/food_category"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                app:font_name="montserratSemiBold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipsFood"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                app:lineSpacing="@dimen/_5sdp"
+                app:singleSelection="false"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:orientation="vertical">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:text="@string/prise"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                app:font_name="montserratSemiBold" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.addedfooddelivery_user._common.views.CustomButton
+        android:id="@+id/btFilter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/apply_fillter"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/_5sdp"
+        app:elevation="@dimen/_2sdp"
+        app:font_name="montserratSemiBold" />
+</RelativeLayout>

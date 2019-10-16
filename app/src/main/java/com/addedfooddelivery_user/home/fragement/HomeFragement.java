@@ -1,10 +1,12 @@
 package com.addedfooddelivery_user.home.fragement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.home.FiltersActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
 
@@ -27,6 +30,8 @@ public class HomeFragement extends Fragment {
     RecyclerView rcyWeek;
     @BindView(R.id.recyclerMostPopular)
     RecyclerView rcyMost;
+    @BindView(R.id.img_fillter)
+    ImageView imfFillter;
     private Context context;
     TrendingRestaurantListAdpter adpter;
     PopularRestaurantListAdpter mAdpter;
@@ -55,12 +60,11 @@ public class HomeFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        // ReusedMethod.updateStatusBarColor((AppCompatActivity) getContext(),R.color.colorWhite,0);
         ButterKnife.bind(this, view);
+
         trendingRestaurantList = new ArrayList<>();
-        popularRestaurantList=new ArrayList<>();
+        popularRestaurantList = new ArrayList<>();
         fillRecords();
         setRestaurantData();
         return view;
@@ -121,10 +125,13 @@ public class HomeFragement extends Fragment {
 
     }
 
-    @OnClick({})
+    @OnClick({R.id.img_fillter})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
-
+            case R.id.img_fillter:
+                startActivity(new Intent(getContext(), FiltersActivity.class));
+                getActivity().finish();
+                break;
         }
 
     }

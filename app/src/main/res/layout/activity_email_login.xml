@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:id="@+id/ll_email_login"
     android:background="@color/bg_half_circle"
-
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -24,9 +23,10 @@
                 android:id="@+id/img_login_banner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_login_bg" />
+                android:src="@drawable/ic_login_bg"
+                android:adjustViewBounds="true"
+                 />
 
             <ImageView
                 android:id="@+id/img_back_login"
@@ -160,6 +160,7 @@
                         android:layout_marginBottom="@dimen/_16sdp"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="@string/login"
+
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/_12ssp"

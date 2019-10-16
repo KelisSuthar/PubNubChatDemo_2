@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/bg_half_circle"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_minus20sdp"
+        android:layout_marginEnd="@dimen/_15ssp"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+
+        <com.addedfooddelivery_user._common.views.CustomEditText
+            android:id="@+id/edEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:background="@drawable/et_bg"
+            android:drawableStart="@drawable/ic_search_gray"
+            android:drawablePadding="@dimen/_10sdp"
+            android:hint="@string/hint_search"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/text_gray"
+            app:font_name="montserratMedium" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcy_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10ssp"
+        android:layout_marginStart="@dimen/_15ssp"
+        tools:listitem="@layout/row_search_listing"
+        android:layout_marginEnd="@dimen/_15ssp"/>
+
 
 </LinearLayout>
