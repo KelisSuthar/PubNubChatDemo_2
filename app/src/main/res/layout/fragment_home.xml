@@ -18,10 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10ssp"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:layout_toStartOf="@+id/img_fillter"
             android:gravity="center_vertical"
-
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
+            android:drawableEnd="@drawable/ic_locationdropdown_white"
+            android:drawablePadding="@dimen/_5sdp"
             app:font_name="montserratREGULAR" />
 
         <ImageView

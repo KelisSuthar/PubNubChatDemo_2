@@ -72,6 +72,24 @@
     <string name="apply_fillter">Apply Filter</string>
     <string name="prise">Price</string>
     <string name="hint_search">Search store or restaurant</string>
+    <!--added list item-->
     <string name="my_added">My Added</string>
     <string name="demo_uname">Natiliya Potts</string>
+    <string name="my_profile">My Profile</string>
+    <string name="manage_address">Manage Address</string>
+    <string name="change_your_delivery_address">Change your delivery address</string>
+    <string name="help">Help</string>
+    <string name="help_added_com">help@added.com</string>
+    <string name="gift_card">Gift Card</string>
+    <string name="past_order">Past Orders</string>
+    <string name="not_available_gift_card">Not available Gift Card</string>
+    <string name="orders_10">10 Orders</string>
+    <string name="payment">Payment</string>
+    <string name="update_payment_option">Update Payment Option</string>
+    <string name="delivery_with_added">Delivery with Added</string>
+    <string name="check_status">Check Status</string>
+    <string name="get">Get $</string>
+    <string name="add_more_in_wallet">Add More $ in Wallet</string>
+    <string name="settings">Settings</string>
+    <string name="notification_restaurants_profile_status">Notification, Restaurants, Profile, Status</string>
 </resources>
