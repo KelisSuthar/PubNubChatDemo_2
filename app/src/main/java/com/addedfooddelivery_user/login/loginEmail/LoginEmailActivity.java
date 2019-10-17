@@ -64,10 +64,6 @@ public class LoginEmailActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_email_login);
         ButterKnife.bind(this);
-
-
-
-
     }
 
 

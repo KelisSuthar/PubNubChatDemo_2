@@ -53,8 +53,11 @@ dependencies {
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.github.aabhasr1:otpview:1.0.6'
 
-    //seekbar
+    // Dexter runtime permissions
+    implementation 'com.karumi:dexter:6.0.0'
 
+    //location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
 
 }

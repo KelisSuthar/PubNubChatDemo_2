@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_half_circle"
+    android:orientation="vertical"
+    tools:context=".home.SetDeliveryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="@dimen/_13sdp"
+        app:navigationIcon="@drawable/ic_action_tab_backarrow_white">
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/set_delivery_location"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp"
+            app:font_name="montserratSemiBold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.addedfooddelivery_user._common.views.CustomEditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/et_bg"
+        android:elevation="@dimen/_8sdp"
+        android:hint="Search for area, street name...."
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_20sdp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/text_gray"
+        app:font_name="montserratMedium" />
+
+    <LinearLayout
+        android:id="@+id/ll_current_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_livelocation_green"
+            android:tint="@color/text_gray_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:text="@string/use_my_current_location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:font_name="montserratSemiBold" />
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:text="@string/use_my_current_location"
+                android:textColor="@color/text_gray_1"
+                android:textSize="@dimen/_8ssp"
+                app:font_name="montserratSemiBold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@color/black" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_address_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:orientation="vertical">
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:text="@string/saved_addresses"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_8ssp"
+            app:font_name="montserratSemiBold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyAddressList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp" />
+    </LinearLayout>
+</LinearLayout>

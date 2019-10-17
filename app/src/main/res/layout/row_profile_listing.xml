@@ -25,9 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_fillrightarrow_gray"
-            android:tint="@color/text_gray_1"/>
+            android:layout_centerVertical="true" />
 
         <LinearLayout
             android:layout_width="match_parent"

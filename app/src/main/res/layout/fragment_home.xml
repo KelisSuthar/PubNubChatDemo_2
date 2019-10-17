@@ -13,19 +13,41 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
-            android:id="@+id/txtAddress"
+        <LinearLayout
+            android:id="@+id/ll_adddress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10ssp"
             android:layout_marginEnd="@dimen/_10ssp"
             android:layout_toStartOf="@+id/img_fillter"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
-            android:drawableEnd="@drawable/ic_locationdropdown_white"
-            android:drawablePadding="@dimen/_5sdp"
-            app:font_name="montserratREGULAR" />
+            android:orientation="horizontal">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_15ssp"
+                android:drawableEnd="@drawable/ic_locationrightarrow_white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="top"
+                android:text="@string/now"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                app:font_name="montserratREGULAR" />
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:drawableEnd="@drawable/ic_locationdropdown_white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="top"
+                android:singleLine="true"
+                android:text="Not Availble"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                app:font_name="montserratREGULAR" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/img_fillter"

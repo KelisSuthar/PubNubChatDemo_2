@@ -1,18 +1,23 @@
 package com.addedfooddelivery_user._common;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user._common.views.CustomButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import static com.addedfooddelivery_user._common.CommonGps.openGpsEnableSetting;
 
 
 public class ReusedMethod {
@@ -40,5 +45,34 @@ public class ReusedMethod {
             snackbar.show();
         }
 
+    }
+
+    public static void CustomeDialog(Activity activity) {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity,R.style.MyDialogTheme_1);
+
+            final FrameLayout frameView = new FrameLayout(activity);
+            //frameView.setBackground(activity.getResources().getDrawable(R.drawable.dialog_bg));
+            builder.setView(frameView);
+
+            final AlertDialog alertDialog = builder.create();
+            LayoutInflater inflater = alertDialog.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custome_popup, frameView);
+
+
+            CustomButton customButton=dialogView.findViewById(R.id.btLocation);
+            customButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.cancel();
+                    openGpsEnableSetting(activity);
+                }
+            });
+            alertDialog.show();
+            alertDialog.getWindow().setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.dialog_bg));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

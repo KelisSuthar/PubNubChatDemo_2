@@ -9,6 +9,13 @@
     <string name="val_min_password">Please Enter Eight Digit Password</string>
 
 
+    <!--location-->
+    <string name="location">Location</string>
+    <string name="alert_title_need_Location">Need Location Permission</string>
+    <string name="alert_msg_Location">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
     <string name="let_s_get_started">Let\'s get started</string>
     <string name="order_your_food_from_the_best_restaurants_near_your_area_location">Order your food from the best restaurants\nnear your area location.</string>
     <string name="continue_with_facebook">Continue with Facebook</string>
@@ -72,6 +79,7 @@
     <string name="apply_fillter">Apply Filter</string>
     <string name="prise">Price</string>
     <string name="hint_search">Search store or restaurant</string>
+
     <!--added list item-->
     <string name="my_added">My Added</string>
     <string name="demo_uname">Natiliya Potts</string>
@@ -92,4 +100,12 @@
     <string name="add_more_in_wallet">Add More $ in Wallet</string>
     <string name="settings">Settings</string>
     <string name="notification_restaurants_profile_status">Notification, Restaurants, Profile, Status</string>
+    <string name="now">Now</string>
+    <string name="enable_your_location">Enable Your Location</string>
+    <string name="please_allow_to_use_your_location_to_show_nearby_restaurant_on_the_map">Please allow to use your location to show nearby restaurant on the map.</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="set_delivery_location">Set Delivery Location</string>
+    <string name="use_my_current_location">Use my current location</string>
+    <string name="saved_addresses">Saved Addresses</string>
+
 </resources>
