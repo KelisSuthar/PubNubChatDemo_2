@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_half_circle"
+    android:paddingBottom="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_half_circle"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context=".home.DeliveryListActivity">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:contentInsetEnd="@dimen/_13sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgBackProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/ic_action_tab_backarrow_white" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/need_help"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    app:font_name="montserratSemiBold" />
+
+                <ImageView
+                    android:id="@+id/imgComment"
+                    android:layout_width="@dimen/_34sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_action_chat_white"
+                    android:tint="@color/white" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:background="@color/bg_half_circle"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_130sdp"
+                    android:layout_marginStart="@dimen/_15ssp"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:layout_marginEnd="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="2dp">
+
+                    <com.addedfooddelivery_user._common.views.CustomEditText
+                        android:id="@+id/edProComment"
+                        style="@style/custome_et"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="top"
+                        android:hint="@string/describe_your_problems"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:maxLines="4"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_5sdp"
+
+                        app:font_name="montserratMedium" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/add_a_screenshots_optional"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    app:font_name="montserratSemiBold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/img_1"
+                        android:layout_width="@dimen/_65sdp"
+                        android:layout_height="@dimen/_65sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_15ssp"
+                        android:layout_marginTop="@dimen/_15ssp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:id="@+id/imgAdd1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_add_gray" />
+
+                        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                            android:id="@+id/imgScreenShot1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+
+                            app:siShape="@drawable/dialog_bg"
+                            app:siSquare="true" />
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/img_2"
+                        android:layout_width="@dimen/_65sdp"
+                        android:layout_height="@dimen/_65sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_15ssp"
+                        android:layout_marginTop="@dimen/_15ssp"
+
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:id="@+id/imgAdd2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_add_gray" />
+
+                        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                            android:id="@+id/imgScreenShot2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            app:siShape="@drawable/dialog_bg"
+                            app:siSquare="true" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/img_3"
+                        android:layout_width="@dimen/_65sdp"
+                        android:layout_height="@dimen/_65sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_15ssp"
+                        android:layout_marginTop="@dimen/_15ssp"
+                        android:layout_marginEnd="@dimen/_15ssp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="2dp">
+
+                        <ImageView
+                            android:id="@+id/imgAdd3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_add_gray" />
+
+                        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                            android:id="@+id/imgScreenShot3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            app:siShape="@drawable/dialog_bg"
+                            app:siSquare="true" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:gravity="center_vertical">
+
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:layout_toStartOf="@+id/btLogin"
+            android:gravity="center_vertical"
+            android:text="@string/have_you_read_our_faq_yet"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_8ssp"
+            app:font_name="montserratMedium" />
+
+
+        <com.addedfooddelivery_user._common.views.CustomButton
+            android:id="@+id/btSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:text="@string/send"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:cornerRadius="@dimen/_5sdp"
+            app:elevation="@dimen/_2sdp"
+            app:font_name="montserratSemiBold" />
+    </RelativeLayout>
+</RelativeLayout>

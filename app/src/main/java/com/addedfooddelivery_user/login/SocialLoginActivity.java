@@ -1,13 +1,13 @@
 package com.addedfooddelivery_user.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;

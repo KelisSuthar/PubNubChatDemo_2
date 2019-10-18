@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:rsb="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/bg_half_circle"
+    android:orientation="vertical"
     tools:context=".home.FiltersActivity">
 
     <include
@@ -66,6 +66,7 @@
                 android:textSize="@dimen/_10ssp" />
 
             <CheckBox
+                android:visibility="gone"
                 android:id="@+id/imgTime"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -128,9 +129,9 @@
                 android:id="@+id/chipsFood"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:lineSpacing="@dimen/_5sdp"
-                app:singleSelection="false"
-                android:layout_height="wrap_content" />
+                app:singleSelection="false" />
 
         </LinearLayout>
 
@@ -151,6 +152,48 @@
                 android:textSize="@dimen/_10ssp"
                 app:font_name="montserratSemiBold" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp">
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txt_min_prise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$ 0.00"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txt_max_prise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="$ 0.00"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp" />
+            </LinearLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/rngPrise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:bar_color="@color/text_gray_1_tran"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:corner_radius="10"
+                app:data_type="_integer"
+                app:left_thumb_image="@drawable/ic_filter_rangesliderbutton"
+                app:left_thumb_image_pressed="@null"
+                app:max_value="100"
+                app:min_value="0"
+                app:right_thumb_image="@drawable/ic_filter_rangesliderbutton"
+                app:right_thumb_image_pressed="@null"
+                app:steps="5"
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -163,6 +206,7 @@
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_16sdp"
+
         android:layout_marginBottom="@dimen/_16sdp"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/apply_fillter"
@@ -173,4 +217,6 @@
         app:cornerRadius="@dimen/_5sdp"
         app:elevation="@dimen/_2sdp"
         app:font_name="montserratSemiBold" />
+
+
 </RelativeLayout>

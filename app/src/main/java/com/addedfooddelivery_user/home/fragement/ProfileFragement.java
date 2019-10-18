@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.addedfooddelivery_user.Added.MyProfileActivity;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.help.HelpActivity;
+import com.addedfooddelivery_user.home.DeliveryListActivity;
 import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.ProfileListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
@@ -81,19 +84,19 @@ public class ProfileFragement extends Fragment {
                 context.getResources().getString(R.string.demo_uname),
                 context.getResources().getDrawable(R.drawable.ic_editprofile_orange),
                 context.getResources().getDrawable(R.drawable.ic_editprofile_gray),
-                MainActivity.class));
+                MyProfileActivity.class));
 
         profileList.add(new ProfileItem(context.getResources().getString(R.string.manage_address),
                 context.getResources().getString(R.string.change_your_delivery_address),
                 context.getResources().getDrawable(R.drawable.ic_addressmanage_orange),
                 context.getResources().getDrawable(R.drawable.ic_addressmanage_gray),
-                MainActivity.class));
+                DeliveryListActivity.class));
 
         profileList.add(new ProfileItem(context.getResources().getString(R.string.help),
                 context.getResources().getString(R.string.help_added_com),
                 context.getResources().getDrawable(R.drawable.ic_needhelp_orange),
                 context.getResources().getDrawable(R.drawable.ic_needhelp_gray),
-                MainActivity.class));
+                HelpActivity.class));
 
         profileList.add(new ProfileItem(context.getResources().getString(R.string.gift_card),
                 context.getResources().getString(R.string.not_available_gift_card),

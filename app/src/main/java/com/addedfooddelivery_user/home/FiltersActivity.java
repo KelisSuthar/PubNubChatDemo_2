@@ -16,6 +16,9 @@ import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 import com.addedfooddelivery_user.signup.SignupActivity;
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -35,7 +38,6 @@ public class FiltersActivity extends AppCompatActivity {
     CustomTextView txtClear;
     @BindView(R.id.img_back_filter)
     ImageView imgFillter;
-
     @BindView(R.id.imgRelevance)
     CheckBox imgRelevance;
     @BindView(R.id.imgRating)
@@ -48,7 +50,12 @@ public class FiltersActivity extends AppCompatActivity {
     CheckBox imgCostHighToLow;
     @BindView(R.id.btFilter)
     CustomButton btFilter;
-
+    @BindView(R.id.rngPrise)
+    CrystalRangeSeekbar rngPrise;
+    @BindView(R.id.txt_min_prise)
+    CustomTextView txtMinPrise;
+    @BindView(R.id.txt_max_prise)
+    CustomTextView txtMaxPrise;
 
     private ArrayList<String> foodCategoryList = new ArrayList<>();
     private ArrayList<String> selectedCategory = new ArrayList<>();
@@ -60,6 +67,13 @@ public class FiltersActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setFood();
+        rngPrise.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+                txtMinPrise.setText(String.valueOf(minValue));
+                txtMaxPrise.setText(String.valueOf(maxValue));
+            }
+        });
     }
 
     @OnClick(R.id.img_back_filter)

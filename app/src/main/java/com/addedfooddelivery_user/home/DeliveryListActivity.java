@@ -5,21 +5,25 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.views.CustomEditText;
 import com.addedfooddelivery_user.home.fragement.adpter.AddressListAdpter;
-import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class SetDeliveryActivity extends AppCompatActivity {
+public class DeliveryListActivity extends AppCompatActivity {
+    @BindView(R.id.imgBackAddress)
+    ImageView imgBackAddress;
     @BindView(R.id.edtSearch)
     CustomEditText edtSearch;
     @BindView(R.id.ll_current_location)
@@ -31,6 +35,7 @@ public class SetDeliveryActivity extends AppCompatActivity {
     LinearLayoutManager mLayoutManagerDelivery;
     private ArrayList<String> addresssList;
     AddressListAdpter adpter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,17 @@ public class SetDeliveryActivity extends AppCompatActivity {
         setAddressData();
     }
 
+    @OnClick({R.id.imgBackAddress})
+    public void EventClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgBackAddress:
+                onBackPressed();
+                break;
+        }
+    }
+
     private void setAddressData() {
-        adpter = new AddressListAdpter(SetDeliveryActivity.this, addresssList, new AddressListAdpter.OnItemClickListener() {
+        adpter = new AddressListAdpter(DeliveryListActivity.this, addresssList, new AddressListAdpter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {
                 switch (view.getId()) {
@@ -52,7 +66,7 @@ public class SetDeliveryActivity extends AppCompatActivity {
             }
         });
 
-        mLayoutManagerDelivery = new LinearLayoutManager(SetDeliveryActivity.this, RecyclerView.VERTICAL, false);
+        mLayoutManagerDelivery = new LinearLayoutManager(DeliveryListActivity.this, RecyclerView.VERTICAL, false);
         rcyAddressList.setLayoutManager(mLayoutManagerDelivery);
 
         rcyAddressList.setItemAnimator(new DefaultItemAnimator());
@@ -63,5 +77,12 @@ public class SetDeliveryActivity extends AppCompatActivity {
         addresssList.add("1");
         addresssList.add("2");
         addresssList.add("3");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+        finish();
     }
 }

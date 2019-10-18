@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/ll_email_login"
-    android:background="@color/bg_half_circle"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_half_circle">
 
     <LinearLayout
 
@@ -23,10 +23,9 @@
                 android:id="@+id/img_login_banner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_login_bg"
                 android:adjustViewBounds="true"
-                 />
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_login_bg" />
 
             <ImageView
                 android:id="@+id/img_back_login"
@@ -104,19 +103,12 @@
 
                         <com.addedfooddelivery_user._common.views.CustomEditText
                             android:id="@+id/edEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_10ssp"
-                            android:layout_marginEnd="@dimen/_10ssp"
-                            android:background="@drawable/et_bg"
+                            style="@style/custome_et"
                             android:drawableStart="@drawable/ic_form_emailorange"
-                            android:drawablePadding="@dimen/_10sdp"
                             android:hint="@string/email"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/text_gray"
                             app:font_name="montserratMedium" />
 
                     </com.google.android.material.card.MaterialCardView>
@@ -133,38 +125,22 @@
 
                         <com.addedfooddelivery_user._common.views.CustomEditText
                             android:id="@+id/edPassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_10ssp"
-                            android:layout_marginEnd="@dimen/_10ssp"
-                            android:background="@drawable/et_bg"
+                            style="@style/custome_et"
                             android:drawableStart="@drawable/ic_form_passwordorange"
-                            android:drawablePadding="@dimen/_10sdp"
                             android:hint="@string/password"
                             android:imeOptions="actionDone"
                             android:inputType="textPassword"
                             android:maxLines="1"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/text_gray"
                             app:font_name="montserratMedium" />
                     </com.google.android.material.card.MaterialCardView>
 
 
                     <com.addedfooddelivery_user._common.views.CustomButton
                         android:id="@+id/btLogin"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_16sdp"
+                        style="@style/custome_bt"
                         android:layout_marginBottom="@dimen/_16sdp"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="@string/login"
-
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold"
                         app:cornerRadius="@dimen/_5sdp"
                         app:elevation="@dimen/_2sdp"
                         app:font_name="montserratSemiBold" />

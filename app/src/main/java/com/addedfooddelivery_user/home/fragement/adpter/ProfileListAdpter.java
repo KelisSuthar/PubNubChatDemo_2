@@ -90,7 +90,6 @@ public class ProfileListAdpter extends RecyclerView.Adapter<ProfileListAdpter.Vi
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.mainContainer)
         LinearLayout mainContainer;
@@ -116,7 +115,8 @@ public class ProfileListAdpter extends RecyclerView.Adapter<ProfileListAdpter.Vi
                 case R.id.mainContainer:
                     lastCheckedPos = getAdapterPosition();
                     notifyDataSetChanged();
-
+                    context.startActivity(new Intent(context, listData.get(lastCheckedPos).getIntentClass()));
+                    context.overridePendingTransition(R.anim.rightto, R.anim.left);
                     break;
             }
         }

@@ -2,6 +2,8 @@ package com.addedfooddelivery_user._common;
 
 public interface AppConstants {
     int PERMISSIONS_REQUEST_CODE = 500;
+    int REQUEST_ENABLE_CAMERA = 517;
+    int REQUEST_ENABLE_MULTIPLE = 518;
     boolean LOG_DEBUG = true;
 
     String APP_NAME = "AddeddFood";

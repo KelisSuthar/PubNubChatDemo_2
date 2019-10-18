@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AddedApplication"
@@ -18,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".home.SetDeliveryActivity"></activity>
+        <activity android:name=".help.HelpActivity"></activity>
+        <activity android:name=".Added.MyProfileActivity" />
+        <activity android:name=".home.DeliveryListActivity" />
         <activity
             android:name=".home.FiltersActivity"
             android:screenOrientation="portrait"

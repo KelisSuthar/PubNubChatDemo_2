@@ -4,15 +4,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user._common.views.CustomTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -62,12 +65,17 @@ public class AddressListAdpter extends RecyclerView.Adapter<AddressListAdpter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.imgLocationType)
+        ImageView imgLocationType;
+        @BindView(R.id.txtLocationTitle)
+        CustomTextView txtLocationTitle;
+        @BindView(R.id.txtLocationAdd)
+        CustomTextView txtLocationAdd;
 
 
         ViewHolder(@NonNull View view, final OnItemClickListener mListener) {
             super(view);
             ButterKnife.bind(this, view);
-
         }
 
         @OnClick()

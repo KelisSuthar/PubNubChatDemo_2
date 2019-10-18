@@ -6,14 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".home.SetDeliveryActivity">
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    tools:context=".home.DeliveryListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:contentInsetEnd="@dimen/_13sdp"
-        app:navigationIcon="@drawable/ic_action_tab_backarrow_white">
+        app:contentInsetEnd="@dimen/_13sdp">
+
+        <ImageView
+            android:id="@+id/imgBackAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_tab_backarrow_white" />
 
         <com.addedfooddelivery_user._common.views.CustomTextView
             android:layout_width="match_parent"
@@ -22,7 +29,7 @@
             android:gravity="center"
             android:text="@string/set_delivery_location"
             android:textColor="@color/white"
-            android:textSize="@dimen/_15ssp"
+            android:textSize="@dimen/_13ssp"
             app:font_name="montserratSemiBold" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -50,8 +57,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:src="@drawable/ic_livelocation_green"
             android:tint="@color/text_gray_1" />
 
@@ -117,7 +125,7 @@
             android:id="@+id/rcyAddressList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp" />
+tools:listitem="@layout/row_search_listing"
+            tools:itemCount="3" />
     </LinearLayout>
 </LinearLayout>

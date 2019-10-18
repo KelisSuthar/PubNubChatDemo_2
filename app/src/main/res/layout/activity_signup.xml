@@ -76,19 +76,12 @@
 
                     <com.addedfooddelivery_user._common.views.CustomEditText
                         android:id="@+id/etUserName"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_10ssp"
-                        android:layout_marginEnd="@dimen/_10ssp"
-                        android:background="@drawable/et_bg"
+                        style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_userorange"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:hint="@string/user_name"
                         android:imeOptions="actionNext"
                         android:inputType="textPersonName"
                         android:maxLines="1"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/text_gray"
                         app:font_name="montserratMedium" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -105,19 +98,12 @@
 
                     <com.addedfooddelivery_user._common.views.CustomEditText
                         android:id="@+id/edSignupEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_10ssp"
-                        android:layout_marginEnd="@dimen/_10ssp"
-                        android:background="@drawable/et_bg"
+                        style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_emailorange"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:hint="@string/email"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/text_gray"
                         app:font_name="montserratMedium" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -134,19 +120,12 @@
 
                     <com.addedfooddelivery_user._common.views.CustomEditText
                         android:id="@+id/edSignupPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_10ssp"
-                        android:layout_marginEnd="@dimen/_10ssp"
-                        android:background="@drawable/et_bg"
+                        style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_passwordorange"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:hint="@string/password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/text_gray"
                         app:font_name="montserratMedium" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -162,36 +141,20 @@
 
                     <com.addedfooddelivery_user._common.views.CustomEditText
                         android:id="@+id/edConfirmPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_15ssp"
-                        android:layout_marginEnd="@dimen/_15ssp"
-                        android:background="@drawable/et_bg"
+                        style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_passwordorange"
-                        android:drawablePadding="@dimen/_10sdp"
                         android:hint="@string/confirm_password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/text_gray"
                         app:font_name="montserratMedium" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.addedfooddelivery_user._common.views.CustomButton
                     android:id="@+id/btSignup"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
+                   style="@style/custome_bt"
                     android:layout_marginBottom="@dimen/_16sdp"
-                    android:backgroundTint="@color/colorPrimary"
                     android:text="@string/sign_up"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold"
                     app:cornerRadius="@dimen/_5sdp"
                     app:elevation="@dimen/_2sdp"
                     app:font_name="montserratSemiBold" />

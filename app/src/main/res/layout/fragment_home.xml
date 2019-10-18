@@ -21,6 +21,7 @@
             android:layout_marginEnd="@dimen/_10ssp"
             android:layout_toStartOf="@+id/img_fillter"
             android:gravity="center_vertical"
+            android:visibility="visible"
             android:orientation="horizontal">
 
             <com.addedfooddelivery_user._common.views.CustomTextView

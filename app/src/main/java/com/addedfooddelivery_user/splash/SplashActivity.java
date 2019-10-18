@@ -1,36 +1,23 @@
 package com.addedfooddelivery_user.splash;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.login.SocialLoginActivity;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import java.util.List;
+import com.addedfooddelivery_user.Added.MyProfileActivity;
+import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
 
 import butterknife.ButterKnife;
 
-import static com.addedfooddelivery_user._common.AppConstants.PERMISSIONS_REQUEST_CODE;
+import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_CAMERA;
+import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -43,18 +30,25 @@ public class SplashActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         redirectToIntro();
+        getPermission();
+
     }
 
-
-
-
+    private void getPermission() {
+        ActivityCompat.requestPermissions(SplashActivity.this, new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.CALL_PHONE}, REQUEST_ENABLE_MULTIPLE);
+    }
 
     void redirectToIntro() {
         Runnable r = () -> {
 
 //            boolean isSkipIntro = SharedPreferenceManager.getBoolean(SKIP_INTRO, false);
 //            boolean isLogin = SharedPreferenceManager.getBoolean(ISLOGIN, false);
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), SocialLoginActivity.class);
 //            if (!isSkipIntro) {
 //                i = new Intent(getApplicationContext(), IntroScreenActivity.class);
 //            } else {

@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,11 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,16 +31,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.CommonGps;
+import com.addedfooddelivery_user._common.GlobalData;
 import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.home.FiltersActivity;
-import com.addedfooddelivery_user.home.MainActivity;
+import com.addedfooddelivery_user.home.DeliveryListActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -60,10 +57,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static androidx.core.content.ContextCompat.checkSelfPermission;
-import static com.addedfooddelivery_user._common.AppConstants.PERMISSIONS_REQUEST_CODE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HomeFragement extends Fragment {
     @BindView(R.id.ll_adddress)
@@ -100,6 +93,8 @@ public class HomeFragement extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+
+
     }
 
     @Override
@@ -109,9 +104,18 @@ public class HomeFragement extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (GlobalData.CurrentAddress != null) {
+            txtAddress.setText(GlobalData.CurrentAddress.toString());
+            llAddress.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
         checkPermission(getActivity());
@@ -120,14 +124,27 @@ public class HomeFragement extends Fragment {
         fillRecords();
         setRestaurantData();
 
+
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
+
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
     }
+
 
     private void setRestaurantData() {
         adpter = new TrendingRestaurantListAdpter(context, trendingRestaurantList, new TrendingRestaurantListAdpter.OnItemClickListener() {
@@ -184,14 +201,18 @@ public class HomeFragement extends Fragment {
 
     }
 
-    @OnClick({R.id.img_fillter})
+    @OnClick({R.id.img_fillter, R.id.ll_adddress})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_fillter:
                 startActivity(new Intent(getContext(), FiltersActivity.class));
+                getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
                 getActivity().finish();
                 break;
             case R.id.ll_adddress:
+                startActivity(new Intent(getContext(), DeliveryListActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+
                 break;
 
         }
@@ -288,7 +309,6 @@ public class HomeFragement extends Fragment {
             }
         });
     }
-
 
 
     private void showSettingsDialog() {
