@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._CountryPicker.Country;
 import com.addedfooddelivery_user._CountryPicker.CountryPicker;
+import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomEditText;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
+import com.addedfooddelivery_user.signup.SignupActivity;
 import com.addedfooddelivery_user.verification.verifyOtp.OtpActivity;
 
 import java.util.Collections;
@@ -63,8 +65,13 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 mCountryPicker.show(VerifyPhoneActivity.this.getSupportFragmentManager(), "COUNTRY_PICKER");
                 break;
             case R.id.btNext:
-                startActivity(new Intent(VerifyPhoneActivity.this, OtpActivity.class));
-                overridePendingTransition(R.anim.rightto, R.anim.left);
+                if(edPhone.getText().toString().trim().equalsIgnoreCase("")){
+                    ReusedMethod.showSnackBar(VerifyPhoneActivity.this, getResources().getString(R.string.val_validate_phone), 1);
+                }else {
+                    startActivity(new Intent(VerifyPhoneActivity.this, OtpActivity.class));
+                    overridePendingTransition(R.anim.rightto, R.anim.left);
+                    finish();
+                }
                 break;
             case R.id.img_back_verify:
                 onBackPressed();

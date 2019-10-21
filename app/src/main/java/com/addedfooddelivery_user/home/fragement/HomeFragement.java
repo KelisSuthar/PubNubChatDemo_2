@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,6 +38,7 @@ import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.home.FiltersActivity;
 import com.addedfooddelivery_user.home.DeliveryListActivity;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -57,6 +60,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class HomeFragement extends Fragment {
     @BindView(R.id.ll_adddress)
@@ -118,12 +123,11 @@ public class HomeFragement extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        checkPermission(getActivity());
+        /*  checkPermission(getActivity());*/
         trendingRestaurantList = new ArrayList<>();
         popularRestaurantList = new ArrayList<>();
         fillRecords();
         setRestaurantData();
-
 
 
     }
@@ -132,10 +136,6 @@ public class HomeFragement extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
-
         return view;
     }
 
@@ -201,6 +201,17 @@ public class HomeFragement extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean coarsePermissionCheck = (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+        boolean finePermissionCheck = (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+        if (coarsePermissionCheck && finePermissionCheck) {
+            checkGPS();
+        }
+    }
+
+
     @OnClick({R.id.img_fillter, R.id.ll_adddress})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
@@ -230,39 +241,18 @@ public class HomeFragement extends Fragment {
         }
     }
 
-    private void checkPermission(Activity context) {
-        Dexter.withActivity(context)
-                .withPermissions(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        // check if all permissions are granted
-                        if (report.areAllPermissionsGranted()) {
-                            checkGPS();
-                        }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 
-                        // check for permanent denial of any permission
-                        if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-                            showSettingsDialog();
-                        }
-                    }
+        switch (requestCode) {
+            case REQUEST_ENABLE_MULTIPLE:
+                if (grantResults.length > 0) {
+                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).
-                withErrorListener(new PermissionRequestErrorListener() {
-                    @Override
-                    public void onError(DexterError error) {
-                        Toast.makeText(getContext(), "Error occurred! ", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .onSameThread()
-                .check();
+                    if (locationAccepted)
+                        checkGPS();
+                }
+        }
     }
 
     private void checkGPS() {
@@ -270,11 +260,7 @@ public class HomeFragement extends Fragment {
             @Override
             public void gpsStatus(boolean isGPSEnable) {
                 // turn on GPS
-
-                if (!isGPSEnable) {
-                    ReusedMethod.CustomeDialog(getActivity());
-                } else {
-
+                if (isGPSEnable) {
                     getLocation();
                 }
             }

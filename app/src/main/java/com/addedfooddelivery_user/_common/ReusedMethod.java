@@ -47,32 +47,5 @@ public class ReusedMethod {
 
     }
 
-    public static void CustomeDialog(Activity activity) {
-        try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity,R.style.MyDialogTheme_1);
 
-            final FrameLayout frameView = new FrameLayout(activity);
-            //frameView.setBackground(activity.getResources().getDrawable(R.drawable.dialog_bg));
-            builder.setView(frameView);
-
-            final AlertDialog alertDialog = builder.create();
-            LayoutInflater inflater = alertDialog.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custome_popup, frameView);
-
-
-            CustomButton customButton=dialogView.findViewById(R.id.btLocation);
-            customButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alertDialog.cancel();
-                    openGpsEnableSetting(activity);
-                }
-            });
-            alertDialog.show();
-            alertDialog.getWindow().setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.dialog_bg));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

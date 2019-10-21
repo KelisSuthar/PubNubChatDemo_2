@@ -30,18 +30,11 @@ public class SplashActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         redirectToIntro();
-        getPermission();
+
 
     }
 
-    private void getPermission() {
-        ActivityCompat.requestPermissions(SplashActivity.this, new String[]{
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.CALL_PHONE}, REQUEST_ENABLE_MULTIPLE);
-    }
+
 
     void redirectToIntro() {
         Runnable r = () -> {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_15sdp"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:id="@+id/message_chat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:maxWidth="@dimen/_200sdp"
+            android:paddingStart="@dimen/_8ssp"
+            android:paddingEnd="@dimen/_8ssp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="@string/dummy_chat"
+            android:textSize="@dimen/_10ssp"
+            app:font_name="montserratMedium"
+            android:background="@drawable/chatbubbol_orange"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:id="@+id/time_chat_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textColor="@color/text_gray_1"
+                android:text="15 min"
+                android:textSize="@dimen/_9ssp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--  <com.smart.customViews.SmartTextView
+          android:id="@+id/time_chat_tv"
+          style="@style/textView_h0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginTop="@dimen/_5sdp"
+          android:layout_marginBottom="@dimen/_2sdp"
+          android:maxLines="1"
+          android:text="11:42 pm" />-->
+</LinearLayout>

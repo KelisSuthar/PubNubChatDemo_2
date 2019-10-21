@@ -22,6 +22,7 @@ import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.ProfileListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
 import com.addedfooddelivery_user.home.model.ProfileItem;
+import com.addedfooddelivery_user.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -132,7 +133,7 @@ public class ProfileFragement extends Fragment {
                 context.getResources().getString(R.string.notification_restaurants_profile_status),
                 context.getResources().getDrawable(R.drawable.ic_setting_orange),
                 context.getResources().getDrawable(R.drawable.ic_setting_gray),
-                MainActivity.class));
+                SettingsActivity.class));
 
 
         mAdpter.notifyDataSetChanged();

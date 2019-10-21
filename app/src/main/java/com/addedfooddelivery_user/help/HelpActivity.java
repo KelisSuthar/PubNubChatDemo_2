@@ -17,6 +17,9 @@ import android.widget.Toast;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.views.CustomButton;
 import com.addedfooddelivery_user._common.views.CustomEditText;
+import com.addedfooddelivery_user.chat.ChatActivity;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
+import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 import com.bumptech.glide.Glide;
 import com.fxn.pix.Options;
 import com.fxn.pix.Pix;
@@ -65,7 +68,7 @@ public class HelpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.img_1, R.id.img_2, R.id.img_3})
+    @OnClick({R.id.img_1, R.id.img_2, R.id.img_3,R.id.imgBackProfile,R.id.imgComment})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_1:
@@ -88,6 +91,14 @@ public class HelpActivity extends AppCompatActivity {
                 } else {
                     ActivityCompat.requestPermissions(HelpActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ENABLE_CAMERA);
                 }
+                break;
+            case R.id.imgComment:
+                startActivity(new Intent(HelpActivity.this, ChatActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+
+                break;
+            case R.id.imgBackProfile:
+                onBackPressed();
                 break;
         }
     }
@@ -138,5 +149,11 @@ public class HelpActivity extends AppCompatActivity {
             }
         }
     }
-    
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
+    }
 }

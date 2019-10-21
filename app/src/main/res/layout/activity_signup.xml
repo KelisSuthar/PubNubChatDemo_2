@@ -21,9 +21,9 @@
             <ImageView
                 android:id="@+id/img_back_signup"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10ssp"
-                android:layout_marginTop="@dimen/_10ssp"
+
                 android:src="@drawable/ic_action_tab_backarrow_white" />
         </LinearLayout>
 
@@ -123,7 +123,7 @@
                         style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_passwordorange"
                         android:hint="@string/password"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         app:font_name="montserratMedium" />

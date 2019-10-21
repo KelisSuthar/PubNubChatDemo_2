@@ -2,7 +2,6 @@ package com.addedfooddelivery_user._common;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -11,10 +10,8 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
-import com.addedfooddelivery_user.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.LocationRequest;
@@ -32,7 +29,7 @@ public class CommonGps {
     private LocationRequest locationRequest;
     LocationSettingsRequest.Builder builder;
     private static final int REQUEST_CHECK_SETTINGS = 214;
-    private static final int REQUEST_ENABLE_GPS = 516;
+    public static final int REQUEST_ENABLE_GPS = 516;
     private final static int PLAY_SERVICES_REQUEST = 1000;
 
     public CommonGps(Context context) {
@@ -121,7 +118,8 @@ public class CommonGps {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         mainActivity.startActivityForResult(intent, REQUEST_ENABLE_GPS);
     }
-    public static void showSettingsDialog(final Activity activity) {
+
+   /* public static void showSettingsDialog(final Activity activity) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
 
@@ -145,5 +143,5 @@ public class CommonGps {
 
         builder.show();
 
-    }
+    }*/
 }

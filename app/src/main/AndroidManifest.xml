@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:name=".AddedApplication"
         android:allowBackup="true"
@@ -20,9 +22,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".help.HelpActivity"></activity>
-        <activity android:name=".Added.MyProfileActivity" />
-        <activity android:name=".home.DeliveryListActivity" />
+        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".settings.SettingsActivity" />
+        <activity
+            android:name=".help.HelpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".Added.MyProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".home.DeliveryListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".home.FiltersActivity"
             android:screenOrientation="portrait"
@@ -38,7 +51,7 @@
         <activity
             android:name=".signup.SignupActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".forgottPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait"
@@ -46,7 +59,7 @@
         <activity
             android:name=".login.loginEmail.LoginEmailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".login.SocialLoginActivity"
             android:screenOrientation="portrait"
@@ -54,7 +67,6 @@
         <activity
             android:name=".splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/splash_theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

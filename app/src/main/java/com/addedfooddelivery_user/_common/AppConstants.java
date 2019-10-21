@@ -4,6 +4,7 @@ public interface AppConstants {
     int PERMISSIONS_REQUEST_CODE = 500;
     int REQUEST_ENABLE_CAMERA = 517;
     int REQUEST_ENABLE_MULTIPLE = 518;
+    int PERMISSION_LOCATION_REQUEST_CODE=501;
     boolean LOG_DEBUG = true;
 
     String APP_NAME = "AddeddFood";

@@ -71,7 +71,7 @@ public class LoginEmailActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btLogin:
-               /* IntegratorImpl.LoginIntegrator(edEmail.getText().toString().trim(), edPassword.getText().toString().trim(), new LoginImaplementView() {
+                IntegratorImpl.LoginIntegrator(edEmail.getText().toString().trim(), edPassword.getText().toString().trim(), new LoginImaplementView() {
                     @Override
                     public void email() {
                         ReusedMethod.showSnackBar(LoginEmailActivity.this, getResources().getString(R.string.val_email), 1);
@@ -94,11 +94,12 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void success() {
-
+                        startActivity(new Intent(LoginEmailActivity.this, MainActivity.class));
+                        overridePendingTransition(R.anim.rightto, R.anim.left);
+                        finish();
                     }
-                });*/
-                startActivity(new Intent(LoginEmailActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.rightto, R.anim.left);
+                });
+
                 break;
             case R.id.tvForgotPassword:
                 startActivity(new Intent(LoginEmailActivity.this, ForgotPasswordActivity.class));

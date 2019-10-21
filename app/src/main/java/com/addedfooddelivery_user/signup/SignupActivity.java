@@ -49,20 +49,20 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btSignup)
+    @OnClick({R.id.btSignup,R.id.img_back_signup})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_signup:
-                startActivity(new Intent(SignupActivity.this, SocialLoginActivity.class));
-                overridePendingTransition(R.anim.leftto, R.anim.right);
-                finish();
+               onBackPressed();
                 break;
             case R.id.btSignup:
-                /*IntegratorImpl.SignUpIntegrator(etUserName.getText().toString().trim(),
+                IntegratorImpl.SignUpIntegrator(etUserName.getText().toString().trim(),
                         edSignupEmail.getText().toString().trim(),
                         edSignupPassword.getText().toString().trim(),
                         edConfirmPassword.getText().toString().trim(), new LoginImaplementView.SignUpImaplementView() {
@@ -83,12 +83,17 @@ public class SignupActivity extends AppCompatActivity {
 
                             @Override
                             public void passwordValidation() {
-                                 ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_password), 1);
+                                ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_password), 1);
                             }
 
                             @Override
                             public void passwordMinValidation() {
                                 ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_min_password), 1);
+                            }
+
+                            @Override
+                            public void confirmPasswordValidation() {
+                                ReusedMethod.showSnackBar(SignupActivity.this, getResources().getString(R.string.val_password), 1);
                             }
 
                             @Override
@@ -104,10 +109,8 @@ public class SignupActivity extends AppCompatActivity {
                             }
 
 
-                        });*/
-                startActivity(new Intent(SignupActivity.this, VerifyPhoneActivity.class));
-                overridePendingTransition(R.anim.rightto, R.anim.left);
-                finish();
+                        });
+
                 break;
         }
     }
@@ -118,6 +121,7 @@ public class SignupActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
     }
+
     static public void showSnackBar(Activity context, String message, int length) {
         View contextView = context.findViewById(android.R.id.content);
 

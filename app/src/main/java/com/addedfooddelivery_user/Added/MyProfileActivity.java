@@ -67,6 +67,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btSaveChanges:
+                onBackPressed();
                 break;
             case R.id.imgBackProfile:
                 onBackPressed();

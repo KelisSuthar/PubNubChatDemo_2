@@ -30,7 +30,7 @@ public class IntegratorImpl {
         } else if (edtPassword.length() < 8) {
             signUpImaplementView.passwordMinValidation();
         } else if (TextUtils.isEmpty(edtConfirmPassword)) {
-            signUpImaplementView.passwordValidation();
+            signUpImaplementView.confirmPasswordValidation();
         } else if (!(edtConfirmPassword.equalsIgnoreCase(edtPassword))) {
             signUpImaplementView.passwordCompare();
         } else {

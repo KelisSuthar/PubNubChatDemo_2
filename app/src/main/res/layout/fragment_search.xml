@@ -2,14 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/bg_half_circle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_half_circle"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"/>
+        android:layout_height="@dimen/_70sdp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:text="@string/title_search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:font_name="montserratSemiBold" />
+    </LinearLayout>
+
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -44,10 +59,10 @@
         android:id="@+id/rcy_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10ssp"
         android:layout_marginStart="@dimen/_15ssp"
-        tools:listitem="@layout/row_search_listing"
-        android:layout_marginEnd="@dimen/_15ssp"/>
+        android:layout_marginTop="@dimen/_10ssp"
+        android:layout_marginEnd="@dimen/_15ssp"
+        tools:listitem="@layout/row_address_listing" />
 
 
 </LinearLayout>

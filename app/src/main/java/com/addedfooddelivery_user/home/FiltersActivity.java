@@ -76,13 +76,16 @@ public class FiltersActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.img_back_filter)
+    @OnClick({R.id.img_back_filter,R.id.txtClear,R.id.btFilter})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_filter:
                 onBackPressed();
                 break;
             case R.id.txtClear:
+
+                break;
+            case R.id.btFilter:
                 onBackPressed();
                 break;
         }

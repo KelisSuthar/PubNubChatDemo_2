@@ -26,6 +26,8 @@ public interface LoginImaplementView {
 
         void passwordMinValidation();
 
+        void confirmPasswordValidation();
+
         void passwordCompare();
 
         void success();
