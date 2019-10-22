@@ -15,7 +15,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_below="@+id/toolbar_order_summery"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/_75sdp"
+
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -232,6 +232,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_40sdp"
                 android:orientation="vertical">
 
                 <com.addedfooddelivery_user._common.views.CustomTextView
