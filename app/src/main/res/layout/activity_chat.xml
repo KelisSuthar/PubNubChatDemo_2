@@ -17,6 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_chat"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_45sdp" />
 
     <com.google.android.material.card.MaterialCardView

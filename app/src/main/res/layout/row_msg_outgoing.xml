@@ -18,7 +18,6 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:orientation="vertical"
             android:padding="@dimen/_5sdp">
 
@@ -27,9 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:maxWidth="@dimen/_200sdp"
-                android:paddingStart="@dimen/_8ssp"
-                android:paddingEnd="@dimen/_8ssp"
+                android:maxWidth="@dimen/_220sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:text="@string/dummy_chat"

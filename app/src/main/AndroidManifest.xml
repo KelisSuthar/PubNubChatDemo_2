@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".orderHistory.OrderHistoryActivity"></activity>
+        <activity android:name=".chat.ChatActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity
             android:name=".help.HelpActivity"

@@ -95,7 +95,6 @@ public class HelpActivity extends AppCompatActivity {
             case R.id.imgComment:
                 startActivity(new Intent(HelpActivity.this, ChatActivity.class));
                 overridePendingTransition(R.anim.rightto, R.anim.left);
-
                 break;
             case R.id.imgBackProfile:
                 onBackPressed();

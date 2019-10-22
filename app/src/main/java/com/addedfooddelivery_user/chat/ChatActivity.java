@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user._common.ReusedMethod;
 import com.addedfooddelivery_user._common.views.CustomEditText;
 import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.chat.adpter.ChatAdapter;
+import com.addedfooddelivery_user.forgottPassword.ForgotPasswordActivity;
 import com.addedfooddelivery_user.home.DeliveryListActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.AddressListAdpter;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ChatActivity extends AppCompatActivity {
     @BindView(R.id.rcyChat)
@@ -49,6 +52,21 @@ public class ChatActivity extends AppCompatActivity {
         fillRecords();
         setAddressData();
     }
+    @OnClick({R.id.img_back_chat,R.id.imgChatSend})
+    public void Clickevent(View view){
+        switch (view.getId()){
+            case R.id.imgChatUser:
+                onBackPressed();
+                break;
+            case R.id.imgChatSend:
+                if(etChat.getText().toString().trim().equalsIgnoreCase("")){
+                    ReusedMethod.showSnackBar(ChatActivity.this, getResources().getString(R.string.val_message), 1);
+                }else {
+                    chatConvList.add("1");
+                }
+                break;
+        }
+    }
 
     private void setAddressData() {
         adpter = new ChatAdapter(ChatActivity.this, chatConvList);
@@ -64,5 +82,12 @@ public class ChatActivity extends AppCompatActivity {
         chatConvList.add("1");
         chatConvList.add("2");
         chatConvList.add("3");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
     }
 }
