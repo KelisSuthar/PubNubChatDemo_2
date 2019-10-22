@@ -140,6 +140,22 @@
     <string name="dummy_prise">$ 158.56</string>
     <string name="payment_completed">Payment completed</string>
     <string name="RepeatOrder">Repeat Order</string>
+    <string name="dummy_restau_name">Langdon Hall</string>
+    <string name="dummy_item">2 x Fitness Freak Salad</string>
+    <string name="title_order_summery">Order Summary</string>
+    <string name="your_order">Your Order</string>
+    <string name="item_total">Item Total</string>
+    <string name="taxes">Taxes</string>
+    <string name="delivery_charge">Delivery charge</string>
+    <string name="Total">Total</string>
+    <string name="order_details">Order Details</string>
+    <string name="order_number">Order Number</string>
+    <string name="paymet">Payment</string>
+    <string name="completed">completed</string>
+    <string name="lable_date">Date</string>
+    <string name="dummy_mobile">+461 5894 2564</string>
+    <string name="deliver_to">Deliver To</string>
+    <string name="view_cart_on_next_step">View Cart on next step</string>
 
 
 </resources>

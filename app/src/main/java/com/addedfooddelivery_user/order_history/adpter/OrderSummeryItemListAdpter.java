@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.orderHistory.adpter;
+package com.addedfooddelivery_user.order_history.adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
@@ -17,14 +16,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
-public class OrderItemListAdpter extends RecyclerView.Adapter<OrderItemListAdpter.ViewHolder> {
+public class OrderSummeryItemListAdpter extends RecyclerView.Adapter<OrderSummeryItemListAdpter.ViewHolder> {
     private ArrayList<String> listData;
     private Context context;
 
-    public OrderItemListAdpter(Context context, ArrayList<String> notificationModelArrayList) {
+    public OrderSummeryItemListAdpter(Context context, ArrayList<String> notificationModelArrayList) {
         this.context = context;
         this.listData = notificationModelArrayList;
 
@@ -44,7 +42,7 @@ public class OrderItemListAdpter extends RecyclerView.Adapter<OrderItemListAdpte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_order_item_listing, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_order_summary_item_listing, parent, false);
         return new ViewHolder(v);
     }
 

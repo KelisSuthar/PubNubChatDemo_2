@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -12,8 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user._common.SimpleDividerItemDecoration;
 import com.addedfooddelivery_user._common.views.CustomTextView;
-import com.addedfooddelivery_user.orderHistory.OrderHistoryActivity;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,7 @@ public class OrderHistoryListAdpter extends RecyclerView.Adapter<OrderHistoryLis
     private final OnItemClickListener listener;
     private ArrayList<String> listData;
     private Context context;
+    int pos;
 
     public OrderHistoryListAdpter(Context context, ArrayList<String> notificationModelArrayList, OnItemClickListener listener) {
         this.context = context;
@@ -80,6 +81,8 @@ public class OrderHistoryListAdpter extends RecyclerView.Adapter<OrderHistoryLis
         CustomTextView txtPayementstatus;
         @BindView(R.id.txtRepetOrder)
         CustomTextView txtRepetOrder;
+        @BindView(R.id.materialCardHistory)
+        MaterialCardView cardViewHistory;
 
         LinearLayoutManager mLayoutManagerOrderItem;
         private ArrayList<String> orderOrderItemList;
@@ -95,9 +98,11 @@ public class OrderHistoryListAdpter extends RecyclerView.Adapter<OrderHistoryLis
             adpter = new OrderItemListAdpter(context, orderOrderItemList);
             mLayoutManagerOrderItem = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
             rcyOrderItem.setLayoutManager(mLayoutManagerOrderItem);
+            rcyOrderItem.addItemDecoration(new SimpleDividerItemDecoration(context));
 
             rcyOrderItem.setItemAnimator(new DefaultItemAnimator());
             rcyOrderItem.setAdapter(adpter);
+
         }
 
     private void fillRecords(ArrayList<String> orderOrderItemList) {
@@ -105,11 +110,18 @@ public class OrderHistoryListAdpter extends RecyclerView.Adapter<OrderHistoryLis
         orderOrderItemList.add("2");
         orderOrderItemList.add("3");
     }
-        @OnClick()
+        @OnClick(R.id.materialCardHistory)
         void clickEvent(View view) {
             switch (view.getId()) {
-
+                case R.id.materialCardHistory:
+                if (pos != RecyclerView.NO_POSITION) {
+                    if (listener != null) {
+                        listener.onItemClick(getAdapterPosition(), view);
+                    }
+                }
+                break;
             }
+
         }
 
     }

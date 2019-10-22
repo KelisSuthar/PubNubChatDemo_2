@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_half_circle"
+    android:orientation="vertical"
+    tools:context=".order_history.OrderSummaryActivity">
+
+    <include
+        android:id="@+id/toolbar_order_summery"
+        layout="@layout/toolbar_order_summery" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/toolbar_order_summery"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/_75sdp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:background="@drawable/profile_unselect_bg"
+                android:paddingBottom="@dimen/_13sdp">
+
+                <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+                    android:id="@+id/imgRestaurantSummery"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:src="@drawable/food09"
+                    app:siShape="@drawable/dialog_bg"
+                    app:siSquare="true" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtResNameSummery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_toEndOf="@+id/imgRestaurantSummery"
+                    android:text="@string/dummy_restau_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:font_name="montserratSemiBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtRestAddressSummery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtResNameSummery"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_toEndOf="@+id/imgRestaurantSummery"
+                    android:text="@string/dummy_add"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratSemiBold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_unselect_bg"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/your_order"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@color/text_gray_1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyOrderItemSummery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/row_order_item_listing" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/item_total"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_10ssp"
+                        app:font_name="montserratSemiBold" />
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtItemTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="end"
+                        android:text="@string/dummy_prise"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_10ssp"
+                        app:font_name="montserratSemiBold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/taxes"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_8ssp"
+                        app:font_name="montserratSemiBold" />
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtTaxes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="end"
+                        android:text="@string/dummy_prise"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_9ssp"
+                        app:font_name="montserratSemiBold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/delivery_charge"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_9ssp"
+                        app:font_name="montserratSemiBold" />
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtDeliveryCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="end"
+                        android:text="@string/dummy_prise"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_9ssp"
+                        app:font_name="montserratSemiBold" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@color/text_gray_1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/Total"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        app:font_name="montserratSemiBold" />
+
+                    <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtOrderTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="end"
+                        android:text="@string/dummy_prise"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        app:font_name="montserratSemiBold" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_details"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@color/text_gray_1" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/order_number"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtOrderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="123456789"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/paymet"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtPaymentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/completed"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/lable_date"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/dummy_date"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/phone_number"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtPhoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/dummy_mobile"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/deliver_to"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+
+                <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtDeliverAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="@string/dummy_add"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8ssp"
+                    app:font_name="montserratBold" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+   <LinearLayout
+       android:id="@+id/ll_repeatOrder"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="@dimen/_20sdp"
+       android:background="@drawable/green_rectangle"
+       android:paddingTop="@dimen/_7sdp"
+       android:paddingBottom="@dimen/_7sdp"
+       android:layout_marginStart="@dimen/_15sdp"
+       android:layout_marginEnd="@dimen/_15sdp"
+       android:gravity="center"
+       android:orientation="vertical"
+       android:layout_alignParentBottom="true">
+
+       <com.addedfooddelivery_user._common.views.CustomTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/RepeatOrder"
+           android:textAllCaps="false"
+           android:textColor="@color/white"
+           android:textSize="@dimen/_12ssp"
+           app:font_name="montserratBold" />
+
+       <com.addedfooddelivery_user._common.views.CustomTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="@dimen/_3sdp"
+           android:text="@string/view_cart_on_next_step"
+           android:textAllCaps="true"
+           android:textColor="@color/white"
+           android:textSize="@dimen/_8ssp"
+           app:font_name="montserratSemiBold" />
+   </LinearLayout>
+</RelativeLayout>

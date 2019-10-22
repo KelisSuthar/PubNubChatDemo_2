@@ -2,11 +2,13 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/materialCardHome"
+    android:id="@+id/materialCardHistory"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/_4sdp"
     app:cardElevation="@dimen/_2sdp"
+
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.MaterialCardView.Small">
@@ -29,7 +31,7 @@
                 android:text="@string/ordered_on"
                 android:textAllCaps="true"
                 android:textColor="@color/text_gray_1"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_8ssp"
                 app:font_name="montserratSemiBold" />
 
             <com.addedfooddelivery_user._common.views.CustomTextView
@@ -41,7 +43,7 @@
                 android:text="@string/dummy_date"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_7ssp"
                 app:font_name="montserratSemiBold" />
 
             <com.addedfooddelivery_user._common.views.CustomTextView
@@ -51,17 +53,24 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="@string/dummy_prise"
+                android:textSize="@dimen/_8ssp"
                 android:textColor="@color/colorPrimary"
                 app:font_name="montserratSemiBold" />
         </RelativeLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcyOrderItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/profile_unselect_bg"
-            android:padding="@dimen/_10sdp"
-            tools:listitem="@layout/row_order_history_listing" />
+            android:layout_margin="@dimen/_10sdp"
+            tools:itemCount="3"
+            tools:listitem="@layout/row_order_item_listing" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="@color/text_gray_1" />
 
         <RelativeLayout
             android:layout_width="match_parent"

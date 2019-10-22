@@ -97,7 +97,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         mCountryPicker.setListener((name, code, dialCode, flagDrawableResID) -> {
             txtContryCode.setText(dialCode);
             country_code = dialCode;
-            imgFlag.setImageResource(flagDrawableResID);
+           // imgFlag.setImageResource(flagDrawableResID);
             //txtContryCode.setCompoundDrawablesWithIntrinsicBounds(flagDrawableResID, 0, 0, 0);
 
             mCountryPicker.dismiss();
@@ -114,13 +114,13 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             if (country != null) {
                 txtContryCode.setText(country.getDialCode());
                 //txtContryCode.setCompoundDrawablesWithIntrinsicBounds(country.getFlag(), 0, 0, 0);
-                imgFlag.setImageResource(country.getFlag());
+               // imgFlag.setImageResource(country.getFlag());
                 country_code = country.getDialCode();
             } else {
-                Country us = new Country("US", "United States", "+1", R.drawable.flag_us);
+                Country us = new Country("US", "United States", "+1");
                 txtContryCode.setText(us.getDialCode());
                // txtContryCode.setCompoundDrawablesWithIntrinsicBounds(us.getFlag(), 0, 0, 0);
-                imgFlag.setImageResource(us.getFlag());
+                //imgFlag.setImageResource(us.getFlag());
                 country_code = us.getDialCode();
             }
         }
