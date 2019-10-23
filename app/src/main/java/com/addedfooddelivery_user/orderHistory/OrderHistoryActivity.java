@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.orderHistory.adpter.OrderHistoryListAdpter;
-import com.addedfooddelivery_user.order_history.OrderSummaryActivity;
+import com.addedfooddelivery_user.orderSummary.OrderSummaryActivity;
 
 import java.util.ArrayList;
 

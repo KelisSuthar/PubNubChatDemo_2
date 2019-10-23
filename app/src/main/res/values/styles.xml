@@ -54,6 +54,7 @@
         <item name="android:windowMinWidthMinor">80%</item>=
     </style>
 
+
     <style name="custome_et">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

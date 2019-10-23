@@ -8,7 +8,6 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/_4sdp"
     app:cardElevation="@dimen/_2sdp"
-
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.MaterialCardView.Small">

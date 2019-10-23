@@ -23,6 +23,7 @@ import com.addedfooddelivery_user.home.fragement.adpter.ProfileListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
 import com.addedfooddelivery_user.home.model.ProfileItem;
 import com.addedfooddelivery_user.orderHistory.OrderHistoryActivity;
+import com.addedfooddelivery_user.orderTracking.OrderTrackingActivity;
 import com.addedfooddelivery_user.settings.SettingsActivity;
 
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class ProfileFragement extends Fragment {
                 context.getResources().getString(R.string.check_status),
                 context.getResources().getDrawable(R.drawable.ic_take_away_orange),
                 context.getResources().getDrawable(R.drawable.ic_take_away_gray),
-                MainActivity.class));
+                OrderTrackingActivity.class));
 
         profileList.add(new ProfileItem(context.getResources().getString(R.string.get),
                 context.getResources().getString(R.string.add_more_in_wallet),

@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:text="@string/title_settings"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 app:font_name="montserratSemiBold" />
 
         </RelativeLayout>

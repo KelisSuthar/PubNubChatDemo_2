@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".order_history.OrderSummaryActivity">
+    tools:context=".orderSummary.OrderSummaryActivity">
 
     <include
         android:id="@+id/toolbar_order_summery"

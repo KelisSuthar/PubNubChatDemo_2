@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.addedfooddelivery_user.Added.MyProfileActivity;
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.login.SocialLoginActivity;
 
 import butterknife.ButterKnife;
@@ -41,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //            boolean isSkipIntro = SharedPreferenceManager.getBoolean(SKIP_INTRO, false);
 //            boolean isLogin = SharedPreferenceManager.getBoolean(ISLOGIN, false);
-            Intent i = new Intent(getApplicationContext(), SocialLoginActivity.class);
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
 //            if (!isSkipIntro) {
 //                i = new Intent(getApplicationContext(), IntroScreenActivity.class);
 //            } else {

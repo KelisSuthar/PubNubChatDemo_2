@@ -133,6 +133,7 @@
     <string name="type_your_query_here">Type your query here</string>
 
     <string name="dummy_chat">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="dummy_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="val_message">Please Enter Message</string>
     <string name="title_order_history">Order History</string>
     <string name="ordered_on">Ordered on</string>
@@ -156,6 +157,16 @@
     <string name="dummy_mobile">+461 5894 2564</string>
     <string name="deliver_to">Deliver To</string>
     <string name="view_cart_on_next_step">View Cart on next step</string>
+    <string name="order_help">Order Help</string>
+    <string name="dumm_time">15:05 AM</string>
+    <string name="estimated_arrivel">Estimated Arrivel</string>
+    <string name="dummy_count">5 Items</string>
+    <string name="live_status">Live Status</string>
+    <string name="dumm_status">Order Processed</string>
+    <string name="dummy_name">Victor M. Thompson</string>
+    <string name="have_an_issue_with_your_order">Have an issue with your order?</string>
+    <string name="chat_with_us">Chat with us</string>
+    <string name="call">Call</string>
 
 
 </resources>
