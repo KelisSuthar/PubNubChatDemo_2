@@ -67,6 +67,7 @@
                     android:textStyle="bold"
                     app:font_name="montserratSemiBold" />
                 <com.addedfooddelivery_user._common.views.CustomTextView
+                    android:id="@+id/txtRestAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_gray_1"

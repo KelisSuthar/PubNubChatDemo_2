@@ -13,10 +13,10 @@
         layout="@layout/toolbar_order_summery" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_below="@+id/toolbar_order_summery"
         android:layout_width="match_parent"
-
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_order_summery"
+        android:layout_marginBottom="@dimen/_65sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:orientation="vertical">
 
                 <com.addedfooddelivery_user._common.views.CustomTextView
@@ -356,37 +356,37 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-   <LinearLayout
-       android:id="@+id/ll_repeatOrder"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginBottom="@dimen/_20sdp"
-       android:background="@drawable/green_rectangle"
-       android:paddingTop="@dimen/_7sdp"
-       android:paddingBottom="@dimen/_7sdp"
-       android:layout_marginStart="@dimen/_15sdp"
-       android:layout_marginEnd="@dimen/_15sdp"
-       android:gravity="center"
-       android:orientation="vertical"
-       android:layout_alignParentBottom="true">
+    <LinearLayout
+        android:id="@+id/ll_repeatOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/green_rectangle"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_7sdp">
 
-       <com.addedfooddelivery_user._common.views.CustomTextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/RepeatOrder"
-           android:textAllCaps="false"
-           android:textColor="@color/white"
-           android:textSize="@dimen/_12ssp"
-           app:font_name="montserratBold" />
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/RepeatOrder"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:font_name="montserratBold" />
 
-       <com.addedfooddelivery_user._common.views.CustomTextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="@dimen/_3sdp"
-           android:text="@string/view_cart_on_next_step"
-           android:textAllCaps="true"
-           android:textColor="@color/white"
-           android:textSize="@dimen/_8ssp"
-           app:font_name="montserratSemiBold" />
-   </LinearLayout>
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:text="@string/view_cart_on_next_step"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8ssp"
+            app:font_name="montserratSemiBold" />
+    </LinearLayout>
 </RelativeLayout>

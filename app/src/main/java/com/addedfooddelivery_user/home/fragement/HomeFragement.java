@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.RestaurantList.RestaurantListActivity;
 import com.addedfooddelivery_user._common.CommonGps;
 import com.addedfooddelivery_user._common.GlobalData;
 import com.addedfooddelivery_user._common.ReusedMethod;
@@ -64,6 +65,10 @@ import butterknife.OnClick;
 import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class HomeFragement extends Fragment {
+    @BindView(R.id.txtViewAllTrending)
+    CustomTextView txtTrendingall;
+    @BindView(R.id.txtViewAllPopular)
+    CustomTextView txtPopularall;
     @BindView(R.id.ll_adddress)
     LinearLayout llAddress;
     @BindView(R.id.recyclerViewWeek)
@@ -147,14 +152,7 @@ public class HomeFragement extends Fragment {
 
 
     private void setRestaurantData() {
-        adpter = new TrendingRestaurantListAdpter(context, trendingRestaurantList, new TrendingRestaurantListAdpter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-                switch (view.getId()) {
-
-                }
-            }
-        });
+        adpter = new TrendingRestaurantListAdpter(getActivity(), trendingRestaurantList);
 
         mLayoutManagerWeek = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
         rcyWeek.setLayoutManager(mLayoutManagerWeek);
@@ -163,14 +161,7 @@ public class HomeFragement extends Fragment {
         rcyWeek.setAdapter(adpter);
 
         /*mostpopular restaurant list*/
-        mAdpter = new PopularRestaurantListAdpter(context, trendingRestaurantList, new PopularRestaurantListAdpter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-                switch (view.getId()) {
-
-                }
-            }
-        });
+        mAdpter = new PopularRestaurantListAdpter(getActivity(), popularRestaurantList);
 
         mLayoutManagerPopular = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         rcyMost.setLayoutManager(mLayoutManagerPopular);
@@ -212,7 +203,7 @@ public class HomeFragement extends Fragment {
     }
 
 
-    @OnClick({R.id.img_fillter, R.id.ll_adddress})
+    @OnClick({R.id.img_fillter, R.id.ll_adddress,R.id.txtViewAllPopular,R.id.txtViewAllTrending})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_fillter:
@@ -222,6 +213,16 @@ public class HomeFragement extends Fragment {
                 break;
             case R.id.ll_adddress:
                 startActivity(new Intent(getContext(), DeliveryListActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+
+                break;
+            case R.id.txtViewAllPopular:
+                startActivity(new Intent(getContext(), RestaurantListActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+
+                break;
+            case R.id.txtViewAllTrending:
+                startActivity(new Intent(getContext(), RestaurantListActivity.class));
                 getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
 
                 break;

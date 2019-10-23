@@ -95,6 +95,7 @@
                         app:font_name="montserratSemiBold" />
 
                     <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtViewAllTrending"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -139,6 +140,7 @@
                         app:font_name="montserratSemiBold" />
 
                     <com.addedfooddelivery_user._common.views.CustomTextView
+                        android:id="@+id/txtViewAllPopular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
