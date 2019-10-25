@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_15sdp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
+            android:id="@+id/imgRestItem"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/food09"
+            app:siShape="@drawable/dialog_bg"
+            app:siSquare="true" />
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:id="@+id/txtItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_toEndOf="@+id/imgRestItem"
+            android:text="@string/dummy_restau_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9ssp"
+            app:font_name="montserratSemiBold" />
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:id="@+id/txtItemPrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtItemName"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_toEndOf="@+id/imgRestItem"
+            android:text="@string/dummy_prise"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_8ssp"
+            app:font_name="montserratSemiBold" />
+
+        <com.addedfooddelivery_user._common.views.CustomTextView
+            android:id="@+id/txtItemDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtItemPrise"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_toEndOf="@+id/imgRestItem"
+            android:text="@string/dummy_add"
+            android:textColor="@color/text_gray_1"
+            android:textSize="@dimen/_8ssp"
+            app:font_name="montserratSemiBold" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/gray" />
+</LinearLayout>

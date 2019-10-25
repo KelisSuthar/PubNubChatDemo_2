@@ -96,7 +96,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ForgotPasswordActivity.this, SocialLoginActivity.class));
+        super.onBackPressed();
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
     }

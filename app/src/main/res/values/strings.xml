@@ -259,6 +259,11 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="_5_0">5.0</string>
+    <string name="free_delivery">• Free Delivery</string>
+    <string name="veg_only">Veg Only</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="review">Review</string>
 
 
 </resources>
