@@ -17,13 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.adpter.MyAdapter;
+import com.addedfooddelivery_user.RestaurantDetails.adpter.productListAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.ReviewListAdpter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.viewPagerAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user._common.SimpleDividerItemDecoration;
-import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -119,7 +118,7 @@ public class RestDetailsActivity extends AppCompatActivity {
 
         rcyProductList.setLayoutManager(new LinearLayoutManager(this));
 
-        MyAdapter myAdapter = new MyAdapter(RestDetailsActivity.this, list);
+        productListAdapter myAdapter = new productListAdapter(RestDetailsActivity.this, list);
         rcyProductList.setAdapter(myAdapter);
         rcyProductList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         rcyProductList.setAdapter(myAdapter);
@@ -130,16 +129,16 @@ public class RestDetailsActivity extends AppCompatActivity {
 
         List<ParentData> list_parent = new ArrayList<>();
         List<ChildData> list_data_child = new ArrayList<>();
+        List<ChildData> list_data_child1 = new ArrayList<>();
 
         list_data_child.add(new ChildData("First"));
         list_data_child.add(new ChildData("Second"));
-        list_data_child.add(new ChildData("Third"));
-        list_data_child.add(new ChildData("Four"));
+        list_data_child1.add(new ChildData("Third"));
+        list_data_child1.add(new ChildData("Four"));
 
         list_parent.add(new ParentData("Parent 1", list_data_child));
-        list_parent.add(new ParentData("Parent 2", list_data_child));
-        list_parent.add(new ParentData("Parent 3", list_data_child));
-        list_parent.add(new ParentData("Parent 4", list_data_child));
+        list_parent.add(new ParentData("Parent 2", list_data_child1));
+
 
         return list_parent;
     }

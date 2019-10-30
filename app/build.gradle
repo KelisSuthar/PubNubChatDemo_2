@@ -75,7 +75,7 @@ dependencies {
     implementation 'me.relex:circleindicator:1.2.2@aar'
     // Expand recycleview
     implementation 'com.thoughtbot:expandablerecyclerview:1.0'
-
-
+//cart in add item animation ticker
+    implementation 'com.robinhood.ticker:ticker:2.0.2'
 
 }

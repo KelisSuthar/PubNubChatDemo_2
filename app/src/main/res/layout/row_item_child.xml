@@ -60,6 +60,33 @@
             android:textSize="@dimen/_8ssp"
             app:font_name="montserratSemiBold" />
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <com.addedfooddelivery_user._common.views.CustomTextView
+                android:id="@+id/btnAddProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_rectangle"
+                android:gravity="center"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="2dp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="2dp"
+                android:text="@string/add"
+                android:textColor="@color/text_gray_1"
+                android:textSize="@dimen/_8ssp"
+                app:font_name="montserratSemiBold" />
+
+            <include
+                android:id="@+id/add_item"
+                layout="@layout/item_add_minus"
+                android:visibility="gone" />
+        </FrameLayout>
+
     </RelativeLayout>
 
     <View

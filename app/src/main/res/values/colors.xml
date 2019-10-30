@@ -20,4 +20,5 @@
     <color name="green">#24B353</color>
     <color name="dots_color">#DCD4C8</color>
     <color name="track_color">#AAAAAA</color>
+    <color name="address_footer">#F2F3F4</color>
 </resources>

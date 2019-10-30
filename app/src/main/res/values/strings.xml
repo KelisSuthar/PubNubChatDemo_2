@@ -264,6 +264,20 @@
     <string name="veg_only">Veg Only</string>
     <string name="breakfast">Breakfast</string>
     <string name="review">Review</string>
+    <string name="title_cart">Cart</string>
+    <string name="dummy_item_Desc">Home made margarita pizza,simplicity redefined.</string>
+    <string name="you_may_also_like">You may also like</string>
+    <string name="add">Add</string>
+    <string name="apply_coupon">Apply coupon</string>
+    <string name="bill_details" >Bill Details</string>
+    <string name="rest_charge">Restaurant Charges</string>
+    <string name="delivery_fees">Delivery Fees</string>
+    <string name="to_pay">To Pay</string>
+    <string name="delivering_food_to">Delivering Food to</string>
+    <string name="Change">Change</string>
+    <string name="payment_mode">Payment mode</string>
+    <string name="_8956">•••• 8956</string>
+    <string name="proceed_to_pay">Proceed to pay</string>
 
 
 </resources>

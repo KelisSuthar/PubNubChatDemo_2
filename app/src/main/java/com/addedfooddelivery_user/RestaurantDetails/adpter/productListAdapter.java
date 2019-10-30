@@ -16,11 +16,11 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
-public class MyAdapter extends ExpandableRecyclerViewAdapter<ParentViewHolder,ChildViewHolders> {
+public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentViewHolder,ChildViewHolders> {
  
     public Context context;
  
-    public MyAdapter(Context context, List<? extends ExpandableGroup> groups) {
+    public productListAdapter(Context context, List<? extends ExpandableGroup> groups) {
         super(groups);
         this.context = context;
     }
@@ -45,14 +45,7 @@ public class MyAdapter extends ExpandableRecyclerViewAdapter<ParentViewHolder,Ch
     public void onBindChildViewHolder(ChildViewHolders holder, int flatPosition, ExpandableGroup group, int childIndex) {
         final ChildData childData = ((ParentData)group).getItems().get(childIndex);
         holder.setChildText(childData.getName());
-        holder.txtItemName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
- 
-                Toast.makeText(context, "Selected : " + childData.getName(), Toast.LENGTH_SHORT).show();
- 
-            }
-        });
+
  
     }
  
