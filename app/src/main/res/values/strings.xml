@@ -2,7 +2,7 @@
     <string name="app_name">AddedFoodDelivery</string>
     <!--validation string-->
     <string name="val_email">Please Enter Your Email</string>
-    <string name="val_validate_email">Please Enter Validate Email</string>
+    <string name="val_validate_email">Please Enter Valid Email Address</string>
     <string name="val_password">Please Enter Your Password</string>
     <string name="val_confirm_password">Please Enter Your Password</string>
     <string name="val_name">Please Enter Your Name</string>
@@ -278,6 +278,8 @@
     <string name="payment_mode">Payment mode</string>
     <string name="_8956">•••• 8956</string>
     <string name="proceed_to_pay">Proceed to pay</string>
+    <string name="plus_taxes">plus taxes</string>
+    <string name="view_cart">View Cart</string>
 
 
 </resources>

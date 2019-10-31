@@ -53,9 +53,10 @@ public class SettingsActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.btnLogout:
-                startActivity(new Intent(SettingsActivity.this, LoginEmailActivity.class));
+                Intent intent=new Intent(SettingsActivity.this, LoginEmailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 overridePendingTransition(R.anim.leftto, R.anim.right);
-                finish();
                 break;
             case R.id.rl_changePassword:
                 break;

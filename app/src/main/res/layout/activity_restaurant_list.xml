@@ -14,6 +14,7 @@
         android:id="@+id/rcyRestaurantList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/_5sdp"
         tools:listitem="@layout/row_popular_restaurant_listing"/>
 
 </LinearLayout>

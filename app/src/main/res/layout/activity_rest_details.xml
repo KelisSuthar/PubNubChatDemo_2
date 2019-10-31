@@ -25,36 +25,38 @@
             app:title=""
             app:toolbarId="@+id/toolbar">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/pager"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_alignParentTop="true" />
-                    <me.relex.circleindicator.CircleIndicator
-                        android:id="@+id/indicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_20sdp"
-                        app:ci_height="@dimen/_5sdp"
-                        app:ci_width="@dimen/_5sdp"
-                        android:layout_alignParentBottom="true"/>
-                </RelativeLayout>
-
-           <!-- <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/food01" />-->
+                android:layout_height="match_parent">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentBottom="true"
+                    app:ci_height="@dimen/_5sdp"
+                    app:ci_width="@dimen/_5sdp" />
+            </RelativeLayout>
+
+            <!-- <ImageView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/food01" />-->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:titleTextColor="@color/white"
                 app:navigationIcon="@drawable/ic_action_tab_backarrow_white"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/white">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -64,5 +66,13 @@
 
     <include layout="@layout/content_rest_details" />
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:fitsSystemWindows="true"
+        android:id="@+id/cart_footer"
+        android:visibility="gone">
+        <include layout="@layout/content_rest_details_footer" />
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

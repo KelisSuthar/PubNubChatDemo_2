@@ -1,5 +1,6 @@
 package com.addedfooddelivery_user.RestaurantDetails;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +25,10 @@ import com.addedfooddelivery_user.RestaurantDetails.adpter.viewPagerAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user._common.SimpleDividerItemDecoration;
+import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.cart.CartActivity;
+import com.addedfooddelivery_user.home.MainActivity;
+import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -33,6 +39,7 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
 public class RestDetailsActivity extends AppCompatActivity {
@@ -48,6 +55,15 @@ public class RestDetailsActivity extends AppCompatActivity {
     RecyclerView rcyProductList;
     @BindView(R.id.rcyReviewList)
     RecyclerView rcyReviewList;
+    @BindView(R.id.txtItemTotal)
+    public CustomTextView txtItemTotal;
+    @BindView(R.id.txtViewCart)
+    public CustomTextView txtViewCart;
+
+
+    public static CustomTextView txtItemCount;
+    public static RelativeLayout rlCartFooter;
+
 
     LinearLayoutManager mLayoutManagerReview;
     private ArrayList<String> reviewList;
@@ -88,11 +104,24 @@ public class RestDetailsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        txtItemCount = findViewById(R.id.txtItemCount);
+        rlCartFooter = findViewById(R.id.cart_footer);
+
         init();
         setupItemRecycleview();
-        reviewList=new ArrayList<>();
+        reviewList = new ArrayList<>();
         fillRecords();
         setRestaurantData();
+    }
+
+    @OnClick(R.id.txtViewCart)
+    public void eventClick(View view) {
+        switch (view.getId()) {
+            case R.id.txtViewCart:
+                startActivity(new Intent(RestDetailsActivity.this, CartActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                break;
+        }
     }
 
     private void fillRecords() {
@@ -102,6 +131,7 @@ public class RestDetailsActivity extends AppCompatActivity {
         reviewList.add("4");
         reviewList.add("5");
     }
+
     private void setRestaurantData() {
         reviewListAdpter = new ReviewListAdpter(RestDetailsActivity.this, reviewList);
 
@@ -131,13 +161,14 @@ public class RestDetailsActivity extends AppCompatActivity {
         List<ChildData> list_data_child = new ArrayList<>();
         List<ChildData> list_data_child1 = new ArrayList<>();
 
-        list_data_child.add(new ChildData("First"));
-        list_data_child.add(new ChildData("Second"));
-        list_data_child1.add(new ChildData("Third"));
-        list_data_child1.add(new ChildData("Four"));
+        list_data_child.add(new ChildData("Manchurian dry"));
+        list_data_child.add(new ChildData("Vegetable Hakka Noodles"));
 
-        list_parent.add(new ParentData("Parent 1", list_data_child));
-        list_parent.add(new ParentData("Parent 2", list_data_child1));
+        list_data_child1.add(new ChildData("Sweet potato egg casserole"));
+        list_data_child1.add(new ChildData("Almond breakfast smoothie"));
+
+        list_parent.add(new ParentData("Chinese", list_data_child));
+        list_parent.add(new ParentData("Breakfast", list_data_child1));
 
 
         return list_parent;

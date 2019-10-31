@@ -45,6 +45,14 @@
             android:textColor="@color/text_gray_1"
             android:textSize="@dimen/_8ssp"
             app:font_name="montserratSemiBold" />
+        <ImageView
+            android:id="@+id/imgDownCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dropdown_black"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_15sdp"/>
     </RelativeLayout>
     <View
         android:id="@+id/view_parent"

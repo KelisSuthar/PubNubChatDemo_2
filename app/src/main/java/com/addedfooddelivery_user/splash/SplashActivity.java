@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //            boolean isSkipIntro = SharedPreferenceManager.getBoolean(SKIP_INTRO, false);
 //            boolean isLogin = SharedPreferenceManager.getBoolean(ISLOGIN, false);
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), SocialLoginActivity.class);
 //            if (!isSkipIntro) {
 //                i = new Intent(getApplicationContext(), IntroScreenActivity.class);
 //            } else {

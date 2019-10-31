@@ -162,7 +162,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_20ssp"
+                        android:layout_marginTop="@dimen/_50ssp"
                         android:text="@string/don_t_have_an_account_create_now"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/_9ssp"

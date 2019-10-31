@@ -52,18 +52,26 @@ public class ChatActivity extends AppCompatActivity {
         fillRecords();
         setAddressData();
     }
-    @OnClick({R.id.img_back_chat,R.id.imgChatSend})
-    public void Clickevent(View view){
-        switch (view.getId()){
+
+    @OnClick({R.id.img_back_chat, R.id.imgChatSend})
+    public void Clickevent(View view) {
+        switch (view.getId()) {
             case R.id.imgChatUser:
                 onBackPressed();
                 break;
             case R.id.imgChatSend:
-                if(etChat.getText().toString().trim().equalsIgnoreCase("")){
+                if (etChat.getText().toString().trim().equalsIgnoreCase("")) {
                     ReusedMethod.showSnackBar(ChatActivity.this, getResources().getString(R.string.val_message), 1);
-                }else {
+                } else {
                     chatConvList.add("1");
+                    adpter.notifyDataSetChanged();
+                    etChat.setText("");
+                    rcyChat.scrollToPosition(chatConvList.size() - 1);
+                    ReusedMethod.hideKeyboard(ChatActivity.this);
                 }
+                break;
+            case R.id.img_back_chat:
+                onBackPressed();
                 break;
         }
     }
@@ -72,6 +80,7 @@ public class ChatActivity extends AppCompatActivity {
         adpter = new ChatAdapter(ChatActivity.this, chatConvList);
 
         mLayoutManagerChat = new LinearLayoutManager(ChatActivity.this, RecyclerView.VERTICAL, false);
+        mLayoutManagerChat.setStackFromEnd(true);
         rcyChat.setLayoutManager(mLayoutManagerChat);
 
         rcyChat.setItemAnimator(new DefaultItemAnimator());

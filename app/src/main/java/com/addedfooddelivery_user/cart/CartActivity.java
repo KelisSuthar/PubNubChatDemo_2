@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
@@ -24,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CartActivity extends AppCompatActivity {
     @BindView(R.id.img_back_cart)
@@ -46,6 +48,14 @@ public class CartActivity extends AppCompatActivity {
         itemLikeList = new ArrayList<>();
         fillRecords();
         setRestaurantData();
+    }
+    @OnClick(R.id.img_back_cart)
+    public void eventClick(View view){
+        switch (view.getId()){
+            case R.id.img_back_cart:
+                onBackPressed();
+                break;
+        }
     }
 
     private void setRestaurantData() {
@@ -85,15 +95,15 @@ public class CartActivity extends AppCompatActivity {
         List<ChildData> list_data_child = new ArrayList<>();
         List<ChildData> list_data_child1 = new ArrayList<>();
 
-        list_data_child.add(new ChildData("First"));
-        list_data_child.add(new ChildData("Second"));
+        list_data_child.add(new ChildData("Manchurian dry"));
+        list_data_child.add(new ChildData("Vegetable Hakka Noodles"));
 
-        list_data_child1.add(new ChildData("Third"));
-        list_data_child1.add(new ChildData("Four"));
+        list_data_child1.add(new ChildData("Sweet potato egg casserole"));
+        list_data_child1.add(new ChildData("Almond breakfast smoothie"));
 
 
-        list_parent.add(new ParentData("Parent 1", list_data_child));
-        list_parent.add(new ParentData("Parent 2", list_data_child1));
+        list_parent.add(new ParentData("Chinese", list_data_child));
+        list_parent.add(new ParentData("Breakfast", list_data_child1));
 
 
         return list_parent;
@@ -109,5 +119,11 @@ public class CartActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         myAdapter.onRestoreInstanceState(savedInstanceState);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
     }
 }

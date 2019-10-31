@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +15,10 @@ import android.widget.RelativeLayout;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.chat.ChatActivity;
+import com.addedfooddelivery_user.help.HelpActivity;
+import com.addedfooddelivery_user.home.MainActivity;
+import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 import com.addedfooddelivery_user.orderSummary.OrderSummaryActivity;
 import com.addedfooddelivery_user.orderSummary.adpter.OrderSummeryItemListAdpter;
 import com.addedfooddelivery_user.orderTracking.adpter.OrderTrackingItemListAdpter;
@@ -30,9 +36,15 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class OrderTrackingActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+    @BindView(R.id.img_Close)
+    ImageView imgClose;
+@BindView(R.id.txtOrderHelp)
+CustomTextView txtOrderHelp;
+    @BindView(R.id.rl_chat)
+    RelativeLayout rlChat;
     @BindView(R.id.fram_order)
     FrameLayout framOrder;
     @BindView(R.id.ll)
@@ -87,6 +99,24 @@ public class OrderTrackingActivity extends AppCompatActivity implements OnMapRea
         fillRecords();
         setAddressData();
         setupMap();
+    }
+
+    @OnClick({R.id.rl_chat, R.id.img_Close,R.id.txtOrderHelp})
+    public void eventClick(View view) {
+        switch (view.getId()) {
+            case R.id.txtOrderHelp:
+                startActivity(new Intent(OrderTrackingActivity.this, HelpActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                break;
+            case R.id.rl_chat:
+                startActivity(new Intent(OrderTrackingActivity.this, ChatActivity.class));
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                break;
+            case R.id.img_Close:
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
+                break;
+        }
     }
 
     private void setAddressData() {

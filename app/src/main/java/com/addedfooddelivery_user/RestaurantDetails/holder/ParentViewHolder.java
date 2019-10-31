@@ -25,6 +25,7 @@ public class ParentViewHolder extends GroupViewHolder {
     public void expand() {
         super.expand();
         textView_parent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropdown_black, 0);
+        textView_parent.setPadding(0,0,0,0);
         viewParent.setVisibility(View.VISIBLE);
     }
 
@@ -32,6 +33,8 @@ public class ParentViewHolder extends GroupViewHolder {
     public void collapse() {
         super.collapse();
         textView_parent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropup_black, 0);
+        textView_parent.setPadding(0,0,0,20);
+
         viewParent.setVisibility(View.GONE);
     }
 

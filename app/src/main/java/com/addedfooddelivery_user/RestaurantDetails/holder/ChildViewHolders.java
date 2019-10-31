@@ -41,17 +41,6 @@ public class ChildViewHolders extends ChildViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    @OnClick({R.id.btnAddProduct, R.id.itemMinus, R.id.itemAdd, R.id.tickerView})
-    public void eventClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnAddProduct:
-                btnAddProduct.setVisibility(View.GONE);
-                addItemProduct.setVisibility(View.VISIBLE);
-                break;
-
-        }
-    }
-
     public void setChildText(String name) {
         txtItemName.setText(name);
     }

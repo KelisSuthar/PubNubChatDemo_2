@@ -218,12 +218,11 @@ public class HomeFragement extends Fragment {
                 break;
             case R.id.txtViewAllPopular:
                 startActivity(new Intent(getContext(), RestaurantListActivity.class));
-                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-
+                getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
                 break;
             case R.id.txtViewAllTrending:
                 startActivity(new Intent(getContext(), RestaurantListActivity.class));
-                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
 
                 break;
 

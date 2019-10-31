@@ -4,7 +4,6 @@
     android:id="@+id/ll_current_location"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_2sdp"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -52,3 +51,6 @@
         android:textSize="@dimen/_8ssp"
         app:font_name="montserratSemiBold" />
 </RelativeLayout>
+
+
+

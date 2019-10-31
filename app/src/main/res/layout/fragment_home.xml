@@ -44,7 +44,7 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:gravity="top"
                 android:singleLine="true"
-                android:text="Not Availble"
+                android:text="Not Available "
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp"
                 app:font_name="montserratREGULAR" />

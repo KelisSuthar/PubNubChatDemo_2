@@ -88,15 +88,12 @@
 
                     <com.addedfooddelivery_user._common.views.CustomTextView
                         android:id="@+id/btnAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_10sdp"
                         android:layout_alignParentEnd="true"
                         android:background="@drawable/add_rectangle"
                         android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:paddingStart="@dimen/_6sdp"
-                        android:paddingEnd="@dimen/_6sdp"
+
                         android:text="@string/add"
                         android:textColor="@color/text_gray_1"
                         android:textSize="@dimen/_6ssp"

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
@@ -16,12 +17,14 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RestaurantListActivity extends AppCompatActivity {
     PopularRestaurantListAdpter mAdpter;
     private ArrayList<String> popularRestaurantList;
     GridLayoutManager mLayoutManagerPopular;
-
+    @BindView(R.id.imgBackRestList)
+    ImageView imgBackRestList;
     @BindView(R.id.rcyRestaurantList)
     RecyclerView rcyRestList;
 
@@ -34,6 +37,15 @@ public class RestaurantListActivity extends AppCompatActivity {
         popularRestaurantList = new ArrayList<>();
         fillRecords();
         setRestaurantData();
+    }
+
+    @OnClick(R.id.imgBackRestList)
+    public void eventClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgBackRestList:
+                onBackPressed();
+                break;
+        }
     }
 
     private void setRestaurantData() {
@@ -51,5 +63,11 @@ public class RestaurantListActivity extends AppCompatActivity {
         popularRestaurantList.add("3");
         popularRestaurantList.add("4");
         popularRestaurantList.add("5");
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
     }
 }

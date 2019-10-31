@@ -1,6 +1,8 @@
 package com.addedfooddelivery_user.cart.adpter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user.cart.holder.CartChildViewHolders;
 import com.addedfooddelivery_user.cart.holder.CartParentViewHolder;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
@@ -18,22 +21,13 @@ import java.util.List;
 
 public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartParentViewHolder, CartChildViewHolders> {
     List<? extends ExpandableGroup> grupo;
-    public Context context;
+    public Activity context;
 
-    public CartProductListAdapter(Context context, List<? extends ExpandableGroup> groups) {
+    public CartProductListAdapter(Activity context, List<? extends ExpandableGroup> groups) {
         super(groups);
         this.context = context;
         grupo = groups;
     }
-
-    @Override
-    public CartParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.row_item_parent_cart, parent, false);
-
-        return new CartParentViewHolder(view);
-    }
-
     @Override
     public CartChildViewHolders onCreateChildViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,13 +55,35 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
             public void onClick(View view) {
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
                 if (count == 1) {
-                    ((ParentData) group).getItems().remove(childIndex);
-                    notifyDataSetChanged();
+                    if (group.getItemCount() <= 1) {
+                        if (grupo.size() <= 1) {
+                            //if only one group discard cart
+                            context.startActivity(new Intent(context, MainActivity.class));
+                            context.overridePendingTransition(R.anim.leftto, R.anim.right);
+                            context.finish();
+                        } else {
+                            //if only one child remove group
+                            grupo.remove(childIndex);
+                            notifyDataSetChanged();
+                        }
+                    } else {
+                        //remove one item in group
+                        ((ParentData) group).getItems().remove(childIndex);
+                        notifyDataSetChanged();
+                    }
                 } else {
                     holder.tickerView.setText(String.valueOf(count - 1));
                 }
             }
         });
+    }
+
+    @Override
+    public CartParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.row_item_parent_cart, parent, false);
+
+        return new CartParentViewHolder(view);
     }
 
 

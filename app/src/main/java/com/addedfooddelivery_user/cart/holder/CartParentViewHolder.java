@@ -1,9 +1,11 @@
 package com.addedfooddelivery_user.cart.holder;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
@@ -11,9 +13,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CartParentViewHolder extends GroupViewHolder {
-
+    @BindView(R.id.imgRestCart)
+    public PorterShapeImageView imgRestCart;
+    @BindView(R.id.txtResNameCart)
+    public CustomTextView txtResNameCart;
+    @BindView(R.id.txtRestAddressCart)
+    public CustomTextView txtRestAddressCart;
+    @BindView(R.id.imgDownCart)
+    public ImageView imgDownCart;
     @BindView(R.id.view_parent)
-    View viewParent;
+    public View viewParent;
+
 
     public CartParentViewHolder(View itemView) {
         super(itemView);
@@ -24,15 +34,15 @@ public class CartParentViewHolder extends GroupViewHolder {
     @Override
     public void expand() {
         super.expand();
-        //textView_parent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropdown_black, 0);
+        imgDownCart.setImageResource(R.drawable.ic_dropdown_black);
         // viewParent.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void collapse() {
         super.collapse();
+        imgDownCart.setImageResource(R.drawable.ic_dropup_black);
 
-        // textView_parent.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropup_black, 0);
         // viewParent.setVisibility(View.GONE);
     }
 

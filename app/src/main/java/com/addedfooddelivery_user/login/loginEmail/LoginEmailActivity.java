@@ -119,7 +119,6 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         finish();
     }
 }

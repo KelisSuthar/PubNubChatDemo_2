@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginBottom="@dimen/_2sdp"
-    android:paddingTop="@dimen/_7sdp">
+    android:paddingTop="@dimen/_9sdp">
 
     <com.addedfooddelivery_user._common.views.CustomTextView
         android:id="@+id/txtItemHeader"
@@ -17,12 +17,12 @@
         app:font_name="montserratSemiBold"
         android:gravity="center_vertical"
         android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:drawableEnd="@drawable/ic_dropdown_black"/>
     <View
         android:id="@+id/view_parent"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_9sdp"
         android:background="@color/gray"/>
 </LinearLayout>

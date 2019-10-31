@@ -70,7 +70,7 @@
                 android:id="@+id/btnAddProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/add_rectangle"
+                android:background="@drawable/product_add_rectangle"
                 android:gravity="center"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="2dp"

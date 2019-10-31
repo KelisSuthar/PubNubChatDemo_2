@@ -20,6 +20,7 @@
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
+
         android:layout_marginBottom="@dimen/_45sdp" />
 
     <com.google.android.material.card.MaterialCardView
@@ -42,6 +43,7 @@
                 android:layout_marginEnd="@dimen/_45sdp"
                 android:hint="@string/type_your_query_here"
                 android:imeOptions="actionNext"
+                android:textSize="@dimen/_11ssp"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 app:font_name="montserratMedium" />
