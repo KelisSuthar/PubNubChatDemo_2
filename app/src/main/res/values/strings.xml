@@ -9,6 +9,7 @@
     <string name="val_conf_password">Password do not match</string>
     <string name="val_min_password">Please Enter Eight Digit Password</string>
     <string name="val_validate_phone">Please Enter Your Phone Number</string>
+    <string name="val_message">Please Enter Message</string>
 
 
     <!--location-->
@@ -134,7 +135,7 @@
 
     <string name="dummy_chat">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="dummy_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
-    <string name="val_message">Please Enter Message</string>
+
     <string name="title_order_history">Order History</string>
     <string name="ordered_on">Ordered on</string>
     <string name="dummy_date">02 Jan 2020 at 08:00 PM</string>
