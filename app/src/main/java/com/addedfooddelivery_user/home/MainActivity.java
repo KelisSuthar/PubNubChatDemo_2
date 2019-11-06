@@ -139,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void gpsStatus(boolean isGPSEnable) {
                 if (isGPSEnable) {
+                    if (alertDialog != null) {
+                        alertDialog.dismiss();
+                    }
                     getLocation();
                 } else {
                     CustomeDialog(MainActivity.this);

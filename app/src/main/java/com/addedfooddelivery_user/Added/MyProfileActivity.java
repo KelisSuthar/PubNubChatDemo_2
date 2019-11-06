@@ -61,7 +61,7 @@ public class MyProfileActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.llPhotoEdit:
                 if (getPermission()) {
-                    Pix.start(MyProfileActivity.this, Options.init().setRequestCode(100).setCount(1));
+                    Pix.start(MyProfileActivity.this, Options.init().setRequestCode(10).setCount(1));
                 } else {
                     ActivityCompat.requestPermissions(MyProfileActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_ENABLE_CAMERA);
                 }

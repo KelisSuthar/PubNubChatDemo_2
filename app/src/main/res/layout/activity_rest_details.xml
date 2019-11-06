@@ -73,6 +73,7 @@
         android:fitsSystemWindows="true"
         android:id="@+id/cart_footer"
         android:visibility="gone">
+
         <include layout="@layout/content_rest_details_footer" />
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
