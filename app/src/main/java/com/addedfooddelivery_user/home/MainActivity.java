@@ -10,9 +10,11 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     List<Address> addresses;
     CoordinatorLayout ConstraintLayout;
     AlertDialog alertDialog;
+    private boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,8 +213,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (exit)
+            MainActivity.this.finish();
+        else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
     }
 }

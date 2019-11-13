@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.img_back_settings, R.id.btnLogout, R.id.rl_changePassword, R.id.rl_sendFeedback, R.id.rl_shareApp, R.id.rl_PrivacyPolice, R.id.rl_AboutAdded, R.id.rl_deleteAccount,})
+    @OnClick({R.id.img_back_settings, R.id.btnLogout, R.id.rl_changePassword, R.id.rl_sendFeedback, R.id.rl_shareApp, R.id.rl_PrivacyPolice, R.id.rl_AboutAdded, R.id.rl_deleteAccount})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_settings:

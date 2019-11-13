@@ -59,12 +59,8 @@ public class RestDetailsActivity extends AppCompatActivity {
     public CustomTextView txtItemTotal;
     @BindView(R.id.txtViewCart)
     public CustomTextView txtViewCart;
-
-
     public static CustomTextView txtItemCount;
     public static RelativeLayout rlCartFooter;
-
-
     LinearLayoutManager mLayoutManagerReview;
     private ArrayList<String> reviewList;
     ReviewListAdpter reviewListAdpter;

@@ -1,27 +1,20 @@
 package com.addedfooddelivery_user._common;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.graphics.Rect;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import static com.addedfooddelivery_user._common.CommonGps.openGpsEnableSetting;
 
 
 public class ReusedMethod {
