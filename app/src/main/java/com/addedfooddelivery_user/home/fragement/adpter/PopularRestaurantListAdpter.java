@@ -1,7 +1,6 @@
 package com.addedfooddelivery_user.home.fragement.adpter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class PopularRestaurantListAdpter extends RecyclerView.Adapter<PopularRestaurantListAdpter.ViewHolder> {

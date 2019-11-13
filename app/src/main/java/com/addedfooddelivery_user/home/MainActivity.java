@@ -16,19 +16,28 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.CommonGps;
-import com.addedfooddelivery_user._common.GlobalData;
-import com.addedfooddelivery_user._common.views.CustomButton;
+import com.addedfooddelivery_user.common.CommonGps;
+import com.addedfooddelivery_user.common.GlobalData;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.home.fragement.ProfileFragement;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,9 +50,9 @@ import java.util.Locale;
 import de.mateware.snacky.Snacky;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static com.addedfooddelivery_user._common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
-import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
-import static com.addedfooddelivery_user._common.CommonGps.openGpsEnableSetting;
+import static com.addedfooddelivery_user.common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
+import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
+import static com.addedfooddelivery_user.common.CommonGps.openGpsEnableSetting;
 
 public class MainActivity extends AppCompatActivity {
     NavController navController;
@@ -54,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout ConstraintLayout;
     AlertDialog alertDialog;
     private boolean exit = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,9 +222,31 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
     @Override
+    public void onBackPressed() {
+        if(navController.getCurrentDestination().getId()==R.id.navigation_profile){
+
+
+        }else {
+            if (exit)
+                MainActivity.this.finish();
+            else {
+                Toast.makeText(this, "Press Back again to Exit.",
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 3 * 1000);
+
+            }
+        }
+
+    }
+
+ /*   @Override
     public void onBackPressed() {
         if (exit)
             MainActivity.this.finish();
@@ -230,5 +262,5 @@ public class MainActivity extends AppCompatActivity {
             }, 3 * 1000);
 
         }
-    }
+    }*/
 }

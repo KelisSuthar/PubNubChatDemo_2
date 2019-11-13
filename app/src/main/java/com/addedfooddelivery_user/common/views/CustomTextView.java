@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common.views;
+package com.addedfooddelivery_user.common.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,8 +8,8 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.AppConstants;
-import com.addedfooddelivery_user._common.TypeFactory;
+import com.addedfooddelivery_user.common.AppConstants;
+import com.addedfooddelivery_user.common.TypeFactory;
 
 public class CustomTextView extends AppCompatTextView {
 

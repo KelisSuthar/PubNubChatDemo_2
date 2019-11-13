@@ -14,13 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.chat.ChatActivity;
 import com.addedfooddelivery_user.help.HelpActivity;
-import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
-import com.addedfooddelivery_user.orderSummary.OrderSummaryActivity;
-import com.addedfooddelivery_user.orderSummary.adpter.OrderSummeryItemListAdpter;
 import com.addedfooddelivery_user.orderTracking.adpter.OrderTrackingItemListAdpter;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.google.android.gms.maps.CameraUpdate;
@@ -29,7 +25,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;

@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomEditText;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.common.views.CustomEditText;
 import com.bumptech.glide.Glide;
 import com.fxn.pix.Options;
 import com.fxn.pix.Pix;
@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_CAMERA;
+import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_CAMERA;
 
 public class MyProfileActivity extends AppCompatActivity {
     @BindView(R.id.imgBackProfile)

@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common.model;
+package com.addedfooddelivery_user.common.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

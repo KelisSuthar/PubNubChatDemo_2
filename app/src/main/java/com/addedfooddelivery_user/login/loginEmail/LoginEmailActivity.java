@@ -2,36 +2,25 @@ package com.addedfooddelivery_user.login.loginEmail;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.IntegratorImpl;
-import com.addedfooddelivery_user._common.LoginImaplementView;
-import com.addedfooddelivery_user._common.ReusedMethod;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomEditText;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.IntegratorImpl;
+import com.addedfooddelivery_user.common.LoginImaplementView;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.common.views.CustomEditText;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.forgottPassword.ForgotPasswordActivity;
 import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.login.SocialLoginActivity;
 import com.addedfooddelivery_user.signup.SignupActivity;
-import com.google.android.material.snackbar.Snackbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

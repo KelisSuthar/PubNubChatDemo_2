@@ -13,7 +13,7 @@
             android:layout_marginTop="@dimen/_15ssp"
             android:src="@drawable/ic_popup_locationpin" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18ssp"
@@ -23,7 +23,7 @@
             android:textSize="@dimen/_15sdp"
             app:font_name="montserratBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10ssp"
@@ -33,7 +33,7 @@
             android:textSize="@dimen/_9ssp"
             app:font_name="montserratMedium" />
 
-        <com.addedfooddelivery_user._common.views.CustomButton
+        <com.addedfooddelivery_user.common.views.CustomButton
             android:id="@+id/btLocation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"

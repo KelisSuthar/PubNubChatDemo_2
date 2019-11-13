@@ -41,7 +41,7 @@
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:orientation="vertical">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15ssp"
@@ -50,7 +50,7 @@
                     android:textSize="@dimen/_10ssp"
                     app:font_name="montserratMedium" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15ssp"
@@ -80,7 +80,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -107,7 +107,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -134,7 +134,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -161,7 +161,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -188,7 +188,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -215,7 +215,7 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/ic_arrow_point_to_right" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -240,7 +240,7 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"

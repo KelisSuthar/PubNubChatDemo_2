@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
@@ -36,7 +36,7 @@
         app:cardCornerRadius="5dp"
         app:cardElevation="2dp">
 
-        <com.addedfooddelivery_user._common.views.CustomEditText
+        <com.addedfooddelivery_user.common.views.CustomEditText
             android:id="@+id/edEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -13,12 +13,11 @@ import android.widget.LinearLayout;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user._CountryPicker.Country;
 import com.addedfooddelivery_user._CountryPicker.CountryPicker;
-import com.addedfooddelivery_user._common.ReusedMethod;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomEditText;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.common.views.CustomEditText;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
-import com.addedfooddelivery_user.signup.SignupActivity;
 import com.addedfooddelivery_user.verification.verifyOtp.OtpActivity;
 
 import java.util.Collections;

@@ -9,11 +9,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomTextView;
-import com.addedfooddelivery_user.login.SocialLoginActivity;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
-import com.addedfooddelivery_user.signup.SignupActivity;
 import com.addedfooddelivery_user.verification.VerifyPhoneActivity;
 
 import butterknife.BindView;

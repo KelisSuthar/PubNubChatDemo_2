@@ -1,7 +1,6 @@
 package com.addedfooddelivery_user.home.fragement.adpter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.model.ProfileItem;
 
 import java.util.ArrayList;

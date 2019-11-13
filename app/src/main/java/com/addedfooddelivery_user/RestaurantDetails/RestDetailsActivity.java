@@ -24,11 +24,9 @@ import com.addedfooddelivery_user.RestaurantDetails.adpter.ReviewListAdpter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.viewPagerAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
-import com.addedfooddelivery_user._common.SimpleDividerItemDecoration;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.SimpleDividerItemDecoration;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.cart.CartActivity;
-import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 

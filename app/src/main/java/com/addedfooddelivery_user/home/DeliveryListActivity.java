@@ -5,14 +5,13 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomEditText;
+import com.addedfooddelivery_user.common.views.CustomEditText;
 import com.addedfooddelivery_user.home.fragement.adpter.AddressListAdpter;
 
 import java.util.ArrayList;

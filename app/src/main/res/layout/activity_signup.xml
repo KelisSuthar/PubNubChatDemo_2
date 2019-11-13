@@ -40,7 +40,7 @@
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -51,7 +51,7 @@
                     android:textSize="@dimen/_18ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,7 +74,7 @@
                     app:cardCornerRadius="5dp"
                     app:cardElevation="2dp">
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/etUserName"
                         style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_userorange"
@@ -96,7 +96,7 @@
                     app:cardCornerRadius="5dp"
                     app:cardElevation="2dp">
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/edSignupEmail"
                         style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_emailorange"
@@ -118,7 +118,7 @@
                     app:cardCornerRadius="5dp"
                     app:cardElevation="2dp">
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/edSignupPassword"
                         style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_passwordorange"
@@ -139,7 +139,7 @@
                     app:cardCornerRadius="5dp"
                     app:cardElevation="2dp">
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/edConfirmPassword"
                         style="@style/custome_et"
                         android:drawableStart="@drawable/ic_form_passwordorange"
@@ -150,7 +150,7 @@
                         app:font_name="montserratMedium" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.addedfooddelivery_user._common.views.CustomButton
+                <com.addedfooddelivery_user.common.views.CustomButton
                     android:id="@+id/btSignup"
                    style="@style/custome_bt"
                     android:layout_marginBottom="@dimen/_16sdp"
@@ -162,7 +162,7 @@
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,18 +3,15 @@ package com.addedfooddelivery_user.RestaurantDetails.holder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.robinhood.ticker.TickerView;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ChildViewHolders extends ChildViewHolder {
     @BindView(R.id.imgRestItem)

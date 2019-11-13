@@ -16,7 +16,7 @@
             android:layout_height="@dimen/_25sdp"
             android:src="@drawable/person02" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtReviewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:textSize="@dimen/_10ssp"
             app:font_name="montserratSemiBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/review_desc"
             android:layout_marginEnd="@dimen/_50sdp"
             android:layout_width="wrap_content"

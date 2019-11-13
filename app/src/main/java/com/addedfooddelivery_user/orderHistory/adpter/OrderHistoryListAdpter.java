@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.SimpleDividerItemDecoration;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.SimpleDividerItemDecoration;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;

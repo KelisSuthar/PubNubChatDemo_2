@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_tab_backarrow_white" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -33,7 +33,7 @@
             app:font_name="montserratSemiBold" />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.addedfooddelivery_user._common.views.CustomEditText
+    <com.addedfooddelivery_user.common.views.CustomEditText
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12ssp"
@@ -78,7 +78,7 @@
                 android:textSize="@dimen/_12ssp"
                 app:font_name="montserratSemiBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12ssp"
@@ -109,7 +109,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:orientation="vertical">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_40sdp"

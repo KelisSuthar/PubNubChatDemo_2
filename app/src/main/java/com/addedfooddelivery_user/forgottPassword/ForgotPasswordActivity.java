@@ -2,9 +2,7 @@ package com.addedfooddelivery_user.forgottPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +12,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.ReusedMethod;
-import com.addedfooddelivery_user._common.SmartUtils;
-import com.addedfooddelivery_user._common.views.CustomButton;
-import com.addedfooddelivery_user._common.views.CustomEditText;
-import com.addedfooddelivery_user.login.SocialLoginActivity;
-import com.addedfooddelivery_user.signup.SignupActivity;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SmartUtils;
+import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.common.views.CustomEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.addedfooddelivery_user._common.CommonGps.openGpsEnableSetting;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     @BindView(R.id.img_back_forgot)

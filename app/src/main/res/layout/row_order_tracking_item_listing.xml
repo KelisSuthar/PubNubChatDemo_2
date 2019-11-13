@@ -16,7 +16,7 @@
         app:siShape="@drawable/dialog_bg"
         app:siSquare="true" />
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtResNameTracking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:textSize="@dimen/_9ssp"
         app:font_name="montserratSemiBold" />
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtItemNameTracking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:textSize="@dimen/_8ssp"
         app:font_name="montserratSemiBold" />
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

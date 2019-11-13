@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/let_s_get_started"
@@ -41,7 +41,7 @@
                     android:textSize="@dimen/_14ssp"
                     app:font_name="montserratSemiBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5ssp"
@@ -72,7 +72,7 @@
                         android:layout_height="match_parent"
                         android:background="#324C81" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8ssp"
@@ -107,7 +107,7 @@
                         android:layout_height="match_parent"
                         android:background="#1989CE" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8ssp"
@@ -142,7 +142,7 @@
                         android:layout_height="match_parent"
                         android:background="#BA5D09" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8ssp"
@@ -155,7 +155,7 @@
                         app:font_name="montserratMedium" />
                 </LinearLayout>
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -165,7 +165,7 @@
                     android:textSize="@dimen/_13ssp"
                     app:font_name="montserratREGULAR" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

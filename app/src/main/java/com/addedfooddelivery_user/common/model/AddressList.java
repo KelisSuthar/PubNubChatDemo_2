@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common.model;
+package com.addedfooddelivery_user.common.model;
 
 import java.util.ArrayList;
 import java.util.List;

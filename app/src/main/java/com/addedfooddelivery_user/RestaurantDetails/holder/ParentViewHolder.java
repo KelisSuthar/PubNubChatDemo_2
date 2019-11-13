@@ -2,7 +2,7 @@ package com.addedfooddelivery_user.RestaurantDetails.holder;
 
 import android.view.View;
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 

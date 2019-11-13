@@ -24,7 +24,7 @@
             android:visibility="visible"
             android:orientation="horizontal">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_15ssp"
                 android:drawableEnd="@drawable/ic_locationrightarrow_white"
@@ -35,7 +35,7 @@
                 android:textSize="@dimen/_10ssp"
                 app:font_name="montserratREGULAR" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_15sdp"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -94,7 +94,7 @@
                         android:textStyle="bold"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtViewAllTrending"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -139,7 +139,7 @@
                         android:textStyle="bold"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtViewAllPopular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

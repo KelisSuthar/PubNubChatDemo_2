@@ -55,7 +55,7 @@
                 android:paddingEnd="@dimen/_8sdp"
                 android:paddingBottom="@dimen/_2sdp">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtRestauranrName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="bold"
                     app:font_name="montserratSemiBold" />
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtRestAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                         android:secondaryProgressTint="@color/new_yellow"
                         android:stepSize="0.5" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtPrise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

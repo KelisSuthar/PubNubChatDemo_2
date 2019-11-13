@@ -35,7 +35,7 @@
                     android:layout_alignParentStart="true"
                     android:src="@drawable/ic_action_tab_backarrow_white" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -78,7 +78,7 @@
                     app:cardCornerRadius="5dp"
                     app:cardElevation="2dp">
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/edProComment"
                         style="@style/custome_et"
                         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                         app:font_name="montserratMedium" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_18sdp"
@@ -214,7 +214,7 @@
         android:gravity="center_vertical">
 
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10ssp"
@@ -227,7 +227,7 @@
             app:font_name="montserratMedium" />
 
 
-        <com.addedfooddelivery_user._common.views.CustomButton
+        <com.addedfooddelivery_user.common.views.CustomButton
             android:id="@+id/btSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

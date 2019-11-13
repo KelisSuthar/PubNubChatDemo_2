@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common.views;
+package com.addedfooddelivery_user.common.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,8 +6,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.AppConstants;
-import com.addedfooddelivery_user._common.TypeFactory;
+import com.addedfooddelivery_user.common.AppConstants;
+import com.addedfooddelivery_user.common.TypeFactory;
 import com.google.android.material.button.MaterialButton;
 
 

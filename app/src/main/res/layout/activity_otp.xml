@@ -28,7 +28,7 @@
             android:animateLayoutChanges="true"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,7 +39,7 @@
                 android:textSize="@dimen/_18ssp"
                 app:font_name="montserratBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -69,7 +69,7 @@
                 app:height="@dimen/_45sdp"
                 app:width="@dimen/_60sdp" />
 
-            <com.addedfooddelivery_user._common.views.CustomButton
+            <com.addedfooddelivery_user.common.views.CustomButton
                 android:id="@+id/btDone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
@@ -87,7 +87,7 @@
                 app:elevation="@dimen/_2sdp"
                 app:font_name="montserratSemiBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtResendOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 android:textSize="@dimen/_8ssp"
                 app:font_name="montserratSemiBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtChangeNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

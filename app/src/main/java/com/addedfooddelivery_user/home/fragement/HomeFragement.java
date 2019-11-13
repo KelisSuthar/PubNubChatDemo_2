@@ -1,7 +1,5 @@
 package com.addedfooddelivery_user.home.fragement;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -33,10 +32,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantList.RestaurantListActivity;
-import com.addedfooddelivery_user._common.CommonGps;
-import com.addedfooddelivery_user._common.GlobalData;
-import com.addedfooddelivery_user._common.ReusedMethod;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.CommonGps;
+import com.addedfooddelivery_user.common.GlobalData;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.FiltersActivity;
 import com.addedfooddelivery_user.home.DeliveryListActivity;
 import com.addedfooddelivery_user.home.MainActivity;
@@ -45,13 +43,6 @@ import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAd
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +53,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
+import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class HomeFragement extends Fragment {
     @BindView(R.id.txtViewAllTrending)
@@ -121,6 +112,17 @@ public class HomeFragement extends Fragment {
             txtAddress.setText(GlobalData.CurrentAddress.toString());
             llAddress.setVisibility(View.VISIBLE);
         }
+
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                //setEnabled(false); // call this to disable listener
+                //remove(); // call to remove listener
+                Toast.makeText(getContext(), "Listing for back press from this fragment", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

@@ -55,7 +55,7 @@
                 android:paddingEnd="@dimen/_8sdp"
                 android:paddingBottom="@dimen/_2sdp">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtRestNameLike"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtPriseLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                         android:textSize="@dimen/_7ssp"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/btnAdd"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_10sdp"

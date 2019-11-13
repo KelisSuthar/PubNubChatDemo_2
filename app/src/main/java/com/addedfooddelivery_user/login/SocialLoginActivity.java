@@ -13,13 +13,12 @@ import androidx.core.app.ActivityCompat;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
-import com.addedfooddelivery_user.splash.SplashActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.addedfooddelivery_user._common.AppConstants.REQUEST_ENABLE_MULTIPLE;
+import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class SocialLoginActivity extends AppCompatActivity {
     @BindView(R.id.ll_fb)

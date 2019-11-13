@@ -28,7 +28,7 @@
                 android:src="@drawable/ic_action_tab_backarrow_white" />
 
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtChatUname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

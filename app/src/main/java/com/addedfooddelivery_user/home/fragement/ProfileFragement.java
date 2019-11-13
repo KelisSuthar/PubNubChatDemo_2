@@ -1,13 +1,13 @@
 package com.addedfooddelivery_user.home.fragement;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.Added.MyProfileActivity;
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
 import com.addedfooddelivery_user.help.HelpActivity;
 import com.addedfooddelivery_user.home.DeliveryListActivity;
 import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.ProfileListAdpter;
-import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
 import com.addedfooddelivery_user.home.model.ProfileItem;
 import com.addedfooddelivery_user.orderHistory.OrderHistoryActivity;
 import com.addedfooddelivery_user.orderTracking.OrderTrackingActivity;
@@ -67,6 +65,13 @@ public class ProfileFragement extends Fragment {
         setRestaurantData();
         fillRecords();
 
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                Toast.makeText(getContext(), "Listing for back press from this fragment", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 

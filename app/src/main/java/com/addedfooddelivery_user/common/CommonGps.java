@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common;
+package com.addedfooddelivery_user.common;
 
 import android.app.Activity;
 import android.content.Context;

@@ -19,7 +19,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center_vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15ssp"
@@ -39,7 +39,7 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:src="@drawable/person02" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

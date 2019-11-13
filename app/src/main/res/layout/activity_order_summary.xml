@@ -40,7 +40,7 @@
                     app:siShape="@drawable/dialog_bg"
                     app:siSquare="true" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtResNameSummery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                     android:textSize="@dimen/_12ssp"
                     app:font_name="montserratSemiBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtRestAddressSummery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/_10sdp">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
@@ -107,7 +107,7 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -116,7 +116,7 @@
                         android:textSize="@dimen/_10ssp"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtItemTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -145,7 +145,7 @@
                         android:textSize="@dimen/_8ssp"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtTaxes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -174,7 +174,7 @@
                         android:textSize="@dimen/_9ssp"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtDeliveryCharge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_10sdp">
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_8sdp"
@@ -211,7 +211,7 @@
                         android:textSize="@dimen/_10ssp"
                         app:font_name="montserratSemiBold" />
 
-                    <com.addedfooddelivery_user._common.views.CustomTextView
+                    <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtOrderTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:orientation="vertical">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/order_details"
@@ -248,7 +248,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@color/text_gray_1" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -258,7 +258,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtOrderId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                     app:font_name="montserratBold" />
 
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -280,7 +280,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtPaymentStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -301,7 +301,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
@@ -311,7 +311,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -321,7 +321,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtPhoneNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -332,7 +332,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -342,7 +342,7 @@
                     android:textSize="@dimen/_8ssp"
                     app:font_name="montserratBold" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txtDeliverAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -370,7 +370,7 @@
         android:paddingTop="@dimen/_7sdp"
         android:paddingBottom="@dimen/_7sdp">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/RepeatOrder"
@@ -379,7 +379,7 @@
             android:textSize="@dimen/_12ssp"
             app:font_name="montserratBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"

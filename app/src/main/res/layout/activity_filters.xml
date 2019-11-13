@@ -22,7 +22,7 @@
         android:layout_marginEnd="@dimen/_10ssp"
         android:orientation="vertical">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10ssp"
@@ -115,7 +115,7 @@
             android:layout_marginEnd="@dimen/_10ssp"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10ssp"
@@ -142,7 +142,7 @@
             android:layout_marginEnd="@dimen/_10ssp"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10ssp"
@@ -159,7 +159,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp">
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txt_min_prise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     android:textColor="@color/text_gray_1"
                     android:textSize="@dimen/_8ssp" />
 
-                <com.addedfooddelivery_user._common.views.CustomTextView
+                <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txt_max_prise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.addedfooddelivery_user._common.views.CustomButton
+    <com.addedfooddelivery_user.common.views.CustomButton
         android:id="@+id/btFilter"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"

@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/_2sdp"
     android:paddingTop="@dimen/_9sdp">
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtItemHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

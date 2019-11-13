@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common;
+package com.addedfooddelivery_user.common;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.addedfooddelivery_user.AddedApplication;
 
-import static com.addedfooddelivery_user._common.AppConstants.LOG_DEBUG;
+import static com.addedfooddelivery_user.common.AppConstants.LOG_DEBUG;
 
 public class ShowLogToast {
 

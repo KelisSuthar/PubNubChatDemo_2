@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.orderSummary.adpter.OrderSummeryItemListAdpter;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 

@@ -20,7 +20,7 @@
             app:siShape="@drawable/dialog_bg"
             app:siSquare="true" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtResNameCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textSize="@dimen/_10ssp"
             app:font_name="montserratSemiBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtRestAddressCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

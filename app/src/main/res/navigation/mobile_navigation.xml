@@ -22,11 +22,7 @@
         android:name="com.addedfooddelivery_user.home.fragement.ProfileFragement"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/navigation_more"
-        android:name="com.addedfooddelivery_user.home.fragement.ProfileFragement"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+
 
 
 

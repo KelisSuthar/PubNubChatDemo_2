@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common;
+package com.addedfooddelivery_user.common;
 
 public interface AppConstants {
     int PERMISSIONS_REQUEST_CODE = 500;
@@ -17,4 +17,9 @@ public interface AppConstants {
     //enter opt
     int OTPValidation = 1;
     int NORMAL = 2;
+
+    String LOGGED_IN_USER_ID = "LOGGED_IN_USER_ID";
+    String API_KEY_VALUE = "API_KEY_VALUE";
+    String ACCESS_TOKEN = "ACCESS_TOKEN";
+    String STATIC_API_KEY = "09d32f6c435438b5d3875a21f90a12a6bf24f5bc";
 }

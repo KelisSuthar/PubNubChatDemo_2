@@ -33,7 +33,7 @@
             android:layout_toEndOf="@+id/profile_item_icon"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/profile_item_head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:textSize="@dimen/_10ssp"
                 app:font_name="montserratSemiBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/profile_item_sub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

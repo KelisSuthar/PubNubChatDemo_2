@@ -10,13 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.ReusedMethod;
-import com.addedfooddelivery_user._common.views.CustomEditText;
-import com.addedfooddelivery_user._common.views.CustomTextView;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.views.CustomEditText;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.chat.adpter.ChatAdapter;
-import com.addedfooddelivery_user.forgottPassword.ForgotPasswordActivity;
-import com.addedfooddelivery_user.home.DeliveryListActivity;
-import com.addedfooddelivery_user.home.fragement.adpter.AddressListAdpter;
 
 import java.util.ArrayList;
 

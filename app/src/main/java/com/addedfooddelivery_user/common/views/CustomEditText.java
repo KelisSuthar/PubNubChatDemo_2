@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common.views;
+package com.addedfooddelivery_user.common.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,8 +7,8 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.AppConstants;
-import com.addedfooddelivery_user._common.TypeFactory;
+import com.addedfooddelivery_user.common.AppConstants;
+import com.addedfooddelivery_user.common.TypeFactory;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class CustomEditText extends TextInputEditText {

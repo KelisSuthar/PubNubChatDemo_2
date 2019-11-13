@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtItemCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:textSize="@dimen/_7ssp"
             app:font_name="montserratREGULAR" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtItemTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:textStyle="bold"
             app:font_name="montserratSemiBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/plus_taxes"
@@ -43,7 +43,7 @@
             app:font_name="montserratREGULAR" />
     </LinearLayout>
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/txtViewCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

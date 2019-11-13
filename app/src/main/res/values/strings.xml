@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AddedFoodDelivery</string>
+    <string name="internet_message_alert">Please Check Your internet connection.</string>
     <!--validation string-->
     <string name="val_email">Please Enter Your Email</string>
     <string name="val_validate_email">Please Enter Valid Email Address</string>

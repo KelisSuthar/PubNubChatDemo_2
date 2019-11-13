@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user._common;
+package com.addedfooddelivery_user.common;
 
 import android.annotation.TargetApi;
 import android.content.Context;

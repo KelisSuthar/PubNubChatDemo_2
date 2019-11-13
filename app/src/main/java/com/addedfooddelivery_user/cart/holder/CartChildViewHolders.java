@@ -4,8 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user._common.views.CustomTextView;
-import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.robinhood.ticker.TickerView;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 

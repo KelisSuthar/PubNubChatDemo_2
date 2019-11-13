@@ -20,7 +20,7 @@
         android:paddingBottom="@dimen/_5sdp"
         android:orientation="vertical">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtLocationTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:textSize="@dimen/_11ssp"
             app:font_name="montserratSemiBold" />
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtLocationAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

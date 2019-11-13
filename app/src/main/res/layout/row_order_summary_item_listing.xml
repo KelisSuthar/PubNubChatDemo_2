@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/_5sdp">
 
-        <com.addedfooddelivery_user._common.views.CustomTextView
+        <com.addedfooddelivery_user.common.views.CustomTextView
             android:id="@+id/txtRestNameItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:orientation="horizontal">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtItemCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textSize="@dimen/_7ssp"
                 app:font_name="montserratSemiBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
     </LinearLayout>
 
-    <com.addedfooddelivery_user._common.views.CustomTextView
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/itemPrise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

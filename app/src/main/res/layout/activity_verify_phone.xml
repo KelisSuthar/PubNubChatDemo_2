@@ -36,7 +36,7 @@
             android:animateLayoutChanges="true"
             android:orientation="vertical">
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,7 +47,7 @@
                 android:textSize="@dimen/_18ssp"
                 app:font_name="montserratBold" />
 
-            <com.addedfooddelivery_user._common.views.CustomTextView
+            <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -89,7 +89,7 @@
                             android:layout_width="@dimen/_25ssp"
                             android:layout_height="match_parent" />
 
-                        <com.addedfooddelivery_user._common.views.CustomTextView
+                        <com.addedfooddelivery_user.common.views.CustomTextView
                             android:id="@+id/txtContryCode"
                             android:layout_width="@dimen/_30ssp"
                             android:layout_height="match_parent"
@@ -105,7 +105,7 @@
                         android:layout_height="match_parent"
                         android:background="@color/gray" />
 
-                    <com.addedfooddelivery_user._common.views.CustomEditText
+                    <com.addedfooddelivery_user.common.views.CustomEditText
                         android:id="@+id/edPhone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -125,7 +125,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <com.addedfooddelivery_user._common.views.CustomButton
+            <com.addedfooddelivery_user.common.views.CustomButton
                 android:id="@+id/btNext"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"

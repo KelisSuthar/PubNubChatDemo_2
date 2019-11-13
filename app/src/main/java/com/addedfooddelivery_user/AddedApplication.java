@@ -9,9 +9,9 @@ import android.os.Bundle;
 
 import androidx.multidex.MultiDex;
 
-import com.addedfooddelivery_user._common.LocaleUtils;
-import com.addedfooddelivery_user._common.SharedPreferenceManager;
-import com.addedfooddelivery_user._common.ShowLogToast;
+import com.addedfooddelivery_user.common.LocaleUtils;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
+import com.addedfooddelivery_user.common.ShowLogToast;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
