@@ -2,7 +2,6 @@ package com.addedfooddelivery_user.apiKey;
 
 import android.app.Activity;
 
-import com.addedfooddelivery_user.apiKey.model.Data;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.common.api.BaseView;
 
@@ -13,7 +12,7 @@ public interface GetAPIKeyConstructor {
 
     interface Model {
 
-        void getAPIKeyDetail(OnFinishedListener onFinishedListener, Activity activity, Class aClass );
+        void getAPIKeyDetail(OnFinishedListener onFinishedListener, Activity activity);
 
 
         interface OnFinishedListener {

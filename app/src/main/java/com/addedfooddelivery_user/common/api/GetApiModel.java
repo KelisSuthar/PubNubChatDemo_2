@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.addedfooddelivery_user.apiKey.GetAPIKeyConstructor;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
+import com.addedfooddelivery_user.common.ReusedMethod;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -26,24 +27,12 @@ public class GetApiModel implements GetAPIKeyConstructor.Model {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
 
-                String bodyString = null;
-                if (response.body() != null) {
-                    Gson gson = new Gson();
-                    try {
-                        bodyString = new String(response.body().bytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    CommonRes commonRes = gson.fromJson(bodyString, CommonRes.class);
-                    if (commonRes.getStatusCode() == 1) {
-
-                        onFinishedListener.onFinished(response);
-                    } else {
-                        onFinishedListener.onFailure(response.message());
-                    }
-
+                if (response.code() == 200) {
+                    onFinishedListener.onFinished(response);
+                }else {
+                    onFinishedListener.onFailure(response.message());
                 }
+
             }
 
             @Override

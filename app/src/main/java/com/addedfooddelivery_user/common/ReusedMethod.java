@@ -18,6 +18,9 @@ import androidx.core.content.ContextCompat;
 import com.addedfooddelivery_user.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class ReusedMethod {
     static String getApplicationName(Context context) {
@@ -59,6 +62,17 @@ public class ReusedMethod {
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    static public int getResponseCode(JSONObject response) {
+        if (response.has("status")) {
+            try {
+                return response.getInt("status");
+            } catch (JSONException e) {
+                return 422;
+            }
+        }
+
+        return 422;
     }
 
 }
