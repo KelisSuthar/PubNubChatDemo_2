@@ -31,7 +31,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ProfileFragement extends Fragment {
-
     @BindView(R.id.rcy_profile_list)
     RecyclerView rcyProfileList;
     private Context context;
@@ -65,11 +64,11 @@ public class ProfileFragement extends Fragment {
         setRestaurantData();
         fillRecords();
 
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(false) {
             @Override
             public void handleOnBackPressed() {
 
-                Toast.makeText(getContext(), "Listing for back press from this fragment", Toast.LENGTH_SHORT).show();
+                MainActivity.navController.navigate(R.id.navigation_home);
             }
         });
         return view;

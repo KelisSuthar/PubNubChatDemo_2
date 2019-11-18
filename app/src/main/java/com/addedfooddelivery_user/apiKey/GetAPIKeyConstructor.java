@@ -2,20 +2,24 @@ package com.addedfooddelivery_user.apiKey;
 
 import android.app.Activity;
 
+import com.addedfooddelivery_user.apiKey.model.Data;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.common.api.BaseView;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public interface GetAPIKeyConstructor {
 
     interface Model {
 
-        void getAPIKeyDetail(OnFinishedListener onFinishedListener, Activity activity);
+        void getAPIKeyDetail(OnFinishedListener onFinishedListener, Activity activity, Class aClass );
 
 
         interface OnFinishedListener {
-            void onFinished(GetAPIKeyResponse response);
+            void onFinished(Response<ResponseBody> response);
 
-            void onFailure(String t);
+            void onFailure(String response);
 
         }
     }

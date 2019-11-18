@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
 import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
@@ -35,6 +37,7 @@ public class SearchFragement extends Fragment {
     public static SearchFragement newInstance() {
         return new SearchFragement();
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -60,6 +63,13 @@ public class SearchFragement extends Fragment {
 
         fillRecords();
         setRestaurantData();
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(false) {
+            @Override
+            public void handleOnBackPressed() {
+
+                MainActivity.navController.navigate(R.id.navigation_home);
+            }
+        });
         return view;
     }
 

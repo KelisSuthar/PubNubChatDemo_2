@@ -1,5 +1,6 @@
 package com.addedfooddelivery_user.RestaurantDetails.adpter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +13,21 @@ import com.addedfooddelivery_user.RestaurantDetails.holder.ChildViewHolders;
 import com.addedfooddelivery_user.RestaurantDetails.holder.ParentViewHolder;
 import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.List;
 
+import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
+
 public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentViewHolder, ChildViewHolders> {
 
-    public Context context;
+    public Activity context;
 
-    public productListAdapter(Context context, List<? extends ExpandableGroup> groups) {
+    public productListAdapter(Activity context, List<? extends ExpandableGroup> groups) {
         super(groups);
         this.context = context;
     }
@@ -49,15 +55,22 @@ public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentView
         holder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnAddProduct.setVisibility(View.GONE);
-                holder.addItemProduct.setVisibility(View.VISIBLE);
-                RestDetailsActivity.rlCartFooter.setVisibility(View.VISIBLE);
-                RestDetailsActivity.txtItemCount.setText(String.valueOf("1"+" Items"));
+                boolean userLogin;
+                userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
+                if(userLogin) {
+                    holder.btnAddProduct.setVisibility(View.GONE);
+                    holder.addItemProduct.setVisibility(View.VISIBLE);
+                    RestDetailsActivity.rlCartFooter.setVisibility(View.VISIBLE);
+                    RestDetailsActivity.txtItemCount.setText(String.valueOf("1" + " Items"));
+                }else {
+                    ReusedMethod.showSnackBar(context,context.getResources().getString(R.string.please_login),1);
+                }
             }
         });
         holder.itemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
                 holder.tickerView.setText(String.valueOf(count + 1));
 

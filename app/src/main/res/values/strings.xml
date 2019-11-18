@@ -282,6 +282,7 @@
     <string name="proceed_to_pay">Proceed to pay</string>
     <string name="plus_taxes">plus taxes</string>
     <string name="view_cart">View Cart</string>
+    <string name="please_login">Please Login</string>
 
 
 </resources>

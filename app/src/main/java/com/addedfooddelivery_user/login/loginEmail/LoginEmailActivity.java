@@ -5,6 +5,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Trace;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,16 +16,20 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.IntegratorImpl;
 import com.addedfooddelivery_user.common.LoginImaplementView;
 import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.forgottPassword.ForgotPasswordActivity;
 import com.addedfooddelivery_user.home.MainActivity;
+import com.addedfooddelivery_user.login.SocialLoginActivity;
 import com.addedfooddelivery_user.signup.SignupActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 
 public class LoginEmailActivity extends AppCompatActivity {
     @BindView(R.id.ll_email_login)
@@ -83,6 +88,7 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void success() {
+                        SharedPreferenceManager.putBoolean(IS_LOGIN, true);
                         startActivity(new Intent(LoginEmailActivity.this, MainActivity.class));
                         overridePendingTransition(R.anim.rightto, R.anim.left);
                         finish();
@@ -108,6 +114,8 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(LoginEmailActivity.this, SocialLoginActivity.class));
+        overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
     }
 }

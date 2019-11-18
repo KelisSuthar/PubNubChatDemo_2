@@ -11,6 +11,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,8 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantList.RestaurantListActivity;
 import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.GlobalData;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.FiltersActivity;
 import com.addedfooddelivery_user.home.DeliveryListActivity;
@@ -53,6 +56,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 
 public class HomeFragement extends Fragment {
@@ -85,6 +89,7 @@ public class HomeFragement extends Fragment {
     private static final int ASK_MULTIPLE_PERMISSION_REQUEST_CODE = 0;
     Geocoder geocoder;
     List<Address> addresses;
+    private boolean exit = false;
 
     public static HomeFragement newInstance() {
         return new HomeFragement();
@@ -114,15 +119,7 @@ public class HomeFragement extends Fragment {
         }
 
 
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
 
-                //setEnabled(false); // call this to disable listener
-                //remove(); // call to remove listener
-                Toast.makeText(getContext(), "Listing for back press from this fragment", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -143,6 +140,24 @@ public class HomeFragement extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(false) {
+            @Override
+            public void handleOnBackPressed() {
+                if (exit)
+                    getActivity().finish();
+                else {
+                    Toast.makeText(getActivity(), "Press Back again to Exit.",
+                            Toast.LENGTH_SHORT).show();
+                    exit = true;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            exit = false;
+                        }
+                    }, 3 * 1000);
+                }
+            }
+        });
         return view;
     }
 
@@ -205,7 +220,7 @@ public class HomeFragement extends Fragment {
     }
 
 
-    @OnClick({R.id.img_fillter, R.id.ll_adddress,R.id.txtViewAllPopular,R.id.txtViewAllTrending})
+    @OnClick({R.id.img_fillter, R.id.ll_adddress, R.id.txtViewAllPopular, R.id.txtViewAllTrending})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_fillter:
@@ -214,9 +229,14 @@ public class HomeFragement extends Fragment {
                 getActivity().finish();
                 break;
             case R.id.ll_adddress:
-                startActivity(new Intent(getContext(), DeliveryListActivity.class));
-                getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
-
+                boolean userLogin;
+                userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
+                if (userLogin) {
+                    startActivity(new Intent(getContext(), DeliveryListActivity.class));
+                    getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
+                } else {
+                    ReusedMethod.showSnackBar(getActivity(),context.getResources().getString(R.string.please_login),1);
+                }
                 break;
             case R.id.txtViewAllPopular:
                 startActivity(new Intent(getContext(), RestaurantListActivity.class));

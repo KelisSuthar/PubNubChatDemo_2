@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_order"
+        android:id="@+id/navigation_search"
         android:name="com.addedfooddelivery_user.home.fragement.SearchFragement"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />

@@ -20,8 +20,8 @@ public class GetAPIKeyModel implements GetAPIKeyConstructor.Model {
     public void getAPIKeyDetail(OnFinishedListener onFinishedListener, Activity activity) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<GetAPIKeyResponse> call = apiService.getAPIKey();
-        call.enqueue(new Callback<GetAPIKeyResponse>() {
+        //Call<GetAPIKeyResponse> call = apiService.getAPIKey();
+        /*call.enqueue(new Callback<GetAPIKeyResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetAPIKeyResponse> call, @NonNull Response<GetAPIKeyResponse> response) {
                 int success;
@@ -49,7 +49,7 @@ public class GetAPIKeyModel implements GetAPIKeyConstructor.Model {
                 Log.e(TAG, t.toString());
                 onFinishedListener.onFailure(t.getMessage());
             }
-        });
+        });*/
     }
 
 }

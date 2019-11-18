@@ -10,8 +10,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -23,21 +23,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.NavDirections;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.GlobalData;
+import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
-import com.addedfooddelivery_user.home.fragement.ProfileFragement;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,12 +46,13 @@ import java.util.Locale;
 import de.mateware.snacky.Snacky;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 import static com.addedfooddelivery_user.common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 import static com.addedfooddelivery_user.common.CommonGps.openGpsEnableSetting;
 
 public class MainActivity extends AppCompatActivity {
-    NavController navController;
+    public static NavController navController;
     private FusedLocationProviderClient mFusedLocationClient;
     private double wayLatitude = 0.0, wayLongitude = 0.0;
     Geocoder geocoder;
@@ -76,9 +73,59 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         checkPermission(this);
         ConstraintLayout = findViewById(R.id.mainContainer);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                int id = destination.getId();
+                switch (id) {
+                    case R.id.navigation_home:
 
+                        break;
+                    case R.id.navigation_search:
+
+                        break;
+                    case R.id.navigation_profile:
+                        boolean userLogin;
+                        userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
+
+                        if (userLogin) {
+                            destination.setId(0);
+                        } else {
+
+                        }
+                        break;
+
+                }
+            }
+        });
+        navView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.navigation_home:
+
+                                break;
+                            case R.id.navigation_search:
+
+                                break;
+                            case R.id.navigation_profile:
+                                boolean userLogin;
+                                userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
+
+                                if (userLogin) {
+                                    item.setChecked(true);
+                                } else {
+                                    ReusedMethod.showSnackBar(MainActivity.this,getResources().getString(R.string.please_login),1);
+                                    item.setChecked(false);
+
+                                }
+                                break;
+                        }
+                        return false;
+                    }
+                });
     }
-
 
     private void checkPermission(MainActivity mainActivity) {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{
@@ -146,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void checkGPS() {
         new CommonGps(this).turnGPSOn(new CommonGps.onGpsListener() {
             @Override
@@ -183,9 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     GlobalData.CurrentAddress = addresses.get(0).getAddressLine(0);
-
                     /*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*/
                 }
             }
@@ -207,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
             alertDialog.getWindow().setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.dialog_bg));
 
-
             CustomButton customButton = dialogView.findViewById(R.id.btLocation);
             customButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -222,12 +265,14 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    @Override
+
+   /* @Override
     public void onBackPressed() {
-        if(navController.getCurrentDestination().getId()==R.id.navigation_profile){
-
-
-        }else {
+        if (navController.getCurrentDestination().getId() == R.id.navigation_profile) {
+            navController.navigate(R.id.navigation_home);
+        } else if (navController.getCurrentDestination().getId() == R.id.navigation_search) {
+            navController.navigate(R.id.navigation_home);
+        } else {
             if (exit)
                 MainActivity.this.finish();
             else {
@@ -245,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+*/
 
  /*   @Override
     public void onBackPressed() {
