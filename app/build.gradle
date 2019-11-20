@@ -80,5 +80,6 @@ dependencies {
     //cart in add item animation ticker
     implementation 'com.robinhood.ticker:ticker:2.0.2'
     implementation 'androidx.work:work-runtime:2.2.0'
-
+    // loadinng dialog
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }

@@ -44,7 +44,7 @@ public class ApiClient implements AppConstants {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(GsonConverterFactory.create())
                     .client(getHttpClient())
                     .build();
         }
@@ -86,6 +86,8 @@ public class ApiClient implements AppConstants {
 
             if (userID != -1)
                 builder.addHeader("userID", "" + userID);
+
+            builder.addHeader("role", "User");
 
             ShowLogToast.ShowLog("http Apikey -->" + apikey);
             ShowLogToast.ShowLog("http accesstoken -->" + accessToken);

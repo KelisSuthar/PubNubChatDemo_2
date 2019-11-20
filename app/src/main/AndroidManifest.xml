@@ -80,11 +80,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".verification.verifyOtp.OtpActivity"
+            android:name=".verifyPhoneOtp.OtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".verification.VerifyPhoneActivity"
+            android:name=".verificationPhone.VerifyPhoneActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
@@ -96,7 +96,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".login.loginEmail.LoginEmailActivity"
+            android:name=".loginEmail.LoginEmailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

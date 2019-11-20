@@ -15,7 +15,7 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
+import com.addedfooddelivery_user.loginEmail.LoginEmailActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

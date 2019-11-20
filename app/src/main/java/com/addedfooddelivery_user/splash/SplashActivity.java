@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity implements GetAPIKeyConstr
     public void onResponseSuccess(GetAPIKeyResponse response) {
         if (response.getStatus() == 1) {
             SharedPreferenceManager.putString(API_KEY_VALUE, response.getData().getApiKey());
-            displayMessage(response.getData().getApiKey().toString());
+            //displayMessage(response.getData().getApiKey().toString());
             redirectToIntro();
         }
     }
@@ -102,13 +102,13 @@ public class SplashActivity extends AppCompatActivity implements GetAPIKeyConstr
 
     @Override
     public void displayMessage(String message) {
-        CustomeToast.showToast(
+        /*CustomeToast.showToast(
                 this,
                 message,
                 true,
                 getResources().getColor(R.color.white),
                 getResources().getColor(R.color.green),
-                true);
+                true);*/
     }
 
     @Override

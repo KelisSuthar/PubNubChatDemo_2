@@ -22,5 +22,7 @@ public interface AppConstants {
     String API_KEY_VALUE = "API_KEY_VALUE";
     String ACCESS_TOKEN = "ACCESS_TOKEN";
     String STATIC_API_KEY = "09d32f6c435438b5d3875a21f90a12a6bf24f5bc";
+
     String IS_LOGIN = "IS_LOGIN";
+    String USER_DETAIL_LOGIN = "USER_DETAIL_LOGIN";
 }

@@ -283,6 +283,7 @@
     <string name="plus_taxes">plus taxes</string>
     <string name="view_cart">View Cart</string>
     <string name="please_login">Please Login</string>
+    <string name="val_country_selction">Please select your country</string>
 
 
 </resources>

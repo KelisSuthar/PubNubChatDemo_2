@@ -5,9 +5,6 @@ import android.app.Activity;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.common.api.BaseView;
 
-import okhttp3.ResponseBody;
-import retrofit2.Response;
-
 public interface GetAPIKeyConstructor {
 
     interface Model {
@@ -16,7 +13,7 @@ public interface GetAPIKeyConstructor {
 
 
         interface OnFinishedListener {
-            void onFinished(Response<ResponseBody> response);
+            void onFinished(GetAPIKeyResponse response);
 
             void onFailure(String response);
 

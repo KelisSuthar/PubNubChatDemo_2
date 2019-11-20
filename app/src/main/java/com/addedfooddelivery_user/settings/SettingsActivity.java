@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.login.loginEmail.LoginEmailActivity;
+import com.addedfooddelivery_user.loginEmail.LoginEmailActivity;
 import com.google.android.material.card.MaterialCardView;
 
 import butterknife.BindView;
