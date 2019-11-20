@@ -3,7 +3,6 @@ package com.addedfooddelivery_user.verifyPhoneOtp.api;
 import android.app.Activity;
 
 import com.addedfooddelivery_user.common.AppConstants;
-import com.addedfooddelivery_user.verifyPhoneOtp.OtpActivity;
 import com.addedfooddelivery_user.verifyPhoneOtp.model.PhoneOtpResponse;
 
 public class VerifyOtpPresenter implements VerifyOtpConstructor.Presenter, VerifyOtpConstructor.Model.OnFinishedListener, AppConstants {
@@ -37,12 +36,16 @@ public class VerifyOtpPresenter implements VerifyOtpConstructor.Presenter, Verif
 
     @Override
     public void onOtpFinished(PhoneOtpResponse response) {
-
+        phoneOtpView.onOtpResponseSuccess(response);
+        phoneOtpView.showLoadingIndicator(false);
     }
 
     @Override
-    public void onOtpFailure(String response) {
-
+    public void onOtpFailure(String t) {
+        if (phoneOtpView != null) {
+            phoneOtpView.showLoadingIndicator(false);
+            phoneOtpView.displayMessage(t);
+        }
     }
 
     @Override
@@ -51,11 +54,11 @@ public class VerifyOtpPresenter implements VerifyOtpConstructor.Presenter, Verif
         phoneOtpModel = null;
     }
 
-    public void requestAPIKey(Activity otpActivity,String otp) {
+    public void requestOtpVerify(Activity otpActivity, String otp) {
             if (phoneOtpView != null) {
                 phoneOtpView.showLoadingIndicator(true);
             }
-            phoneOtpModel.getForgotData(this, otpActivity,otp);
+            phoneOtpModel.VerifyOtpData(this, otpActivity,otp);
 
     }
 

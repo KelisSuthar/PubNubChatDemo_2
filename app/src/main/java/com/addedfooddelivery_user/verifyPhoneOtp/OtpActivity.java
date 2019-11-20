@@ -18,9 +18,6 @@ import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.loginEmail.LoginEmailActivity;
 import com.addedfooddelivery_user.verificationPhone.VerifyPhoneActivity;
-import com.addedfooddelivery_user.verificationPhone.api.VerifyPhoneConstructor;
-import com.addedfooddelivery_user.verificationPhone.api.VerifyPhonePresenter;
-import com.addedfooddelivery_user.verificationPhone.model.PhoneVerifyResponse;
 import com.addedfooddelivery_user.verifyPhoneOtp.api.VerifyOtpConstructor;
 import com.addedfooddelivery_user.verifyPhoneOtp.api.VerifyOtpPresenter;
 import com.addedfooddelivery_user.verifyPhoneOtp.model.PhoneOtpResponse;
@@ -31,9 +28,7 @@ import butterknife.OnClick;
 import in.aabhasjindal.otptextview.OTPListener;
 import in.aabhasjindal.otptextview.OtpTextView;
 
-import static com.addedfooddelivery_user.common.AppConstants.API_KEY_VALUE;
 import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
-import static com.addedfooddelivery_user.common.AppConstants.LOGGED_IN_USER_ID;
 
 public class OtpActivity extends AppCompatActivity implements VerifyOtpConstructor.View {
     @BindView(R.id.otpTextView)
@@ -56,9 +51,14 @@ public class OtpActivity extends AppCompatActivity implements VerifyOtpConstruct
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_otp);
         ButterKnife.bind(this);
+        otpTextView.requestFocusOTP();
         verifyOtpPresenter = new VerifyOtpPresenter(this);
         initProgressBar();
-
+        if (getIntent().hasExtra("screen")) {
+            if (getIntent().getStringExtra("screen").equalsIgnoreCase("login")) {
+                verifyOtpPresenter.getResetOtp(OtpActivity.this);
+            }
+        }
         otpTextView.setOtpListener(new OTPListener() {
             @Override
             public void onInteractionListener() {
@@ -72,14 +72,15 @@ public class OtpActivity extends AppCompatActivity implements VerifyOtpConstruct
                 otpData = otp;
             }
         });
+
     }
 
     @OnClick({R.id.btDone, R.id.txtResendOtp, R.id.txtChangeNo})
     public void clickEvent(View view) {
         switch (view.getId()) {
             case R.id.btDone:
-                if (otpData.equalsIgnoreCase("")) {
-                    verifyOtpPresenter.requestAPIKey(OtpActivity.this, otpData);
+                if (!(otpData.equalsIgnoreCase(""))) {
+                    verifyOtpPresenter.requestOtpVerify(OtpActivity.this, otpData);
                 }
                 break;
             case R.id.txtResendOtp:
@@ -95,7 +96,7 @@ public class OtpActivity extends AppCompatActivity implements VerifyOtpConstruct
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(OtpActivity.this, LoginEmailActivity.class));
+        //  startActivity(new Intent(OtpActivity.this, LoginEmailActivity.class));
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
     }
@@ -125,11 +126,13 @@ public class OtpActivity extends AppCompatActivity implements VerifyOtpConstruct
 
     @Override
     public void onOtpResponseFailure(Throwable throwable) {
-
+//for resend otp
     }
 
     @Override
     public void onOtpResponseSuccess(PhoneOtpResponse response) {
+//for resend otp
+        otpTextView.setOTP("");
 
     }
 

@@ -1,7 +1,9 @@
 package com.addedfooddelivery_user.common.api;
 
+import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.forgottPassword.model.ForgotPassResponse;
+import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
 import com.addedfooddelivery_user.loginEmail.model.LoginResponse;
 import com.addedfooddelivery_user.signup.model.SignupResponse;
 import com.addedfooddelivery_user.verificationPhone.model.PhoneVerifyResponse;
@@ -38,15 +40,34 @@ public interface ApiInterface {
             @Field("loginType") String loginType,
             @Field("socialID") String socialID);
 
+    //add phone number
     @FormUrlEncoded
     @POST("customermobile")
     Call<PhoneVerifyResponse> submitPhone(@Field("countryCode") String countryCode,
                                           @Field("phoneNumber") String phoneNumber);
 
+    //verify otp
     @FormUrlEncoded
     @POST("customerVerifyOTP")
     Call<PhoneOtpResponse> submitOtp(@Field("otp") String otpPhone);
 
+    //resend otp
     @POST("resendOTP")
     Call<PhoneOtpResponse> submitResendOtp();
+
+    //get home restaurant data
+    @FormUrlEncoded
+    @POST("home")
+    Call<HomeRestaurantResponse> getHomeRestaurant(@Field("restaurantCity") String city);
+
+    //view all restaurant list
+    @FormUrlEncoded
+    @POST("restaurantList")
+    Call<AllRestaurantResponse> getAllRestaurant(
+            @Field("restaurantType") String restaurantType,
+            @Field("sort_by") String sort_by,
+            @Field("direction") String direction,
+            @Field("category") String category,
+            @Field("price") String price);
+
 }

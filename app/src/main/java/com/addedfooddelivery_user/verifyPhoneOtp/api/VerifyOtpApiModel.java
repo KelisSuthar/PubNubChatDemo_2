@@ -17,7 +17,7 @@ public class VerifyOtpApiModel implements VerifyOtpConstructor.Model {
     private final String TAG = "ForgotPassModel";
 
     @Override
-    public void getForgotData(OnFinishedListener onFinishedListener, Activity activity, String otp) {
+    public void VerifyOtpData(OnFinishedListener onFinishedListener, Activity activity, String otp) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<PhoneOtpResponse> call = apiService.submitOtp(otp);

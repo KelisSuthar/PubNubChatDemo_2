@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home;
+package com.addedfooddelivery_user.home_filter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomTextView;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.material.chip.Chip;

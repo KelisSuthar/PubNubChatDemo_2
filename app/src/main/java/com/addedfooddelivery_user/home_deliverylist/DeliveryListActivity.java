@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home;
+package com.addedfooddelivery_user.home_deliverylist;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.views.CustomEditText;
-import com.addedfooddelivery_user.home.fragement.adpter.AddressListAdpter;
+import com.addedfooddelivery_user.home_deliverylist.adpter.AddressListAdpter;
 
 import java.util.ArrayList;
 

@@ -74,5 +74,32 @@ public class ReusedMethod {
 
         return 422;
     }
+ /*   private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+        builder.setTitle("Need Permissions");
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
 
+    }*/
+
+    // navigating user to app settings
+ /*   private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }*/
 }

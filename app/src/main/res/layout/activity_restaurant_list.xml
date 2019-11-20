@@ -10,11 +10,15 @@
     <include
         android:id="@+id/toolbar_restaurant"
         layout="@layout/toolbar_restaurant_list" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyRestaurantList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/_5sdp"
-        tools:listitem="@layout/row_popular_restaurant_listing"/>
+        android:visibility="gone"
+        tools:listitem="@layout/row_popular_restaurant_listing" />
+
+    <include layout="@layout/no_data" />
 
 </LinearLayout>

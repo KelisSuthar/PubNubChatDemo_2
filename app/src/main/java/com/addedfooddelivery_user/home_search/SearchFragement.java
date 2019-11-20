@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home.fragement;
+package com.addedfooddelivery_user.home_search;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.home.fragement.adpter.PopularRestaurantListAdpter;
-import com.addedfooddelivery_user.home.fragement.adpter.SearchListAdpter;
-import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
+import com.addedfooddelivery_user.home_search.adpter.SearchListAdpter;
 
 import java.util.ArrayList;
 

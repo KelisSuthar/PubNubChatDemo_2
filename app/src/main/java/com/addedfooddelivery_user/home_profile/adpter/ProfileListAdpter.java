@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home.fragement.adpter;
+package com.addedfooddelivery_user.home_profile.adpter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.views.CustomTextView;
-import com.addedfooddelivery_user.home.model.ProfileItem;
+import com.addedfooddelivery_user.home_profile.model.ProfileItem;
 
 import java.util.ArrayList;
 import java.util.List;

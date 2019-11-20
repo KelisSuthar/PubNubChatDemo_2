@@ -119,6 +119,7 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginConstr
             case R.id.txtSignup:
                 startActivity(new Intent(LoginEmailActivity.this, SignupActivity.class));
                 overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
                 break;
             case R.id.img_back_login:
                 onBackPressed();
@@ -156,7 +157,7 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginConstr
                     overridePendingTransition(R.anim.rightto, R.anim.left);
                     finish();
                 } else {
-                    startActivity(new Intent(LoginEmailActivity.this, OtpActivity.class));
+                    startActivity(new Intent(LoginEmailActivity.this, OtpActivity.class).putExtra("screen","login"));
                     overridePendingTransition(R.anim.rightto, R.anim.left);
                     finish();
                 }

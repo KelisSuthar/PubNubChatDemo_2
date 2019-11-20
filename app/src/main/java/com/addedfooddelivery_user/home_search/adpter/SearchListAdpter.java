@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home.fragement.adpter;
+package com.addedfooddelivery_user.home_search.adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

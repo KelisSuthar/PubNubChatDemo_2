@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.addedfooddelivery_user.R;
@@ -16,9 +15,6 @@ import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user.cart.adpter.CartProductListAdapter;
 import com.addedfooddelivery_user.cart.adpter.ItemLikeListAdpter;
-import com.addedfooddelivery_user.home.fragement.adpter.TrendingRestaurantListAdpter;
-import com.thoughtbot.expandablerecyclerview.listeners.GroupExpandCollapseListener;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.ArrayList;
 import java.util.List;

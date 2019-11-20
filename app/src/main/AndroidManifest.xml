@@ -72,11 +72,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".home.DeliveryListActivity"
+            android:name=".home_deliverylist.DeliveryListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".home.FiltersActivity"
+            android:name=".home_filter.FiltersActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity

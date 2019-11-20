@@ -21,7 +21,7 @@ public class GetAPIKeyPresenter implements GetAPIKeyConstructor.Presenter, GetAP
 
     @Override
     public void onFinished(GetAPIKeyResponse response) {
-       // Data data = response.getData();
+       // HomeRestaurantData data = response.getData();
         //SharedPreferenceManager.putString(API_KEY_VALUE, data.getApiKey());
         movieDetailView.onResponseSuccess(response);
         movieDetailView.showLoadingIndicator(false);

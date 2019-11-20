@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home.model;
+package com.addedfooddelivery_user.home_profile.model;
 
 import android.graphics.drawable.Drawable;
 

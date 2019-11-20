@@ -21,8 +21,8 @@
             android:layout_marginEnd="@dimen/_10ssp"
             android:layout_toStartOf="@+id/img_fillter"
             android:gravity="center_vertical"
-            android:visibility="visible"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <com.addedfooddelivery_user.common.views.CustomTextView
                 android:layout_width="wrap_content"
@@ -57,6 +57,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_15ssp"
+            android:visibility="gone"
             android:src="@drawable/tab_filterwhite" />
     </RelativeLayout>
 
@@ -68,101 +69,127 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10ssp"
-            android:layout_marginTop="@dimen/_10ssp"
-            android:layout_marginEnd="@dimen/_10ssp"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearEventOnWeek"
+                android:id="@+id/ll_home_data"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_10ssp"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/linearEventOnWeek"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <com.addedfooddelivery_user.common.views.CustomTextView
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/trending_this_week"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/_13ssp"
-                        android:textStyle="bold"
-                        app:font_name="montserratSemiBold" />
+                        android:orientation="horizontal">
 
-                    <com.addedfooddelivery_user.common.views.CustomTextView
-                        android:id="@+id/txtViewAllTrending"
-                        android:layout_width="wrap_content"
+                        <com.addedfooddelivery_user.common.views.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/trending_this_week"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold"
+                            app:font_name="montserratSemiBold" />
+
+                        <com.addedfooddelivery_user.common.views.CustomTextView
+                            android:id="@+id/txtViewAllTrending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:drawableEnd="@drawable/ic_viewalldoubleright_orange"
+                            android:drawablePadding="@dimen/_5ssp"
+                            android:gravity="center_vertical"
+                            android:text="@string/view_all"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewWeek"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:drawableEnd="@drawable/ic_viewalldoubleright_orange"
-                        android:drawablePadding="@dimen/_5ssp"
-                        android:gravity="center_vertical"
-                        android:text="@string/view_all"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_9ssp" />
-                </RelativeLayout>
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/row_trending_restaurant_listing" />
+                </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewWeek"
+                <LinearLayout
+                    android:id="@+id/linearMostPopular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/row_trending_restaurant_listing" />
+                    android:layout_marginTop="@dimen/_5ssp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.addedfooddelivery_user.common.views.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/most_popular_reataurants"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_13ssp"
+                            android:textStyle="bold"
+                            app:font_name="montserratSemiBold" />
+
+                        <com.addedfooddelivery_user.common.views.CustomTextView
+                            android:id="@+id/txtViewAllPopular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:drawableEnd="@drawable/ic_viewalldoubleright_orange"
+                            android:drawablePadding="@dimen/_5ssp"
+                            android:gravity="center_vertical"
+                            android:text="@string/view_all"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_9ssp" />
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerMostPopular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="0dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:visibility="visible"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        tools:listitem="@layout/row_popular_restaurant_listing" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearMostPopular"
+                android:id="@+id/ll_home_no_data"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5ssp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <com.addedfooddelivery_user.common.views.CustomTextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.addedfooddelivery_user.common.views.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/most_popular_reataurants"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/_13ssp"
-                        android:textStyle="bold"
-                        app:font_name="montserratSemiBold" />
-
-                    <com.addedfooddelivery_user.common.views.CustomTextView
-                        android:id="@+id/txtViewAllPopular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:drawableEnd="@drawable/ic_viewalldoubleright_orange"
-                        android:drawablePadding="@dimen/_5ssp"
-                        android:gravity="center_vertical"
-                        android:text="@string/view_all"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_9ssp" />
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerMostPopular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="0dp"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:visibility="visible"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    tools:listitem="@layout/row_popular_restaurant_listing" />
+                    android:layout_gravity="center"
+                    android:text="@string/no_data_found"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:font_name="montserratBold" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

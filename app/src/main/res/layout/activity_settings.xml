@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".home.FiltersActivity">
+    tools:context=".home_filter.FiltersActivity">
 
     <include
         android:id="@+id/toolbar_settings"
@@ -248,10 +248,11 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginBottom="@dimen/_6sdp"
             android:drawableStart="@drawable/ic_logoutorange"
-            android:drawablePadding="@dimen/_10ssp"
+            android:drawablePadding="@dimen/_5ssp"
             android:text="@string/logout"
+            android:gravity="center_vertical"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_11ssp"
             app:font_name="montserratSemiBold" />
 
     </com.google.android.material.card.MaterialCardView>

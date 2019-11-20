@@ -1,11 +1,10 @@
-package com.addedfooddelivery_user.home.fragement;
+package com.addedfooddelivery_user.home_profile;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
@@ -16,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.addedfooddelivery_user.Added.MyProfileActivity;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.help.HelpActivity;
-import com.addedfooddelivery_user.home.DeliveryListActivity;
+import com.addedfooddelivery_user.home_deliverylist.DeliveryListActivity;
 import com.addedfooddelivery_user.home.MainActivity;
-import com.addedfooddelivery_user.home.fragement.adpter.ProfileListAdpter;
-import com.addedfooddelivery_user.home.model.ProfileItem;
+import com.addedfooddelivery_user.home_profile.adpter.ProfileListAdpter;
+import com.addedfooddelivery_user.home_profile.model.ProfileItem;
 import com.addedfooddelivery_user.orderHistory.OrderHistoryActivity;
 import com.addedfooddelivery_user.orderTracking.OrderTrackingActivity;
 import com.addedfooddelivery_user.settings.SettingsActivity;

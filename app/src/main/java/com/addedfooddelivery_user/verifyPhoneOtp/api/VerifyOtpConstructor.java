@@ -10,7 +10,7 @@ public interface VerifyOtpConstructor {
 
     interface Model {
 
-        void getForgotData(OnFinishedListener onFinishedListener, Activity activity, String otp);
+        void VerifyOtpData(OnFinishedListener onFinishedListener, Activity activity, String otp);
 
         void getResetOtp(OnFinishedListener onFinishedListener, Activity otpActivity);
 
@@ -41,7 +41,7 @@ public interface VerifyOtpConstructor {
     interface Presenter {
         void onDestroy();
 
-        void requestAPIKey(Activity activity, String otp);
+        void requestOtpVerify(Activity activity, String otp);
 
         void  getResetOtp(Activity activity);
 

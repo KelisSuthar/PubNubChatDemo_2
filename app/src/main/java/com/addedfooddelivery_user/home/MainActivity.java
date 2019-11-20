@@ -3,6 +3,7 @@ package com.addedfooddelivery_user.home;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Address;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -34,6 +36,7 @@ import com.addedfooddelivery_user.common.GlobalData;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
+import com.addedfooddelivery_user.home.fragement.HomeFragement;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -98,33 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        navView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.navigation_home:
 
-                                break;
-                            case R.id.navigation_search:
-
-                                break;
-                            case R.id.navigation_profile:
-                                boolean userLogin;
-                                userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
-
-                                if (userLogin) {
-                                    item.setChecked(true);
-                                } else {
-                                    ReusedMethod.showSnackBar(MainActivity.this,getResources().getString(R.string.please_login),1);
-                                    item.setChecked(false);
-
-                                }
-                                break;
-                        }
-                        return false;
-                    }
-                });
     }
 
     private void checkPermission(MainActivity mainActivity) {
@@ -142,45 +119,50 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_ENABLE_MULTIPLE:
                 if (grantResults.length > 0) {
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-
                     if (locationAccepted)
                         checkGPS();
                     else {
-                        Snacky.builder()
-                                .setActivity(MainActivity.this)
-                                .setActionText("Grant")
-                                .setActionTextColor(getResources().getColor(R.color.white))
-                                .setBackgroundColor(getResources().getColor(R.color.light_primary))
-                                .setTextSize(12)
-                                .setActionTextSize(12)
-                                .setTextColor(getResources().getColor(R.color.white))
-                                .setTextTypefaceStyle(Typeface.BOLD)
-                                .setActionClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                            requestPermissions(new String[]{ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                                                    PERMISSION_LOCATION_REQUEST_CODE);
-                                        }
-                                    }
-                                })
-                                .setText("Permission Denied, You cannot access location data")
-                                .setDuration(Snacky.LENGTH_INDEFINITE)
-                                .build()
-                                .show();
-
-
+                        locationPermission();
                     }
                 }
                 break;
             case PERMISSION_LOCATION_REQUEST_CODE:
                 if (grantResults.length > 0) {
+
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (locationAccepted)
                         checkGPS();
+                    else {
+                        locationPermission();
+                    }
                 }
                 break;
         }
+    }
+
+    public void locationPermission() {
+        Snacky.builder()
+                .setActivity(MainActivity.this)
+                .setActionText("Grant")
+                .setActionTextColor(getResources().getColor(R.color.white))
+                .setBackgroundColor(getResources().getColor(R.color.light_primary))
+                .setTextSize(12)
+                .setActionTextSize(12)
+                .setTextColor(getResources().getColor(R.color.white))
+                .setTextTypefaceStyle(Typeface.BOLD)
+                .setActionClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(new String[]{ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                                    PERMISSION_LOCATION_REQUEST_CODE);
+                        }
+                    }
+                })
+                .setText("Permission Denied, You cannot access location data")
+                .setDuration(Snacky.LENGTH_INDEFINITE)
+                .build()
+                .show();
     }
 
     @Override
@@ -229,7 +211,11 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    GlobalData.CurrentAddress = addresses.get(0).getAddressLine(0);
+
+                    GlobalData.CurrentAddress = addresses;
+                    Intent intent = new Intent("location");
+                    intent.putExtra("getAdd", "getAdd");
+                    LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
                     /*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*/
                 }
             }

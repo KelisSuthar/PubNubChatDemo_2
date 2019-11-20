@@ -284,6 +284,7 @@
     <string name="view_cart">View Cart</string>
     <string name="please_login">Please Login</string>
     <string name="val_country_selction">Please select your country</string>
+    <string name="no_data_found">No Data Found</string>
 
 
 </resources>

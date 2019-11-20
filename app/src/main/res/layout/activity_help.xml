@@ -14,7 +14,7 @@
         android:focusable="false"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        tools:context=".home.DeliveryListActivity">
+        tools:context=".home_deliverylist.DeliveryListActivity">
 
 
         <androidx.appcompat.widget.Toolbar

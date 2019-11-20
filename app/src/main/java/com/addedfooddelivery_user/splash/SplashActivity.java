@@ -13,14 +13,15 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.apiKey.GetAPIKeyConstructor;
 import com.addedfooddelivery_user.apiKey.GetAPIKeyPresenter;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
-import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.login.SocialLoginActivity;
 
 import butterknife.ButterKnife;
 
 import static com.addedfooddelivery_user.common.AppConstants.API_KEY_VALUE;
+import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 
 public class SplashActivity extends AppCompatActivity implements GetAPIKeyConstructor.View {
     GetAPIKeyPresenter apiKeyPresenter;
@@ -54,28 +55,20 @@ public class SplashActivity extends AppCompatActivity implements GetAPIKeyConstr
 
     void redirectToIntro() {
         Runnable r = () -> {
+            boolean isLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
+            if (isLogin) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
+            } else {
+                Intent i = new Intent(getApplicationContext(), SocialLoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.rightto, R.anim.left);
+                finish();
+            }
 
-//            boolean isSkipIntro = SharedPreferenceManager.getBoolean(SKIP_INTRO, false);
-//            boolean isLogin = SharedPreferenceManager.getBoolean(ISLOGIN, false);
-            Intent i = new Intent(getApplicationContext(), SocialLoginActivity.class);
-//            if (!isSkipIntro) {
-//                i = new Intent(getApplicationContext(), IntroScreenActivity.class);
-//            } else {
-//                if (isLogin) {
-//                    boolean isProvider = SharedPreferenceManager.getBoolean(IS_PROVIDER, false);
-//
-//                    if (isProvider) {
-//                        i = new Intent(getApplicationContext(), ProviderHomeActivity.class);
-//                    } else {
-//                        i = new Intent(getApplicationContext(), HomeActivity.class);
-//                    }
-//                } else {
-//                    i = new Intent(getApplicationContext(), UserSelectionActivity.class);
-//                }
-//            }
-            startActivity(i);
-            overridePendingTransition(R.anim.rightto, R.anim.left);
-            finish();
+
         };
         Handler h = new Handler();
         h.postDelayed(r, 1500); // will be delayed for ic_placeholder.5 seconds

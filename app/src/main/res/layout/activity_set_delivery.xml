@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:focusable="false"
     android:focusableInTouchMode="true"
-    tools:context=".home.DeliveryListActivity">
+    tools:context=".home_deliverylist.DeliveryListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
