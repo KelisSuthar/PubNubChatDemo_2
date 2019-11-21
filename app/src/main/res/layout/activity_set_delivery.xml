@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
-    android:orientation="vertical"
     android:focusable="false"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context=".home_deliverylist.DeliveryListActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -33,19 +33,21 @@
             app:font_name="montserratSemiBold" />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.addedfooddelivery_user.common.views.CustomEditText
+
+    <com.addedfooddelivery_user.common.views.CustomTextView
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/et_bg"
         android:elevation="@dimen/_8sdp"
-        android:hint="Search for area, street name...."
+        android:gravity="center_vertical"
+        android:text="@string/search_for_area_street_name"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
-        android:paddingStart="@dimen/_20sdp"
-        android:textColor="@color/colorBlack"
-        android:textColorHint="@color/text_gray"
+        android:textColor="@color/text_gray_1"
+        android:paddingStart="@dimen/_20ssp"
+        android:visibility="visible"
         app:font_name="montserratMedium" />
 
     <LinearLayout
@@ -125,7 +127,7 @@
             android:id="@+id/rcyAddressList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-tools:listitem="@layout/row_address_listing"
-            tools:itemCount="3" />
+            tools:itemCount="3"
+            tools:listitem="@layout/row_address_listing" />
     </LinearLayout>
 </LinearLayout>

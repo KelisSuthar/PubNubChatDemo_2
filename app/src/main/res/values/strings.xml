@@ -1,4 +1,6 @@
 <resources>
+    <string name="fontSemiBold">Montserrat-SemiBold.ttf</string>
+
     <string name="app_name">AddedFoodDelivery</string>
     <string name="internet_message_alert">Please Check Your internet connection.</string>
     <!--validation string-->
@@ -271,7 +273,7 @@
     <string name="you_may_also_like">You may also like</string>
     <string name="add">Add</string>
     <string name="apply_coupon">Apply coupon</string>
-    <string name="bill_details" >Bill Details</string>
+    <string name="bill_details">Bill Details</string>
     <string name="rest_charge">Restaurant Charges</string>
     <string name="delivery_fees">Delivery Fees</string>
     <string name="to_pay">To Pay</string>
@@ -285,6 +287,13 @@
     <string name="please_login">Please Login</string>
     <string name="val_country_selction">Please select your country</string>
     <string name="no_data_found">No Data Found</string>
-
+    <string name="search_for_area_street_name">Search for area, street name....</string>
+    <string name="your_location">Your Location</string>
+    <string name="complete_address">Complete address (optional)</string>
+    <string name="save_as">Save this address as</string>
+    <string name="work">Work</string>
+    <string name="other">Other</string>
+    <string name="address_hint">Ex : Dad\'s place, John\'s Home</string>
+    <string name="save_proceed">Confirm Location</string>
 
 </resources>

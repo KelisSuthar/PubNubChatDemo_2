@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
-//facebbok google twitter
+    //facebbok google twitter
     implementation 'com.facebook.android:facebook-login:4.42.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
@@ -73,6 +73,8 @@ dependencies {
     //google map
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //place
+    implementation 'com.google.android.libraries.places:places:2.1.0'
     //slide libeary
     implementation 'me.relex:circleindicator:2.1.0@aar'
     // Expand recycleview

@@ -6,6 +6,7 @@ public interface AppConstants {
     int REQUEST_ENABLE_MULTIPLE = 518;
     int PERMISSION_LOCATION_REQUEST_CODE=501;
     boolean LOG_DEBUG = true;
+    int AUTOCOMPLETE_REQUEST_CODE=521;
 
     String APP_NAME = "AddeddFood";
 

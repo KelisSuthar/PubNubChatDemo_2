@@ -1,0 +1,7 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <bitmap android:src="@drawable/ic_location_homegray_small" android:tint="@color/colorPrimary" />
+    </item>
+    <item android:drawable="@drawable/ic_location_homegray_small" android:state_checked="false" />
+
+</selector>

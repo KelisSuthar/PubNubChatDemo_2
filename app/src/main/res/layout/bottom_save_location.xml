@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:cardBackgroundColor="@color/white"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/animation_line_cart_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <com.addedfooddelivery_user.common.views.CustomEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:focusable="false"
+                android:hint="@string/your_location"
+                android:inputType="textMultiLine"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text_gray_1"
+                android:textSize="@dimen/_11ssp"
+                app:font_name="montserratMedium"
+                android:background="@drawable/bottom_line"/>
+
+
+            <com.addedfooddelivery_user.common.views.CustomEditText
+                android:id="@+id/flat_no"
+                android:background="@drawable/bottom_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5ssp"
+                android:hint="@string/complete_address"
+                android:inputType="textPostalAddress"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text_gray_1"
+                android:textSize="@dimen/_11ssp"
+                app:font_name="montserratMedium"/>
+
+        </LinearLayout>
+
+        <com.addedfooddelivery_user.common.views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="@string/save_as"
+            android:textAllCaps="false"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_10ssp"
+            app:font_name="montserratMedium"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/type_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RadioButton
+                    android:id="@+id/home_radio"
+                    android:fontFamily="@string/fontSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/border_save_address"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_home_address"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="@string/home"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1" />
+
+                <RadioButton
+                    android:id="@+id/work_radio"
+                    android:fontFamily="@string/fontSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/border_save_address"
+
+                    android:button="@null"
+                    android:drawableLeft="@drawable/selector_work_address"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="@string/work"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1" />
+
+                <RadioButton
+                    android:id="@+id/other_radio"
+                    android:fontFamily="@string/fontSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_save_address"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/selector_other_address"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="@string/other"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_gray_1" />
+
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/other_address_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_5sdp">
+
+                <com.addedfooddelivery_user.common.views.CustomEditText
+                    android:id="@+id/other_address_header_et"
+                    android:background="@drawable/bottom_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:hint="@string/address_hint"
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_gray_1"
+                    android:textSize="@dimen/_11ssp"
+                    app:font_name="montserratMedium"/>
+
+                <TextView
+                    android:id="@+id/cancel_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/text_gray_1" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <com.addedfooddelivery_user.common.views.CustomButton
+            android:id="@+id/save"
+            style="@style/custome_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/email_rectangle"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="@string/save_proceed"
+            android:layout_marginStart="@dimen/_1ssp"
+            android:layout_marginEnd="@dimen/_1ssp"
+            android:layout_marginTop="@dimen/_15ssp"
+            app:font_name="montserratSemiBold"
+            android:textColor="@color/colorWhite" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

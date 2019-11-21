@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             //frameView.setBackground(activity.getResources().getDrawable(R.drawable.dialog_bg));
             builder.setView(frameView);
 
-            AlertDialog alertDialog = builder.create();
+            alertDialog = builder.create();
             LayoutInflater inflater = alertDialog.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custome_popup, frameView);
 

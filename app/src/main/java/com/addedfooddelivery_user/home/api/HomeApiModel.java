@@ -31,6 +31,9 @@ public class HomeApiModel implements HomeConstructor.Model {
                     if (success == 1) {
                         HomeRestaurantResponse keyResponse = response.body();
                         onFinishedListener.onHomeFinished(keyResponse);
+                    }if (success == 0) {
+                        HomeRestaurantResponse keyResponse = response.body();
+                        onFinishedListener.onHomeFinished(keyResponse);
                     } else {
                         onFinishedListener.onHomeFailure(response.body().getMessage());
                     }

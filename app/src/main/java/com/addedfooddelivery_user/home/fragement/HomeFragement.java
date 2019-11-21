@@ -327,6 +327,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     @Override
     public void onHomeResponseFailure(Throwable throwable) {
+
         displayMessage(throwable.getMessage());
     }
 
