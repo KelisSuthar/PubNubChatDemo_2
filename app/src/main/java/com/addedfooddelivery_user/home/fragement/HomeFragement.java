@@ -258,40 +258,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ENABLE_GPS) {
-            if (mFusedLocationClient != null) {
-                getLocation();
-            }
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-
-        switch (requestCode) {
-            case REQUEST_ENABLE_MULTIPLE:
-                if (grantResults.length > 0) {
-                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (locationAccepted)
-                        checkGPS();
-                }
-        }
-    }
-
-    private void checkGPS() {
-        new CommonGps(getActivity()).turnGPSOn(new CommonGps.onGpsListener() {
-            @Override
-            public void gpsStatus(boolean isGPSEnable) {
-                // turn on GPS
-                if (isGPSEnable) {
-                    getLocation();
-                }
-            }
-        });
-    }
 
     private void getLocation() {
         if (mFusedLocationClient == null) {

@@ -3,7 +3,7 @@ package com.addedfooddelivery_user.common.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+public class AddressCommon {
 
     @SerializedName("id")
     @Expose
@@ -44,7 +44,16 @@ public class Address {
     @SerializedName("type")
     @Expose
     private String type;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    public String getAddress() {
+        return address;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public Integer getId() {
         return id;
     }

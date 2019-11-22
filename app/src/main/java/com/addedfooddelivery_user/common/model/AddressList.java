@@ -6,7 +6,7 @@ import java.util.List;
 public class AddressList {
 
     String header;
-    List<Address> addresses = new ArrayList<>();
+    List<AddressCommon> addresses = new ArrayList<>();
 
     public String getHeader() {
         return header;
@@ -16,11 +16,11 @@ public class AddressList {
         this.header = header;
     }
 
-    public List<Address> getAddresses() {
+    public List<AddressCommon> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<AddressCommon> addresses) {
         this.addresses = addresses;
     }
 }

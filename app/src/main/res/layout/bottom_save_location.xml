@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/_8sdp">
 
             <com.addedfooddelivery_user.common.views.CustomEditText
-                android:id="@+id/address"
+                android:id="@+id/edLocation"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:focusable="false"
@@ -170,7 +170,7 @@
         </LinearLayout>
 
         <com.addedfooddelivery_user.common.views.CustomButton
-            android:id="@+id/save"
+            android:id="@+id/saveAdd"
             style="@style/custome_bt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.views.CustomTextView;
+import com.addedfooddelivery_user.home_deliverylist.model.ListAddData;
+import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +24,23 @@ import butterknife.OnClick;
 
 public class AddressListAdpter extends RecyclerView.Adapter<AddressListAdpter.ViewHolder> {
     private final OnItemClickListener listener;
-    private ArrayList<String> listData;
+    private ArrayList<ListAddData> addressListData;
     private Context context;
 
-    public AddressListAdpter(Context context, ArrayList<String> notificationModelArrayList, OnItemClickListener listener) {
+    public AddressListAdpter(Context context, ArrayList<ListAddData> notificationModelArrayList, OnItemClickListener listener) {
         this.context = context;
-        this.listData = notificationModelArrayList;
+        this.addressListData = notificationModelArrayList;
         this.listener = listener;
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<String> list) {
-        listData.addAll(list);
+    public void addAll(List<ListAddData> list) {
+        addressListData.addAll(list);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        listData.clear();
+        addressListData.clear();
         notifyDataSetChanged();
     }
 
@@ -51,12 +53,22 @@ public class AddressListAdpter extends RecyclerView.Adapter<AddressListAdpter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        if (addressListData.get(position).getAdderessType().equalsIgnoreCase(context.getResources().getString(R.string.work))) {
+            holder.imgLocationType.setImageResource(R.drawable.ic_location_workgray);
+            holder.txtLocationTitle.setText(context.getResources().getString(R.string.work));
+        } else if (addressListData.get(position).getAdderessType().equalsIgnoreCase(context.getResources().getString(R.string.home))) {
+            holder.imgLocationType.setImageResource(R.drawable.ic_location_homegray);
+            holder.txtLocationTitle.setText(context.getResources().getString(R.string.home));
+        } else {
+            holder.imgLocationType.setImageResource(R.drawable.ic_location_othergray);
+            holder.txtLocationTitle.setText(context.getResources().getString(R.string.other));
+        }
+        holder.txtLocationAdd.setText(addressListData.get(position).getAdderess());
     }
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        return addressListData.size();
     }
 
 

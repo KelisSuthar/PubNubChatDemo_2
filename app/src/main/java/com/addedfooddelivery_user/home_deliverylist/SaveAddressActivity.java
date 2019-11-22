@@ -3,6 +3,7 @@ package com.addedfooddelivery_user.home_deliverylist;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -28,14 +29,20 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.CommonGps;
-import com.addedfooddelivery_user.common.GlobalData;
+import com.addedfooddelivery_user.common.CustomeToast;
+import com.addedfooddelivery_user.common.model.AddressCommon;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
+import com.addedfooddelivery_user.home.api.HomePresenter;
+import com.addedfooddelivery_user.home_deliverylist.api.AddAddressConstructor;
+import com.addedfooddelivery_user.home_deliverylist.api.AddAddressPresenter;
+import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -49,7 +56,9 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -62,10 +71,11 @@ import butterknife.OnClick;
 import de.mateware.snacky.Snacky;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.addedfooddelivery_user.common.AppConstants.AUTOCOMPLETE_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.CommonGps.openGpsEnableSetting;
 
-public class SaveAddressActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SaveAddressActivity extends AppCompatActivity implements OnMapReadyCallback, AddAddressConstructor.View {
     @BindView(R.id.backArrow)
     ImageView backArrow;
     @BindView(R.id.ll_map)
@@ -76,7 +86,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     ImageView currentLocImg;
     @BindView(R.id.animation_line_cart_add)
     ImageView animationLineCartAdd;
-    @BindView(R.id.address)
+    @BindView(R.id.edLocation)
     CustomEditText edaddress;
     @BindView(R.id.flat_no)
     CustomEditText flatNo;
@@ -94,8 +104,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     CustomEditText otherAddressHeaderEt;
     @BindView(R.id.cancel_txt)
     TextView cancelTxt;
-    @BindView(R.id.save)
-    CustomButton save;
+    @BindView(R.id.saveAdd)
+    CustomButton saveAdd;
     FusedLocationProviderClient mFusedLocationClient;
     AlertDialog alertDialog;
     private double wayLatitude = 0.0, wayLongitude = 0.0;
@@ -104,6 +114,10 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     PlacesClient placesClient;
+    String addressType ;
+
+    AddAddressPresenter addAddressPresenter;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +132,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         initPlace();
+        addAddressPresenter = new AddAddressPresenter(this);
+        addressType=getResources().getString(R.string.other);
         otherRadio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,6 +154,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = radioGroup.findViewById(i);
                 if (radioButton.getText().toString().toLowerCase().equals("home")) {
+                    addressType = getResources().getString(R.string.home);
+
                     currentLocImg.setBackgroundResource(R.drawable.ic_location_homegray_midum);
                     currentLocImg.setColorFilter(getResources().getColor(R.color.colorPrimary));
 
@@ -154,6 +172,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                         homeRadio.setBackground(getResources().getDrawable(R.drawable.border_save_address));
                     }
                 } else if (radioButton.getText().toString().toLowerCase().equals("work")) {
+                    addressType = getResources().getString(R.string.work);
+
                     currentLocImg.setBackgroundResource(R.drawable.ic_location_workgray_midum);
                     currentLocImg.setColorFilter(getResources().getColor(R.color.colorPrimary));
                     if (workRadio.isChecked()) {
@@ -173,6 +193,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                     }
                 } else if (radioButton.getText().toString().equalsIgnoreCase(getResources().getString(R.string.other))) {
                     if (otherRadio.isChecked()) {
+                        addressType =getResources().getString(R.string.other);
+
                         //otherAddressHeaderEt.setText(edaddress.getType());
                         otherRadio.setTextColor(getResources().getColor(R.color.colorPrimary));
                         otherRadio.setBackground(getResources().getDrawable(R.drawable.select_border_save_add));
@@ -207,7 +229,12 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         });
         //pass by autocomplete place api
         Bundle extras = getIntent().getExtras();
-        getAndSetBundleData(extras);
+        if (extras != null) {
+            String id = extras.getString("placeId");
+            if (id != null) {
+                getAndSetBundleData(id);
+            }
+        }
 
     }
 
@@ -218,52 +245,54 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         placesClient = Places.createClient(this);
     }
 
-    private void getAndSetBundleData(Bundle extras) {
-        if (extras != null) {
-            String id = extras.getString("placeId");
+    private void getAndSetBundleData(String id) {
+        List<Place.Field> placeFields = Arrays.asList(
+                Place.Field.ADDRESS,
+                Place.Field.ADDRESS_COMPONENTS,
+                Place.Field.ID,
+                Place.Field.LAT_LNG,
+                Place.Field.NAME,
+                Place.Field.OPENING_HOURS,
+                Place.Field.PHONE_NUMBER,
+                Place.Field.PHOTO_METADATAS,
+                Place.Field.PLUS_CODE,
+                Place.Field.PRICE_LEVEL,
+                Place.Field.RATING,
+                Place.Field.TYPES,
+                Place.Field.USER_RATINGS_TOTAL,
+                Place.Field.UTC_OFFSET,
+                Place.Field.VIEWPORT,
+                Place.Field.WEBSITE_URI);
+        FetchPlaceRequest request = FetchPlaceRequest.builder(id, placeFields)
+                .build();
+        placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
+            Place place = response.getPlace();
 
-            if (id != null) {
 
-                List<Place.Field> placeFields = Arrays.asList(
-                        Place.Field.ADDRESS,
-                        Place.Field.ADDRESS_COMPONENTS,
-                        Place.Field.ID,
-                        Place.Field.LAT_LNG,
-                        Place.Field.NAME,
-                        Place.Field.OPENING_HOURS,
-                        Place.Field.PHONE_NUMBER,
-                        Place.Field.PHOTO_METADATAS,
-                        Place.Field.PLUS_CODE,
-                        Place.Field.PRICE_LEVEL,
-                        Place.Field.RATING,
-                        Place.Field.TYPES,
-                        Place.Field.USER_RATINGS_TOTAL,
-                        Place.Field.UTC_OFFSET,
-                        Place.Field.VIEWPORT,
-                        Place.Field.WEBSITE_URI);
-                FetchPlaceRequest request = FetchPlaceRequest.builder(id, placeFields)
-                        .build();
-                placesClient.fetchPlace(request).addOnSuccessListener((response) -> {
-                    Place place = response.getPlace();
+            geocoder = new Geocoder(SaveAddressActivity.this, Locale.getDefault());
 
-                    edaddress.setText(place.getAddress());
-                    LatLng latLng = place.getLatLng();
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-                }).addOnFailureListener((exception) -> {
-                    if (exception instanceof ApiException) {
-                        ApiException apiException = (ApiException) exception;
-                        int statusCode = apiException.getStatusCode();
-                        // Handle error with given status code.
-                        Log.e("FoundPlace", "Place not found: " + exception.getMessage());
-                    }
-                });
+            try {
+                addresses = geocoder.getFromLocation(place.getLatLng().latitude, place.getLatLng().longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
+            edaddress.setText(addresses.get(0).getAddressLine(0));
+            LatLng latLng = place.getLatLng();
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(16).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        }).addOnFailureListener((exception) -> {
+            if (exception instanceof ApiException) {
+                ApiException apiException = (ApiException) exception;
+                int statusCode = apiException.getStatusCode();
+                // Handle error with given status code.
+                Log.e("FoundPlace", "Place not found: " + exception.getMessage());
+            }
+        });
+
     }
 
-    @OnClick({R.id.cancel_txt, R.id.backArrow, R.id.imgCurrentLoc})
+    @OnClick({R.id.cancel_txt, R.id.backArrow, R.id.imgCurrentLoc, R.id.edLocation, R.id.saveAdd})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.cancel_txt:
@@ -283,7 +312,45 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
             case R.id.imgCurrentLoc:
                 getLocation();
                 break;
+            case R.id.edLocation:
+                setUpPlacesAutocomplete();
+                break;
+            case R.id.saveAdd:
+                if (addresses != null) {
+                    addAddressPresenter.requestAddAddress(SaveAddressActivity.this,
+                            addressType,
+                            addresses.get(0).getAddressLine(0),
+                            addresses.get(0).getLatitude(),
+                            addresses.get(0).getLongitude(),
+                            addresses.get(0).getLocality());
+                }
+                break;
         }
+    }
+
+    private void setUpPlacesAutocomplete() {
+        List<Place.Field> fields = Arrays.asList(
+                Place.Field.ADDRESS,
+                Place.Field.ADDRESS_COMPONENTS,
+                Place.Field.ID,
+                Place.Field.LAT_LNG,
+                Place.Field.NAME,
+                Place.Field.OPENING_HOURS,
+                Place.Field.PHONE_NUMBER,
+                Place.Field.PHOTO_METADATAS,
+                Place.Field.PLUS_CODE,
+                Place.Field.PRICE_LEVEL,
+                Place.Field.RATING,
+                Place.Field.TYPES,
+                Place.Field.USER_RATINGS_TOTAL,
+                Place.Field.UTC_OFFSET,
+                Place.Field.VIEWPORT,
+                Place.Field.WEBSITE_URI);
+
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.OVERLAY, fields)
+                .build(this);
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
     }
 
     private void checkPermission() {
@@ -295,6 +362,27 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         PERMISSION_LOCATION_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                if (place != null) {
+                    if (place.getId() != null) {
+                        getAndSetBundleData(place.getId());
+                    }
+                }
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i("AutoComplete", status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
             }
         }
     }
@@ -356,6 +444,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                             new LatLng(wayLatitude,
                                     wayLongitude), 16));
+
                     edaddress.setText(addresses.get(0).getAddressLine(0));
                     /*Toast.makeText(SaveAddressActivity.this, "Success"+String.valueOf(edaddress.trim()), Toast.LENGTH_SHORT).show();*/
                 }
@@ -440,4 +529,66 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         finish();
     }
 
+    @Override
+    public void onSaveAddressResponseFailure(Throwable throwable) {
+        displayMessage(throwable.getMessage());
+    }
+
+    @Override
+    public void onSaveAddressResponseSuccess(SaveAddResponse response) {
+        if (response.getStatus() == 1) {
+            displayMessage(response.getMessage());
+            startActivity(new Intent(SaveAddressActivity.this, DeliveryListActivity.class));
+            overridePendingTransition(R.anim.leftto, R.anim.right);
+            finish();
+        }
+    }
+
+
+    @Override
+    public void showLoadingIndicator(boolean isShow) {
+        if (dialog != null) {
+            if (isShow) {
+                dialog.show();
+            } else {
+                dialog.dismiss();
+                dialog.cancel();
+            }
+        }
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        CustomeToast.showToast(
+                this,
+                message,
+                true,
+                getResources().getColor(R.color.white),
+                getResources().getColor(R.color.colorPrimary),
+                true);
+    }
+
+    @Override
+    public void initProgressBar() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.progress_dialog);
+
+        dialog.setCancelable(false);
+    }
+
+    @Override
+    public Activity getContext() {
+        return this;
+    }
+
+    @Override
+    public void onListAddressResponseFailure(Throwable throwable) {
+// getting address list
+    }
+
+    @Override
+    public void onListAddressResponseSuccess(ListAddResponse response) {
+// getting address list
+    }
 }

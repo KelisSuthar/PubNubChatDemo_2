@@ -38,6 +38,7 @@ import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.home.fragement.HomeFragement;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -52,9 +53,10 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 import static com.addedfooddelivery_user.common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
+import static com.addedfooddelivery_user.common.CommonGps.REQUEST_ENABLE_GPS;
 import static com.addedfooddelivery_user.common.CommonGps.openGpsEnableSetting;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
     public static NavController navController;
     private FusedLocationProviderClient mFusedLocationClient;
     private double wayLatitude = 0.0, wayLongitude = 0.0;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         checkPermission(this);
         ConstraintLayout = findViewById(R.id.mainContainer);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
@@ -172,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         boolean finePermissionCheck = (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
         if (coarsePermissionCheck && finePermissionCheck) {
             checkGPS();
+        }else {
+
         }
     }
 
@@ -185,13 +190,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     getLocation();
                 } else {
-                    CustomeDialog(MainActivity.this);
+                    if(alertDialog==null)
+
+                        CustomeDialog(MainActivity.this);
+
                 }
             }
         });
     }
 
     private void getLocation() {
+
         if (mFusedLocationClient == null) {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
         }
@@ -220,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public void CustomeDialog(Activity activity) {
@@ -252,6 +262,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ENABLE_GPS) {
+            if (mFusedLocationClient != null) {
+                getLocation();
+            }
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            wayLatitude = location.getLatitude();
+            wayLongitude = location.getLongitude();
+
+            geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+
+            try {
+                addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            GlobalData.CurrentAddress = addresses;
+            Intent intent = new Intent("location");
+            intent.putExtra("getAdd", "getAdd");
+            LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
+            /*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*/
+        }
+    }
    /* @Override
     public void onBackPressed() {
         if (navController.getCurrentDestination().getId() == R.id.navigation_profile) {

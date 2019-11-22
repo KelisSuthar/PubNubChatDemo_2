@@ -113,7 +113,7 @@
     <string name="set_delivery_location">Set Delivery Location</string>
     <string name="use_my_current_location">Use my current location</string>
     <string name="saved_addresses">Saved Addresses</string>
-    <string name="home">Home</string>
+
     <string name="dummy_add">10880 Malibu Point Florida</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="tell_us_a_little_somthing_about_yourself_max_150_word">"tell us a little somthing about yourself ( max 150 word )"</string>
@@ -293,6 +293,7 @@
     <string name="save_as">Save this address as</string>
     <string name="work">Work</string>
     <string name="other">Other</string>
+    <string name="home">Home</string>
     <string name="address_hint">Ex : Dad\'s place, John\'s Home</string>
     <string name="save_proceed">Confirm Location</string>
 

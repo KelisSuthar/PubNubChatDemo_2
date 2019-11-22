@@ -12,7 +12,6 @@
         android:layout_above="@+id/view_bottom">
 
 
-
         <RelativeLayout
             android:id="@+id/ll_map"
             android:layout_width="match_parent"
@@ -32,8 +31,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="@dimen/_10ssp"
-                android:drawablePadding="@dimen/_5sdp"
                 android:drawableTop="@drawable/ic_livelocation_green"
+                android:drawablePadding="@dimen/_5sdp"
                 android:drawableTint="@color/colorPrimary" />
 
             <ImageView
@@ -41,18 +40,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:tint="@color/colorPrimary"
                 android:background="@drawable/ic_map_dropuppin"
-                android:contentDescription="@string/app_name" />
+                android:contentDescription="@string/app_name"
+                android:tint="@color/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/app_name"
+                android:tint="@color/black"
+                android:src="@drawable/ic_action_tab_backarrow_white" />
         </RelativeLayout>
-        <ImageView
-            android:id="@+id/backArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_action_tab_backarrow_white" />
+
 
     </RelativeLayout>
 

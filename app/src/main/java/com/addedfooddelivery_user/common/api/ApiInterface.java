@@ -4,6 +4,8 @@ import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.forgottPassword.model.ForgotPassResponse;
 import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
 import com.addedfooddelivery_user.loginEmail.model.LoginResponse;
 import com.addedfooddelivery_user.signup.model.SignupResponse;
 import com.addedfooddelivery_user.verificationPhone.model.PhoneVerifyResponse;
@@ -70,4 +72,16 @@ public interface ApiInterface {
             @Field("category") String category,
             @Field("price") String price);
 
+    //add address
+    @FormUrlEncoded
+    @POST("addDeliveryAddress")
+    Call<SaveAddResponse> addAddress(
+            @Field("adderessType") String adderessType,
+            @Field("adderess") String adderess,
+            @Field("adderessLatitude") Double direction,
+            @Field("adderessLongitude") Double category,
+            @Field("adderessCity") String adderessCity);
+
+    @GET("AddressList")
+    Call<ListAddResponse> getAddressList();
 }
