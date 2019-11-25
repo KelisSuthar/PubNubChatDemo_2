@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.home_filter;
+package com.addedfooddelivery_user.RestaurantList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,12 +75,17 @@ public class FiltersActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setFood();
-
+        setView();
         rngPrise.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
             public void valueChanged(Number value) {
+
                 txtMaxPrise.setText(String.valueOf(value + ".00"));
+
                 price = String.valueOf(value);
+                if (price.equalsIgnoreCase("0")) {
+                    price = "";
+                }
             }
         });
 
@@ -101,10 +106,45 @@ public class FiltersActivity extends AppCompatActivity {
 
 
                 }
+
             }
         });
+
+
     }
 
+    private void setView() {
+        //for already filter
+        if (!price.equalsIgnoreCase("")) {
+            rngPrise.setMinStartValue(Float.parseFloat(price));
+            rngPrise.setMinStartValue(Float.parseFloat(price));
+            txtMaxPrise.setText(String.valueOf(price + ".00"));
+            rngPrise.apply();
+        }
+
+        if (sort_by.equalsIgnoreCase(getString(R.string.relvance))) {
+            ragSortBy.check(ragSortBy.getChildAt(0).getId());
+        } else if (sort_by.equalsIgnoreCase(getString(R.string.rating))) {
+            ragSortBy.check(ragSortBy.getChildAt(1).getId());
+        } else if (sort_by.equalsIgnoreCase(getString(R.string.prise))) {
+            if (direction.equalsIgnoreCase("asc"))
+                ragSortBy.check(ragSortBy.getChildAt(3).getId());
+            else
+                ragSortBy.check(ragSortBy.getChildAt(4).getId());
+        }
+
+        if (!category.equalsIgnoreCase("")) {
+            for (int j = 0; j < chipGroupFood.getChildCount(); j++) {
+                Chip nextchip = (Chip) chipGroupFood.getChildAt(j);
+                if (nextchip.getText().equals(category)) {
+                    nextchip.setChecked(true);
+                } else {
+                    nextchip.setChecked(false);
+                }
+            }
+        }
+
+    }
 
 
     @OnClick({R.id.img_back_filter, R.id.txtClear, R.id.btFilter})
@@ -152,6 +192,7 @@ public class FiltersActivity extends AppCompatActivity {
                 final Chip entryChip = getChip(chipGroupFood, foodCategoryList.get(i).toString(), i);
 
                 chipGroupFood.addView(entryChip);
+
                 chipGroupFood.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(ChipGroup chipGroup, int checkedId) {
@@ -163,11 +204,8 @@ public class FiltersActivity extends AppCompatActivity {
                             if (chip.isCheckable()) {
                                 int position = (Integer) chip.getTag();
                                 Log.v("@@@@", foodCategoryList.get(position).toString());
-                                //get selection id
-                                //selectedCategory.add(foodCategoryList.get(position).toString());
                                 category = foodCategoryList.get(position).toString();
                             } else {
-
                                 selectedCategory.remove(chip.getTag().toString());
                             }
                         }
@@ -181,6 +219,7 @@ public class FiltersActivity extends AppCompatActivity {
 
     private Chip getChip(final ChipGroup entryChipGroup, String text, int position) {
         final Chip chip = new Chip(this);
+
         chip.setChipDrawable(ChipDrawable.createFromResource(this, R.xml.my_chip));
         int paddingDp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 10,
@@ -188,12 +227,14 @@ public class FiltersActivity extends AppCompatActivity {
         );
         chip.setPadding(paddingDp, 2, paddingDp, 2);
         chip.setText(text);
+        chip.setTag(text);
         chip.setTextColor(getResources().getColor(R.color.bg_chip_state_list));
         chip.setBackgroundColor(getResources().getColor(R.color.bg_chip_state_list));
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/Montserrat-Bold.ttf");
         chip.setTypeface(font);
         chip.setTag(position);
         chip.setTextAppearanceResource(R.style.chipTextAppearance);
+
 
         return chip;
     }

@@ -11,6 +11,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,10 +38,19 @@ import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.home.fragement.HomeFragement;
+import com.addedfooddelivery_user.home_deliverylist.DeliveryListActivity;
+import com.addedfooddelivery_user.home_deliverylist.SaveAddressActivity;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
@@ -66,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     AlertDialog alertDialog;
     private boolean exit = false;
 
-
+    PlacesClient placesClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,12 +210,52 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void getLocation() {
+        Places.initialize(this, getString(R.string.google_maps_key));
+        placesClient = Places.createClient(this);
 
         if (mFusedLocationClient == null) {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
         }
+        // Use the builder to create a FindCurrentPlaceRequest.
+        FindCurrentPlaceRequest request =
+                FindCurrentPlaceRequest.newInstance(ReusedMethod.CurrentPlacefields);
 
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+        // Call findCurrentPlace and handle the response (first check that the user has granted permission).
+        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
+            placeResponse.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    FindCurrentPlaceResponse response = task.getResult();
+                    List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
+
+
+
+                    wayLatitude =  placeLikelihood.get(0).getPlace().getLatLng().latitude;
+                    wayLongitude = placeLikelihood.get(0).getPlace().getLatLng().longitude;
+
+                    geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+
+                    try {
+                        addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    GlobalData.CurrentAddress = addresses;
+                    Intent intent = new Intent("location");
+                    intent.putExtra("getAdd", "getAdd");
+                    LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
+
+                } else {
+                    Exception exception = task.getException();
+                    if (exception instanceof ApiException) {
+                        ApiException apiException = (ApiException) exception;
+                        Log.e("Place not found: ", String.valueOf(apiException.getStatusCode()));
+                    }
+                }
+            });
+        }
+       /* mFusedLocationClient.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onSuccess(Location location) {
@@ -225,12 +275,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     Intent intent = new Intent("location");
                     intent.putExtra("getAdd", "getAdd");
                     LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
-                    /*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*/
+                    *//*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*//*
+                }else {
+
                 }
             }
-        });
+        });*/
 
     }
+
 
     public void CustomeDialog(Activity activity) {
         try {

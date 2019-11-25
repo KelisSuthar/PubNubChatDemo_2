@@ -9,12 +9,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.loginEmail.LoginEmailActivity;
 import com.google.android.material.card.MaterialCardView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.addedfooddelivery_user.common.AppConstants.ACCESS_TOKEN;
+import static com.addedfooddelivery_user.common.AppConstants.LOGGED_IN_USER_ID;
+import static com.addedfooddelivery_user.common.AppConstants.USER_DETAIL_LOGIN;
 
 public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.img_back_settings)
@@ -53,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.btnLogout:
+                SharedPreferenceManager.removeAllData();
+                
                 Intent intent=new Intent(SettingsActivity.this, LoginEmailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

@@ -16,6 +16,7 @@ import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.IntegratorImpl;
 import com.addedfooddelivery_user.common.LoginImaplementView;
 import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
 import com.addedfooddelivery_user.common.views.CustomTextView;
@@ -27,6 +28,9 @@ import com.addedfooddelivery_user.verificationPhone.VerifyPhoneActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.addedfooddelivery_user.common.AppConstants.ACCESS_TOKEN;
+import static com.addedfooddelivery_user.common.AppConstants.LOGGED_IN_USER_ID;
 
 public class SignupActivity extends AppCompatActivity implements SignupConstructor.View {
     @BindView(R.id.img_back_signup)
@@ -142,6 +146,8 @@ public class SignupActivity extends AppCompatActivity implements SignupConstruct
     @Override
     public void onResponseSuccess(SignupResponse response) {
         if (response.getStatus() == 1) {
+            SharedPreferenceManager.putString(ACCESS_TOKEN, response.getData().getUserDetail().getAccessToken());
+            SharedPreferenceManager.putInt(LOGGED_IN_USER_ID, response.getData().getUserDetail().getCustomerID());
             startActivity(new Intent(SignupActivity.this, VerifyPhoneActivity.class));
             overridePendingTransition(R.anim.leftto, R.anim.right);
             finish();

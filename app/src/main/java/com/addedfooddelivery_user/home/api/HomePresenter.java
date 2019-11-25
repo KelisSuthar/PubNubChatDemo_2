@@ -40,7 +40,7 @@ public class HomePresenter implements HomeConstructor.Presenter, HomeConstructor
     public void onDefaultAddFailure(String t) {
         if (homeView != null) {
             homeView.showLoadingIndicator(false);
-            homeView.displayMessage(t);
+            //homeView.displayMessage(t);
         }
     }
 

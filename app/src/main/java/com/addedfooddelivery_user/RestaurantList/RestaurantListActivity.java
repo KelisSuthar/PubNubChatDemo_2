@@ -21,7 +21,6 @@ import com.addedfooddelivery_user.RestaurantList.api.RestaurantPresenter;
 import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantData;
 import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.common.CustomeToast;
-import com.addedfooddelivery_user.home_filter.FiltersActivity;
 
 import java.util.ArrayList;
 

@@ -74,7 +74,8 @@ public class ApiClient implements AppConstants {
 
             String apikey = SharedPreferenceManager.getString(API_KEY_VALUE, STATIC_API_KEY);
             String accessToken = SharedPreferenceManager.getString(ACCESS_TOKEN, "");
-            int userID = SharedPreferenceManager.getInt(LOGGED_IN_USER_ID, -1);
+
+            int userID = SharedPreferenceManager.getInt(LOGGED_IN_USER_ID,-1);
             if (apikey.equals(STATIC_API_KEY))
                 builder.addHeader("Accesskey", "" + apikey);
             else

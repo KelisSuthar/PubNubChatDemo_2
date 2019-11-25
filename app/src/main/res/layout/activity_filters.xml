@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".home_filter.FiltersActivity">
+    tools:context=".RestaurantList.FiltersActivity">
 
     <include
         android:id="@+id/toolbar_fillter"
@@ -190,7 +190,7 @@
                 app:left_thumb_image="@drawable/ic_filter_rangesliderbutton"
                 app:left_thumb_image_pressed="@null"
                 app:max_value="100"
-                app:min_value="0"
+
                 app:right_thumb_image="@drawable/ic_filter_rangesliderbutton"
                 app:right_thumb_image_pressed="@null"
                 app:steps="5"

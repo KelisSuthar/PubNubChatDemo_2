@@ -22,7 +22,9 @@ public class HomeApiModel implements HomeConstructor.Model {
     @Override
     public void getHomeData(OnFinishedListener onFinishedListener, Activity activity, String restaurantCity) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
+if(restaurantCity.equalsIgnoreCase("")){
+    restaurantCity="ahmedabad";
+}
         Call<HomeRestaurantResponse> call = apiService.getHomeRestaurant(restaurantCity);
         call.enqueue(new Callback<HomeRestaurantResponse>() {
             @Override

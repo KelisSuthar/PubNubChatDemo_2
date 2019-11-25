@@ -67,7 +67,7 @@ public class SharedPreferenceManager {
 //        AppConstants.DEVICE_TOKEN = getString(DEVICE_ID, "");
         editor.clear().commit();
 //        putString(Constants.API_KEY, ApiKey);
-        putBoolean(AppConstants.SKIP_INTRO, true);
+        //putBoolean(AppConstants.SKIP_INTRO, true);
     }
 
 }
