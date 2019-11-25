@@ -16,8 +16,9 @@ import retrofit2.Response;
 public class RestaurantApiModel implements RestaurantConstructor.Model {
     private final String TAG = "LoginModel";
 
+
     @Override
-    public void getHomeData(OnFinishedListener onFinishedListener, Activity activity, String restaurantType,String sort_by,String direction,String category,String price) {
+    public void getAllRestaurant(OnFinishedListener onFinishedListener, Activity activity, String restaurantType, String sort_by, String direction, String category, String price) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<AllRestaurantResponse> call = apiService.getAllRestaurant(restaurantType,sort_by,direction,category,price);

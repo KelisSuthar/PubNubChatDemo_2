@@ -29,6 +29,7 @@ public class RestaurantPresenter implements RestaurantConstructor.Presenter, Res
         if (restaurantView != null) {
             restaurantView.showLoadingIndicator(false);
             restaurantView.displayMessage(t);
+            restaurantView.onRestaurantResponseFailure(t);
         }
 
     }
@@ -44,7 +45,7 @@ public class RestaurantPresenter implements RestaurantConstructor.Presenter, Res
         if (restaurantView != null) {
             restaurantView.showLoadingIndicator(true);
         }
-        restaurantModel.getHomeData(this, activity, restaurantType, sort_by, direction, category, price);
+        restaurantModel.getAllRestaurant(this, activity, restaurantType, sort_by, direction, category, price);
     }
 
 

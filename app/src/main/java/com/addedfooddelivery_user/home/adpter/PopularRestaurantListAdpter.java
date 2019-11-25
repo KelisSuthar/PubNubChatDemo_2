@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantData;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.model.Popular;
 import com.github.siyamed.shapeimageview.RoundedImageView;

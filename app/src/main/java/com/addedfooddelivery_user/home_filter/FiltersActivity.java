@@ -2,21 +2,25 @@ package com.addedfooddelivery_user.home_filter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.home.MainActivity;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -27,28 +31,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.addedfooddelivery_user.common.GlobalData.category;
+import static com.addedfooddelivery_user.common.GlobalData.direction;
+import static com.addedfooddelivery_user.common.GlobalData.price;
+import static com.addedfooddelivery_user.common.GlobalData.sort_by;
+
 
 public class FiltersActivity extends AppCompatActivity {
     @BindView(R.id.chipsFood)
     ChipGroup chipGroupFood;
+    @BindView(R.id.ragSortBy)
+    RadioGroup ragSortBy;
     @BindView(R.id.txtClear)
     CustomTextView txtClear;
     @BindView(R.id.img_back_filter)
     ImageView imgFillter;
     @BindView(R.id.imgRelevance)
-    CheckBox imgRelevance;
+    RadioButton imgRelevance;
     @BindView(R.id.imgRating)
-    CheckBox imgRating;
+    RadioButton imgRating;
     @BindView(R.id.imgTime)
-    CheckBox imgTime;
+    RadioButton imgTime;
     @BindView(R.id.imgCostLowToHigh)
-    CheckBox imgCostLowToHigh;
+    RadioButton imgCostLowToHigh;
     @BindView(R.id.imgCostHighToLow)
-    CheckBox imgCostHighToLow;
+    RadioButton imgCostHighToLow;
     @BindView(R.id.btFilter)
     CustomButton btFilter;
     @BindView(R.id.rngPrise)
-    CrystalRangeSeekbar rngPrise;
+    CrystalSeekbar rngPrise;
     @BindView(R.id.txt_min_prise)
     CustomTextView txtMinPrise;
     @BindView(R.id.txt_max_prise)
@@ -64,39 +75,75 @@ public class FiltersActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setFood();
-        rngPrise.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+
+        rngPrise.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                txtMinPrise.setText(String.valueOf(minValue));
-                txtMaxPrise.setText(String.valueOf(maxValue));
+            public void valueChanged(Number value) {
+                txtMaxPrise.setText(String.valueOf(value + ".00"));
+                price = String.valueOf(value);
+            }
+        });
+
+        ragSortBy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                RadioButton rb = (RadioButton) radioGroup.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getId() == R.id.imgCostLowToHigh) {
+                        sort_by = "price";
+                        direction = "asc";
+                    } else if (rb.getId() == R.id.imgCostHighToLow) {
+                        sort_by = "price";
+                        direction = "desc";
+                    } else
+                        sort_by = rb.getText().toString();
+
+
+                }
             }
         });
     }
 
-    @OnClick({R.id.img_back_filter,R.id.txtClear,R.id.btFilter})
+
+
+    @OnClick({R.id.img_back_filter, R.id.txtClear, R.id.btFilter})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_filter:
                 onBackPressed();
                 break;
             case R.id.txtClear:
+                chipGroupFood.clearCheck();
+                ragSortBy.clearCheck();
+                rngPrise.setMinStartValue(0);
+                rngPrise.apply();
 
+                sort_by = "";
+                direction = "asc";
+                category = "";
+                price = "";
                 break;
             case R.id.btFilter:
+                Log.v("Data", sort_by + "__" + direction + "__" + category + "__" + price);
                 onBackPressed();
                 break;
         }
     }
 
     private void setFood() {
+
         foodCategoryList.add("All");
         foodCategoryList.add("Breakfast");
         foodCategoryList.add("Meals");
         foodCategoryList.add("Starters");
         foodCategoryList.add("Baked Dishes");
-        foodCategoryList.add("All");
-        foodCategoryList.add("Breakfast");
-        foodCategoryList.add("Meals");
+        foodCategoryList.add("Fried Rice");
+        foodCategoryList.add("Accompaniments");
+        foodCategoryList.add("Chinese");
+        foodCategoryList.add("Noodles");
+        foodCategoryList.add("Rice");
+        foodCategoryList.add("Oven");
 
 
         chipGroupFood.removeAllViews();
@@ -117,8 +164,8 @@ public class FiltersActivity extends AppCompatActivity {
                                 int position = (Integer) chip.getTag();
                                 Log.v("@@@@", foodCategoryList.get(position).toString());
                                 //get selection id
-                                selectedCategory.add(foodCategoryList.get(position).toString());
-
+                                //selectedCategory.add(foodCategoryList.get(position).toString());
+                                category = foodCategoryList.get(position).toString();
                             } else {
 
                                 selectedCategory.remove(chip.getTag().toString());
@@ -153,7 +200,9 @@ public class FiltersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(FiltersActivity.this, MainActivity.class));
+        Intent intent = new Intent();
+        intent.putExtra("editTextValue", "value_here");
+        setResult(RESULT_OK, intent);
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
     }

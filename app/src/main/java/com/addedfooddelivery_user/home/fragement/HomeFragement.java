@@ -6,11 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -24,8 +21,6 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -35,25 +30,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantList.RestaurantListActivity;
-import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.GlobalData;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.addedfooddelivery_user.common.views.CustomTextView;
+import com.addedfooddelivery_user.home.adpter.PopularRestaurantListAdpter;
+import com.addedfooddelivery_user.home.adpter.TrendingRestaurantListAdpter;
 import com.addedfooddelivery_user.home.api.HomeConstructor;
 import com.addedfooddelivery_user.home.api.HomePresenter;
+import com.addedfooddelivery_user.home.model.DefaultAddResponse;
 import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
 import com.addedfooddelivery_user.home.model.Popular;
 import com.addedfooddelivery_user.home.model.Trending;
-import com.addedfooddelivery_user.home_filter.FiltersActivity;
 import com.addedfooddelivery_user.home_deliverylist.DeliveryListActivity;
-import com.addedfooddelivery_user.home.adpter.PopularRestaurantListAdpter;
-import com.addedfooddelivery_user.home.adpter.TrendingRestaurantListAdpter;
-import com.addedfooddelivery_user.loginEmail.api.LoginPresenter;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,8 +56,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
-import static com.addedfooddelivery_user.common.AppConstants.REQUEST_ENABLE_MULTIPLE;
 import static com.addedfooddelivery_user.common.GlobalData.CurrentAddress;
+import static com.addedfooddelivery_user.common.GlobalData.SavedAddress;
+import static com.addedfooddelivery_user.common.GlobalData.rest_type;
 
 public class HomeFragement extends Fragment implements HomeConstructor.View {
     @BindView(R.id.ll_home_data)
@@ -106,18 +98,21 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     HomePresenter homePresenter;
     Dialog dialog;
-    boolean recevierCall=true;
+    boolean recevierCall = true;
+    boolean getDefaultAddress = false;
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (CurrentAddress != null) {
-                String address = CurrentAddress.get(0).getAddressLine(0);
-                txtAddress.setText(address.trim());
-                String city = CurrentAddress.get(0).getLocality();
-                if(recevierCall) {
-                    homePresenter.requestAPIRestaurant(getActivity(), city);
-                    recevierCall=false;
+            if (SavedAddress == null) {
+                if (CurrentAddress != null) {
+                    String address = CurrentAddress.get(0).getAddressLine(0);
+                    txtAddress.setText(address.trim());
+                    String city = CurrentAddress.get(0).getLocality();
+                    if (recevierCall) {
+                        homePresenter.requestAPIRestaurant(getActivity(), city);
+                        recevierCall = false;
+                    }
                 }
             }
         }
@@ -151,7 +146,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
         initProgressBar();
         homePresenter = new HomePresenter(this);
-
+        homePresenter.requestForAddress(getActivity());
 
     }
 
@@ -201,13 +196,6 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
     }
 
 
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -217,23 +205,32 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
     @Override
     public void onResume() {
         super.onResume();
+        String selectCity = "";
+        String SelectAddress = "";
+
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver,
                 new IntentFilter("location"));
-        if (CurrentAddress != null) {
-            String city = CurrentAddress.get(0).getLocality();
-            homePresenter.requestAPIRestaurant(getActivity(), city);
-        }
+
+            //get default address after call get restaurant data
+            if (SavedAddress != null) {
+                SelectAddress = SavedAddress.get(0).getAddressLine(0);
+                txtAddress.setText(SelectAddress.trim());
+                selectCity = SavedAddress.get(0).getLocality().toString();
+            } else {
+                if (CurrentAddress != null) {
+                    selectCity = CurrentAddress.get(0).getLocality();
+                }
+            }
+
+            homePresenter.requestAPIRestaurant(getActivity(), selectCity);
+
     }
 
 
-    @OnClick({R.id.img_fillter, R.id.ll_adddress, R.id.txtViewAllPopular, R.id.txtViewAllTrending})
+    @OnClick({R.id.ll_adddress, R.id.txtViewAllPopular, R.id.txtViewAllTrending})
     public void OnViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.img_fillter:
-                startActivity(new Intent(getContext(), FiltersActivity.class));
-                getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
-                getActivity().finish();
-                break;
+
             case R.id.ll_adddress:
                 boolean userLogin;
                 userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
@@ -245,50 +242,19 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
                 }
                 break;
             case R.id.txtViewAllPopular:
-                startActivity(new Intent(getContext(), RestaurantListActivity.class));
+                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType","Popular"));
                 getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
+                rest_type="Popular";
                 break;
             case R.id.txtViewAllTrending:
-                startActivity(new Intent(getContext(), RestaurantListActivity.class));
+                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType","Trending"));
                 getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
+                rest_type="Trending";
 
                 break;
 
         }
 
-    }
-
-
-
-    private void getLocation() {
-        if (mFusedLocationClient == null) {
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-        }
-
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    wayLatitude = location.getLatitude();
-                    wayLongitude = location.getLongitude();
-
-                    geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
-                    try {
-                        addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    CurrentAddress = addresses;
-                    if (addresses != null) {
-                        String address = addresses.get(0).getAddressLine(0);
-                        txtAddress.setText(address.trim());
-                    }
-                    //Toast.makeText(MainActivity.this, "Success"+String.valueOf(wayLatitude), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
 
@@ -303,11 +269,11 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
         if (response.getStatus() == 1) {
             llHomeNoData.setVisibility(View.GONE);
             llHome.setVisibility(View.VISIBLE);
-            if(trendingRestaurantList.size()>0){
+            if (trendingRestaurantList.size() > 0) {
                 trendingRestaurantList.clear();
             }
             trendingRestaurantList.addAll(response.getData().getTrending());
-            if(popularRestaurantList.size()>0){
+            if (popularRestaurantList.size() > 0) {
                 popularRestaurantList.clear();
             }
             popularRestaurantList.addAll(response.getData().getPopular());
@@ -316,6 +282,31 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
             llHomeNoData.setVisibility(View.VISIBLE);
             llHome.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDefaultAddResponseFailure(Throwable throwable) {
+        displayMessage(throwable.getMessage());
+        getDefaultAddress = false;
+    }
+
+    @Override
+    public void onDefaultAddResponseSuccess(DefaultAddResponse response) {
+        double wayLatitude = Double.parseDouble(response.getData().getAdderessLatitude());
+        double wayLongitude = Double.parseDouble(response.getData().getAdderessLongitude());
+
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        GlobalData.SavedAddress = addresses;
+
+        txtAddress.setText(SavedAddress.get(0).getAddressLine(00));
+        homePresenter.requestAPIRestaurant(getActivity(), SavedAddress.get(0).getLocality().toString());
+
     }
 
     @Override
@@ -332,13 +323,15 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     @Override
     public void displayMessage(String message) {
-        CustomeToast.showToast(
-                getActivity(),
-                message,
-                true,
-                getResources().getColor(R.color.white),
-                getResources().getColor(R.color.colorPrimary),
-                true);
+        if (!(message.equalsIgnoreCase("Data get Successfully."))) {
+            CustomeToast.showToast(
+                    getActivity(),
+                    message,
+                    true,
+                    getResources().getColor(R.color.white),
+                    getResources().getColor(R.color.colorPrimary),
+                    true);
+        }
     }
 
     @Override

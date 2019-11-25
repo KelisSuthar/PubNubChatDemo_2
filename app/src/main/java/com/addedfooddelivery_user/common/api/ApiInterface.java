@@ -3,6 +3,7 @@ package com.addedfooddelivery_user.common.api;
 import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.forgottPassword.model.ForgotPassResponse;
+import com.addedfooddelivery_user.home.model.DefaultAddResponse;
 import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
@@ -84,4 +85,7 @@ public interface ApiInterface {
 
     @GET("AddressList")
     Call<ListAddResponse> getAddressList();
+
+    @POST("default_address")
+    Call<DefaultAddResponse> getDefaultAdd();
 }

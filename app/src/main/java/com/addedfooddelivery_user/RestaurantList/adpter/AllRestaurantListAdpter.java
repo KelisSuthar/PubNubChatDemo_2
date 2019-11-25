@@ -17,7 +17,6 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
 import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantData;
 import com.addedfooddelivery_user.common.views.CustomTextView;
-import com.addedfooddelivery_user.home.model.Popular;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -29,50 +28,58 @@ import butterknife.ButterKnife;
 
 
 public class AllRestaurantListAdpter extends RecyclerView.Adapter<AllRestaurantListAdpter.ViewHolder> {
-    private ArrayList<AllRestaurantData> populars;
+    private ArrayList<AllRestaurantData> allRestaurantData;
     private Activity context;
 
     public AllRestaurantListAdpter(Activity context, ArrayList<AllRestaurantData> notificationModelArrayList) {
         this.context = context;
-        this.populars = notificationModelArrayList;
+        this.allRestaurantData = notificationModelArrayList;
     }
 
     // Add a list of items -- change to type used
     public void addAll(List<AllRestaurantData> list) {
-        populars.addAll(list);
+        allRestaurantData.addAll(list);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        populars.clear();
+        allRestaurantData.clear();
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_popular_restaurant_listing, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_all_restaurant_listing, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtRestauranrName.setText(TextUtils.isEmpty(populars.get(position).getRestaurantName()) ? " " : populars.get(position).getRestaurantName());
-        holder.txtRestAdd.setText(TextUtils.isEmpty(populars.get(position).getRestaurantAddress()) ? " " : populars.get(position).getRestaurantAddress());
-       // holder.txtRestaurantTime.setText(TextUtils.isEmpty(populars.get(position).getItemPrice()) ? " " : populars.get(position).getItemPrice());
-        if (populars.get(position).getRestaurantRatingAVG() != null) {
-            holder.userRating.setRating(populars.get(position).getRestaurantRatingAVG());
-        }
-        if (populars.get(position).getRestaurantImage() != null) {
+        holder.txtRestauranrName.setText(TextUtils.isEmpty(allRestaurantData.get(position).getRestaurantName()) ? " " : allRestaurantData.get(position).getRestaurantName());
+        holder.txtRestAdd.setText(TextUtils.isEmpty(allRestaurantData.get(position).getRestaurantAddress()) ? " " : allRestaurantData.get(position).getRestaurantAddress());
+       // holder.txtRestaurantTime.setText(TextUtils.isEmpty(allRestaurantData.get(position).getItemPrice()) ? " " : allRestaurantData.get(position).getItemPrice());
+        if (allRestaurantData.get(position).getRestaurantRatingAVG() != 0) {
+            holder.userRating.setRating(allRestaurantData.get(position).getRestaurantRatingAVG());
+        }else
+            holder.userRating.setRating((float) 0.0);
+
+        if (allRestaurantData.get(position).getRestaurantImage() != null) {
             Picasso.with(context)
-                    .load(populars.get(position).getRestaurantImage())
-                    .into(holder.imgRestaurant);
+                    .load(allRestaurantData.get(position).getRestaurantImage())
+                    .into(holder.imgAllRestaurant);
         }
+        if (allRestaurantData.get(position).getItemImage() != null) {
+            Picasso.with(context)
+                    .load(allRestaurantData.get(position).getItemImage())
+                    .into(holder.imgAllRestaurant);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return populars.size();
+        return allRestaurantData.size();
     }
 
 
@@ -84,8 +91,8 @@ public class AllRestaurantListAdpter extends RecyclerView.Adapter<AllRestaurantL
 
         @BindView(R.id.linearEventImages)
         LinearLayout linearEventImages;
-        @BindView(R.id.imgRestaurant)
-        RoundedImageView imgRestaurant;
+        @BindView(R.id.imgAllRestaurant)
+        RoundedImageView imgAllRestaurant;
         @BindView(R.id.linearEvent)
         LinearLayout linearEvent;
         @BindView(R.id.txtRestaurantName)

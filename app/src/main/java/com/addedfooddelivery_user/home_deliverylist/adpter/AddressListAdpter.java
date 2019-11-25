@@ -76,7 +76,7 @@ public class AddressListAdpter extends RecyclerView.Adapter<AddressListAdpter.Vi
         void onItemClick(int position, View view);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.imgLocationType)
         ImageView imgLocationType;
         @BindView(R.id.txtLocationTitle)
@@ -88,14 +88,13 @@ public class AddressListAdpter extends RecyclerView.Adapter<AddressListAdpter.Vi
         ViewHolder(@NonNull View view, final OnItemClickListener mListener) {
             super(view);
             ButterKnife.bind(this, view);
+            itemView.setOnClickListener(this);
         }
 
-        @OnClick()
-        void clickEvent(View view) {
-            switch (view.getId()) {
 
-            }
+        @Override
+        public void onClick(View view) {
+            listener.onItemClick(getAdapterPosition(),view);
         }
-
     }
 }

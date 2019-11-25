@@ -524,6 +524,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         //startActivity(new Intent(SignupActivity.this, LoginEmailActivity.class));
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();

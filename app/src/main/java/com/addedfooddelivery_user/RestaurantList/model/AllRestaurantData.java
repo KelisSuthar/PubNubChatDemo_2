@@ -25,10 +25,13 @@ public class AllRestaurantData implements Parcelable {
     private String foodCategoryName;
     @SerializedName("restaurantRatingAVG")
     @Expose
-    private Integer restaurantRatingAVG;
+    private float restaurantRatingAVG;
     @SerializedName("restaurantImage")
     @Expose
     private String restaurantImage;
+    @SerializedName("itemImage")
+    @Expose
+    private String itemImage;
     public final static Parcelable.Creator<AllRestaurantData> CREATOR = new Creator<AllRestaurantData>() {
 
 
@@ -53,6 +56,7 @@ public class AllRestaurantData implements Parcelable {
         this.foodCategoryName = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantRatingAVG = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.restaurantImage = ((String) in.readValue((String.class.getClassLoader())));
+        this.itemImage = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
@@ -69,8 +73,9 @@ public class AllRestaurantData implements Parcelable {
      * @param restaurantID
      * @param foodCategoryName
      * @param restaurantRatingAVG
+     * @param itemImage
      */
-    public AllRestaurantData(Integer restaurantID, String restaurantName, String itemPrice, String restaurantAddress, String foodCategoryName, Integer restaurantRatingAVG, String restaurantImage) {
+    public AllRestaurantData(Integer restaurantID, String restaurantName, String itemPrice, String restaurantAddress, String foodCategoryName, Integer restaurantRatingAVG, String restaurantImage, String itemImage) {
         super();
         this.restaurantID = restaurantID;
         this.restaurantName = restaurantName;
@@ -79,6 +84,7 @@ public class AllRestaurantData implements Parcelable {
         this.foodCategoryName = foodCategoryName;
         this.restaurantRatingAVG = restaurantRatingAVG;
         this.restaurantImage = restaurantImage;
+        this.itemImage = itemImage;
     }
 
     public Integer getRestaurantID() {
@@ -121,11 +127,11 @@ public class AllRestaurantData implements Parcelable {
         this.foodCategoryName = foodCategoryName;
     }
 
-    public Integer getRestaurantRatingAVG() {
+    public float getRestaurantRatingAVG() {
         return restaurantRatingAVG;
     }
 
-    public void setRestaurantRatingAVG(Integer restaurantRatingAVG) {
+    public void setRestaurantRatingAVG(float restaurantRatingAVG) {
         this.restaurantRatingAVG = restaurantRatingAVG;
     }
 
@@ -137,6 +143,14 @@ public class AllRestaurantData implements Parcelable {
         this.restaurantImage = restaurantImage;
     }
 
+    public String getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(String itemImage) {
+        this.itemImage = itemImage;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(restaurantID);
         dest.writeValue(restaurantName);
@@ -145,6 +159,7 @@ public class AllRestaurantData implements Parcelable {
         dest.writeValue(foodCategoryName);
         dest.writeValue(restaurantRatingAVG);
         dest.writeValue(restaurantImage);
+        dest.writeValue(itemImage);
     }
 
     public int describeContents() {

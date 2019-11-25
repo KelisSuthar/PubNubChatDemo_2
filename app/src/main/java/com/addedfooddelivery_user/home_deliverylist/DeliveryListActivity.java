@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.CustomeToast;
+import com.addedfooddelivery_user.common.GlobalData;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
@@ -103,6 +104,9 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
     AddAddressPresenter addAddressPresenter;
     Dialog dialog;
 
+    Geocoder geocoder;
+    List<Address> addresses;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +135,19 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
         adpter = new AddressListAdpter(DeliveryListActivity.this, addresssList, new AddressListAdpter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {
+                double wayLatitude = Double.parseDouble(addresssList.get(position).getAdderessLatitude());
+                double wayLongitude = Double.parseDouble(addresssList.get(position).getAdderessLongitude());
 
+                geocoder = new Geocoder(DeliveryListActivity.this, Locale.getDefault());
+                try {
+                    addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                GlobalData.SavedAddress = addresses;
+                overridePendingTransition(R.anim.leftto, R.anim.right);
+                finish();
             }
         });
 
@@ -215,8 +231,8 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
 
     private void getLocation() {
         // Use the builder to create a FindCurrentPlaceRequest.
-                FindCurrentPlaceRequest request =
-                        FindCurrentPlaceRequest.newInstance(ReusedMethod.CurrentPlacefields);
+        FindCurrentPlaceRequest request =
+                FindCurrentPlaceRequest.newInstance(ReusedMethod.CurrentPlacefields);
 
         // Call findCurrentPlace and handle the response (first check that the user has granted permission).
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -224,10 +240,12 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
             placeResponse.addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     FindCurrentPlaceResponse response = task.getResult();
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        startActivity(new Intent(DeliveryListActivity.this, SaveAddressActivity.class).putExtra("placeId", placeLikelihood.getPlace().getId()));
-                        overridePendingTransition(R.anim.rightto, R.anim.left);
-                    }
+                    List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
+
+                    startActivity(new Intent(DeliveryListActivity.this, SaveAddressActivity.class)
+                            .putExtra("placeId", placeLikelihood.get(0).getPlace().getId()));
+                    overridePendingTransition(R.anim.rightto, R.anim.left);
+
                 } else {
                     Exception exception = task.getException();
                     if (exception instanceof ApiException) {

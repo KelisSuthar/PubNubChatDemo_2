@@ -32,12 +32,13 @@
             android:textSize="@dimen/_10ssp"
             app:font_name="montserratSemiBold" />
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/ragSortBy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/imgRelevance"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
                 android:textColor="@color/text_selecation_fillter"
                 android:textSize="@dimen/_10ssp" />
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/imgRating"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
                 android:textColor="@color/text_selecation_fillter"
                 android:textSize="@dimen/_10ssp" />
 
-            <CheckBox
+            <RadioButton
                 android:visibility="gone"
                 android:id="@+id/imgTime"
                 android:layout_width="@dimen/_50sdp"
@@ -80,7 +81,7 @@
                 android:textColor="@color/text_selecation_fillter"
                 android:textSize="@dimen/_10ssp" />
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/imgCostLowToHigh"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -94,7 +95,7 @@
                 android:textColor="@color/text_selecation_fillter"
                 android:textSize="@dimen/_10ssp" />
 
-            <CheckBox
+            <RadioButton
                 android:id="@+id/imgCostHighToLow"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -106,7 +107,7 @@
                 android:text="@string/cost_high_low"
                 android:textColor="@color/text_selecation_fillter"
                 android:textSize="@dimen/_10ssp" />
-        </LinearLayout>
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,11 +128,11 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipsFood"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:lineSpacing="@dimen/_5sdp"
-                app:singleSelection="false" />
+                app:singleSelection="true" />
 
         </LinearLayout>
 
@@ -177,7 +178,7 @@
                     android:textSize="@dimen/_8ssp" />
             </LinearLayout>
 
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
                 android:id="@+id/rngPrise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
