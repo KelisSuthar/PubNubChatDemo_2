@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.apiKey.GetAPIKeyConstructor;
+import com.addedfooddelivery_user.apiKey.GetAPIKeyPresenter;
+import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.IntegratorImpl;
 import com.addedfooddelivery_user.common.LoginImaplementView;
@@ -29,6 +32,7 @@ import com.addedfooddelivery_user.loginEmail.api.LoginConstructor;
 import com.addedfooddelivery_user.loginEmail.api.LoginPresenter;
 import com.addedfooddelivery_user.loginEmail.model.LoginResponse;
 import com.addedfooddelivery_user.signup.SignupActivity;
+import com.addedfooddelivery_user.splash.SplashActivity;
 import com.addedfooddelivery_user.verificationPhone.VerifyPhoneActivity;
 import com.addedfooddelivery_user.verifyPhoneOtp.OtpActivity;
 import com.google.gson.Gson;
@@ -38,11 +42,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.addedfooddelivery_user.common.AppConstants.ACCESS_TOKEN;
+import static com.addedfooddelivery_user.common.AppConstants.API_KEY_VALUE;
 import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 import static com.addedfooddelivery_user.common.AppConstants.LOGGED_IN_USER_ID;
 import static com.addedfooddelivery_user.common.AppConstants.USER_DETAIL_LOGIN;
 
-public class LoginEmailActivity extends AppCompatActivity implements LoginConstructor.View {
+public class LoginEmailActivity extends AppCompatActivity implements LoginConstructor.View, GetAPIKeyConstructor.View {
     @BindView(R.id.ll_email_login)
     CoordinatorLayout llMainView;
     @BindView(R.id.img_login_banner)
@@ -64,7 +69,7 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginConstr
 
     LoginPresenter loginPresenter;
     Dialog dialog;
-
+    GetAPIKeyPresenter apiKeyPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +80,20 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginConstr
         //first istep
         loginPresenter = new LoginPresenter(LoginEmailActivity.this);
         initProgressBar();
+        initPresenter();
     }
 
-
+    void initPresenter() {
+        String apiKey = SharedPreferenceManager.getString(API_KEY_VALUE, "");
+        apiKeyPresenter = new GetAPIKeyPresenter(this);
+        if (apiKey.equals("")) {
+            if (ReusedMethod.isNetworkConnected(LoginEmailActivity.this)) {
+                apiKeyPresenter.requestAPIKey(LoginEmailActivity.this);
+            } else {
+                displayMessage(getResources().getString(R.string.internet_message_alert));
+            }
+        }
+    }
     @OnClick({R.id.btLogin, R.id.tvForgotPassword, R.id.txtSignup, R.id.img_back_login})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -138,6 +154,15 @@ public class LoginEmailActivity extends AppCompatActivity implements LoginConstr
     @Override
     public void onResponseFailure(Throwable throwable) {
         displayMessage(throwable.getMessage());
+    }
+
+    @Override
+    public void onResponseSuccess(GetAPIKeyResponse response) {
+        if (response.getStatus() == 1) {
+            SharedPreferenceManager.putString(API_KEY_VALUE, response.getData().getApiKey());
+            //displayMessage(response.getData().getApiKey().toString());
+
+        }
     }
 
     @Override

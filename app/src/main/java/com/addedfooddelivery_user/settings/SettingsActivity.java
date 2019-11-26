@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.btnLogout:
-                SharedPreferenceManager.removeAllData();
+                    SharedPreferenceManager.removeAllData();
                 
                 Intent intent=new Intent(SettingsActivity.this, LoginEmailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
