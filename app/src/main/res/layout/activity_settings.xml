@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".RestaurantList.FiltersActivity">
+    tools:context=".restaurantList.FiltersActivity">
 
     <include
         android:id="@+id/toolbar_settings"

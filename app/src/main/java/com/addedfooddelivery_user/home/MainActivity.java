@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private boolean exit = false;
 
     PlacesClient placesClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         boolean finePermissionCheck = (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
         if (coarsePermissionCheck && finePermissionCheck) {
             checkGPS();
-        }else {
+        } else {
 
         }
     }
@@ -200,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     }
                     getLocation();
                 } else {
-                    if(alertDialog==null)
+                    if (alertDialog == null)
 
                         CustomeDialog(MainActivity.this);
 
@@ -216,46 +217,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (mFusedLocationClient == null) {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
         }
-        // Use the builder to create a FindCurrentPlaceRequest.
-        FindCurrentPlaceRequest request =
-                FindCurrentPlaceRequest.newInstance(ReusedMethod.CurrentPlacefields);
 
-        // Call findCurrentPlace and handle the response (first check that the user has granted permission).
-        if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
-            placeResponse.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    FindCurrentPlaceResponse response = task.getResult();
-                    List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
-
-
-
-                    wayLatitude =  placeLikelihood.get(0).getPlace().getLatLng().latitude;
-                    wayLongitude = placeLikelihood.get(0).getPlace().getLatLng().longitude;
-
-                    geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-
-                    try {
-                        addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    GlobalData.CurrentAddress = addresses;
-                    Intent intent = new Intent("location");
-                    intent.putExtra("getAdd", "getAdd");
-                    LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
-
-                } else {
-                    Exception exception = task.getException();
-                    if (exception instanceof ApiException) {
-                        ApiException apiException = (ApiException) exception;
-                        Log.e("Place not found: ", String.valueOf(apiException.getStatusCode()));
-                    }
-                }
-            });
-        }
-       /* mFusedLocationClient.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onSuccess(Location location) {
@@ -275,12 +238,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     Intent intent = new Intent("location");
                     intent.putExtra("getAdd", "getAdd");
                     LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
-                    *//*Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();*//*
-                }else {
+                    //Toast.makeText(MainActivity.this, "Success"+String.valueOf(address.trim()), Toast.LENGTH_SHORT).show();
+                } else {
+                    // Use the builder to create a FindCurrentPlaceRequest.
+                    FindCurrentPlaceRequest request =
+                            FindCurrentPlaceRequest.newInstance(ReusedMethod.CurrentPlacefields);
+
+                    // Call findCurrentPlace and handle the response (first check that the user has granted permission).
+                    Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
+                    placeResponse.addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            FindCurrentPlaceResponse response = task.getResult();
+                            List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
+
+
+                            wayLatitude = placeLikelihood.get(0).getPlace().getLatLng().latitude;
+                            wayLongitude = placeLikelihood.get(0).getPlace().getLatLng().longitude;
+
+                            geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+
+                            try {
+                                addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            GlobalData.CurrentAddress = addresses;
+                            Intent intent = new Intent("location");
+                            intent.putExtra("getAdd", "getAdd");
+                            LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
+
+                        } else {
+                            Exception exception = task.getException();
+                            if (exception instanceof ApiException) {
+                                ApiException apiException = (ApiException) exception;
+                                Log.e("Place not found: ", String.valueOf(apiException.getStatusCode()));
+                            }
+                        }
+                    });
 
                 }
+
             }
-        });*/
+        });
 
     }
 

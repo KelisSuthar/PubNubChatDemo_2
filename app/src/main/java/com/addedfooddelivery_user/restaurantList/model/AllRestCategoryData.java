@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.RestaurantList.model;
+package com.addedfooddelivery_user.restaurantList.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AllRestaurantData implements Parcelable {
+public class AllRestCategoryData implements Parcelable {
 
     @SerializedName("restaurantID")
     @Expose
@@ -14,58 +14,63 @@ public class AllRestaurantData implements Parcelable {
     @SerializedName("restaurantName")
     @Expose
     private String restaurantName;
-    @SerializedName("itemPrice")
-    @Expose
-    private String itemPrice;
     @SerializedName("restaurantAddress")
     @Expose
     private String restaurantAddress;
     @SerializedName("foodCategoryName")
     @Expose
     private String foodCategoryName;
+    @SerializedName("itemName")
+    @Expose
+    private String itemName;
+    @SerializedName("itemPrice")
+    @Expose
+    private String itemPrice;
+    @SerializedName("itemImage")
+    @Expose
+    private String itemImage;
     @SerializedName("restaurantRatingAVG")
     @Expose
     private float restaurantRatingAVG;
     @SerializedName("restaurantImage")
     @Expose
     private String restaurantImage;
-    @SerializedName("itemImage")
-    @Expose
-    private String itemImage;
-    public final static Parcelable.Creator<AllRestaurantData> CREATOR = new Creator<AllRestaurantData>() {
+    public final static Parcelable.Creator<AllRestCategoryData> CREATOR = new Creator<AllRestCategoryData>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public AllRestaurantData createFromParcel(Parcel in) {
-            return new AllRestaurantData(in);
+        public AllRestCategoryData createFromParcel(Parcel in) {
+            return new AllRestCategoryData(in);
         }
 
-        public AllRestaurantData[] newArray(int size) {
-            return (new AllRestaurantData[size]);
+        public AllRestCategoryData[] newArray(int size) {
+            return (new AllRestCategoryData[size]);
         }
 
     };
 
-    protected AllRestaurantData(Parcel in) {
+    protected AllRestCategoryData(Parcel in) {
         this.restaurantID = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.restaurantName = ((String) in.readValue((String.class.getClassLoader())));
-        this.itemPrice = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantAddress = ((String) in.readValue((String.class.getClassLoader())));
         this.foodCategoryName = ((String) in.readValue((String.class.getClassLoader())));
+        this.itemName = ((String) in.readValue((String.class.getClassLoader())));
+        this.itemPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.itemImage = ((String) in.readValue((String.class.getClassLoader())));
         this.restaurantRatingAVG = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.restaurantImage = ((String) in.readValue((String.class.getClassLoader())));
-        this.itemImage = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
      * No args constructor for use in serialization
      */
-    public AllRestaurantData() {
+    public AllRestCategoryData() {
     }
 
     /**
+     * @param itemName
      * @param restaurantAddress
      * @param restaurantName
      * @param restaurantImage
@@ -75,16 +80,17 @@ public class AllRestaurantData implements Parcelable {
      * @param restaurantRatingAVG
      * @param itemImage
      */
-    public AllRestaurantData(Integer restaurantID, String restaurantName, String itemPrice, String restaurantAddress, String foodCategoryName, Integer restaurantRatingAVG, String restaurantImage, String itemImage) {
+    public AllRestCategoryData(Integer restaurantID, String restaurantName, String restaurantAddress, String foodCategoryName, String itemName, String itemPrice, String itemImage, Integer restaurantRatingAVG, String restaurantImage) {
         super();
         this.restaurantID = restaurantID;
         this.restaurantName = restaurantName;
-        this.itemPrice = itemPrice;
         this.restaurantAddress = restaurantAddress;
         this.foodCategoryName = foodCategoryName;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemImage = itemImage;
         this.restaurantRatingAVG = restaurantRatingAVG;
         this.restaurantImage = restaurantImage;
-        this.itemImage = itemImage;
     }
 
     public Integer getRestaurantID() {
@@ -103,14 +109,6 @@ public class AllRestaurantData implements Parcelable {
         this.restaurantName = restaurantName;
     }
 
-    public String getItemPrice() {
-        return itemPrice;
-    }
-
-    public void setItemPrice(String itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
     public String getRestaurantAddress() {
         return restaurantAddress;
     }
@@ -125,6 +123,30 @@ public class AllRestaurantData implements Parcelable {
 
     public void setFoodCategoryName(String foodCategoryName) {
         this.foodCategoryName = foodCategoryName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public String getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(String itemImage) {
+        this.itemImage = itemImage;
     }
 
     public float getRestaurantRatingAVG() {
@@ -143,23 +165,16 @@ public class AllRestaurantData implements Parcelable {
         this.restaurantImage = restaurantImage;
     }
 
-    public String getItemImage() {
-        return itemImage;
-    }
-
-    public void setItemImage(String itemImage) {
-        this.itemImage = itemImage;
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(restaurantID);
         dest.writeValue(restaurantName);
-        dest.writeValue(itemPrice);
         dest.writeValue(restaurantAddress);
         dest.writeValue(foodCategoryName);
+        dest.writeValue(itemName);
+        dest.writeValue(itemPrice);
+        dest.writeValue(itemImage);
         dest.writeValue(restaurantRatingAVG);
         dest.writeValue(restaurantImage);
-        dest.writeValue(itemImage);
     }
 
     public int describeContents() {

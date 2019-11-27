@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.RestaurantList;
+package com.addedfooddelivery_user.restaurantList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -15,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantList.adpter.AllRestaurantListAdpter;
-import com.addedfooddelivery_user.RestaurantList.api.RestaurantConstructor;
-import com.addedfooddelivery_user.RestaurantList.api.RestaurantPresenter;
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantData;
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
+import com.addedfooddelivery_user.restaurantList.adpter.AllResCategoryListAdpter;
+import com.addedfooddelivery_user.restaurantList.adpter.AllRestaurantListAdpter;
+import com.addedfooddelivery_user.restaurantList.api.RestaurantConstructor;
+import com.addedfooddelivery_user.restaurantList.api.RestaurantPresenter;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryData;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantData;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.common.CustomeToast;
 
 import java.util.ArrayList;
@@ -35,6 +38,8 @@ import static com.addedfooddelivery_user.common.GlobalData.rest_type;
 import static com.addedfooddelivery_user.common.GlobalData.sort_by;
 
 public class RestaurantListActivity extends AppCompatActivity implements RestaurantConstructor.View {
+    AllResCategoryListAdpter mCategoryAdpter;
+    private ArrayList<AllRestCategoryData> allResCategoryList;
 
     AllRestaurantListAdpter mAdpter;
     private ArrayList<AllRestaurantData> allRestaurantList;
@@ -58,6 +63,7 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
         ButterKnife.bind(this);
 
         allRestaurantList = new ArrayList<>();
+        allResCategoryList = new ArrayList<>();
 
         setRestaurantData();
         initProgressBar();
@@ -71,33 +77,35 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
                 onBackPressed();
                 break;
             case R.id.imgRestListFilter:
-                startActivityForResult(new Intent(getContext(), FiltersActivity.class),1);
+                startActivityForResult(new Intent(getContext(), FiltersActivity.class), 1);
                 overridePendingTransition(R.anim.rightto, R.anim.left);
                 break;
         }
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                restaurantPresenter.requestAPIAllRestaurant(RestaurantListActivity.this, rest_type, sort_by, direction, category, price);
-            }
-        }
-    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        if (getIntent().hasExtra("foodCategoryName")) {
+            String categoryName = getIntent().getStringExtra("foodCategoryName");
+            restaurantPresenter.requestAPIAllRestaurantCategory(RestaurantListActivity.this, categoryName, sort_by, direction, price);
+        } else
             restaurantPresenter.requestAPIAllRestaurant(RestaurantListActivity.this, rest_type, sort_by, direction, category, price);
 
     }
 
     private void setRestaurantData() {
         mAdpter = new AllRestaurantListAdpter(RestaurantListActivity.this, allRestaurantList);
+        mCategoryAdpter = new AllResCategoryListAdpter(RestaurantListActivity.this, allResCategoryList);
         mLayoutManagerPopular = new GridLayoutManager(RestaurantListActivity.this, 2, GridLayoutManager.VERTICAL, false);
         rcyRestList.setLayoutManager(mLayoutManagerPopular);
 
         rcyRestList.setItemAnimator(new DefaultItemAnimator());
-        rcyRestList.setAdapter(mAdpter);
+
+
+
+
+
     }
 
 
@@ -123,9 +131,33 @@ public class RestaurantListActivity extends AppCompatActivity implements Restaur
             if (allRestaurantList.size() > 0) {
                 allRestaurantList.clear();
             }
-
+            rcyRestList.setAdapter(mAdpter);
             allRestaurantList.addAll(response.getData());
+            mAdpter.notifyDataSetChanged();
+        } else {
+            rcyRestList.setVisibility(View.GONE);
+            llHomeNoData.setVisibility(View.VISIBLE);
+        }
+    }
 
+    @Override
+    public void onRestCategoryFailure(String t) {
+        displayMessage(t);
+        rcyRestList.setVisibility(View.GONE);
+        llHomeNoData.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRestCategorySuccess(AllRestCategoryResponse response) {
+        if (response.getStatus() == 1) {
+            rcyRestList.setVisibility(View.VISIBLE);
+            llHomeNoData.setVisibility(View.GONE);
+            if (allResCategoryList.size() > 0) {
+                allResCategoryList.clear();
+            }
+            rcyRestList.setAdapter(mCategoryAdpter);
+            allResCategoryList.addAll(response.getData());
+            mCategoryAdpter.notifyDataSetChanged();
         } else {
             rcyRestList.setVisibility(View.GONE);
             llHomeNoData.setVisibility(View.VISIBLE);

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_half_circle"
     android:orientation="vertical"
-    tools:context=".RestaurantList.FiltersActivity">
+    tools:context=".restaurantList.FiltersActivity">
 
     <include
         android:id="@+id/toolbar_fillter"
@@ -67,7 +67,6 @@
                 android:textSize="@dimen/_10ssp" />
 
             <RadioButton
-                android:visibility="gone"
                 android:id="@+id/imgTime"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
@@ -79,7 +78,8 @@
                 android:gravity="center"
                 android:text="@string/time"
                 android:textColor="@color/text_selecation_fillter"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_10ssp"
+                android:visibility="gone" />
 
             <RadioButton
                 android:id="@+id/imgCostLowToHigh"
@@ -117,6 +117,7 @@
             android:orientation="vertical">
 
             <com.addedfooddelivery_user.common.views.CustomTextView
+                android:id="@+id/txtCategoryLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_10ssp"
@@ -124,6 +125,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
+                android:visibility="gone"
                 app:font_name="montserratSemiBold" />
 
             <com.google.android.material.chip.ChipGroup
@@ -156,9 +158,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp">
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal">
 
                 <com.addedfooddelivery_user.common.views.CustomTextView
                     android:id="@+id/txt_min_prise"
@@ -193,8 +195,7 @@
 
                 app:right_thumb_image="@drawable/ic_filter_rangesliderbutton"
                 app:right_thumb_image_pressed="@null"
-                app:steps="5"
-                />
+                app:steps="5" />
 
         </LinearLayout>
     </LinearLayout>

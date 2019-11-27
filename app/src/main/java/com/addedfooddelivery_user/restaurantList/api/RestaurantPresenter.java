@@ -1,8 +1,10 @@
-package com.addedfooddelivery_user.RestaurantList.api;
+package com.addedfooddelivery_user.restaurantList.api;
 
 import android.app.Activity;
 
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
+import com.addedfooddelivery_user.restaurantList.RestaurantListActivity;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 
 public class RestaurantPresenter implements RestaurantConstructor.Presenter, RestaurantConstructor.Model.OnFinishedListener {
 
@@ -15,14 +17,11 @@ public class RestaurantPresenter implements RestaurantConstructor.Presenter, Res
         this.restaurantModel = new RestaurantApiModel();
     }
 
-
     @Override
     public void onRestaurantFinished(AllRestaurantResponse response) {
-
         restaurantView.onRestaurantResponseSuccess(response);
         restaurantView.showLoadingIndicator(false);
     }
-
 
     @Override
     public void onRestaurantFailure(String t) {
@@ -32,6 +31,21 @@ public class RestaurantPresenter implements RestaurantConstructor.Presenter, Res
             restaurantView.onRestaurantResponseFailure(t);
         }
 
+    }
+
+    @Override
+    public void onRestCategoryFinished(AllRestCategoryResponse response) {
+        restaurantView.onRestCategorySuccess(response);
+        restaurantView.showLoadingIndicator(false);
+    }
+
+    @Override
+    public void onRestCategoryFailure(String t) {
+        if (restaurantView != null) {
+            restaurantView.showLoadingIndicator(false);
+            restaurantView.displayMessage(t);
+            restaurantView.onRestCategoryFailure(t);
+        }
     }
 
     @Override
@@ -47,6 +61,15 @@ public class RestaurantPresenter implements RestaurantConstructor.Presenter, Res
         }
         restaurantModel.getAllRestaurant(this, activity, restaurantType, sort_by, direction, category, price);
     }
+
+    @Override
+    public void requestAPIAllRestaurantCategory(Activity activity, String categoryName, String sort_by, String direction, String price) {
+        if (restaurantView != null) {
+            restaurantView.showLoadingIndicator(true);
+        }
+        restaurantModel.getAllRestaurantCategory(this, activity, categoryName, sort_by, direction, price);
+    }
+
 
 
 }

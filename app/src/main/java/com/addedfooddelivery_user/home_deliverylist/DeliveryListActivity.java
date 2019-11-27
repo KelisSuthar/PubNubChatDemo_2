@@ -46,6 +46,7 @@ import com.addedfooddelivery_user.home_deliverylist.api.AddAddressPresenter;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddData;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -144,10 +145,8 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                addAddressPresenter.requestAddAddress(DeliveryListActivity.this,addresssList.get(position).getCustomerAddressID());
 
-                GlobalData.SavedAddress = addresses;
-                overridePendingTransition(R.anim.leftto, R.anim.right);
-                finish();
             }
         });
 
@@ -180,7 +179,6 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
     }
 
     private void setUpPlacesAutocomplete() {
-
 
         Intent intent = new Autocomplete.IntentBuilder(
                 AutocompleteActivityMode.OVERLAY, ReusedMethod.fields)
@@ -238,7 +236,7 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
+               if (task.isSuccessful()) {
                     FindCurrentPlaceResponse response = task.getResult();
                     List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
 
@@ -317,6 +315,22 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
             addresssList.addAll(response.getData());
             adpter.notifyDataSetChanged();
 
+        }
+    }
+
+    @Override
+    public void onsetDefaultAddailure(String throwable) {
+        //for set default address
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onsetDefaultAddSuccess(SetDefaultAddResponse response) {
+        //for set default address
+        if(response.getStatus()==1) {
+            GlobalData.SavedAddress = addresses;
+            overridePendingTransition(R.anim.leftto, R.anim.right);
+            finish();
         }
     }
 

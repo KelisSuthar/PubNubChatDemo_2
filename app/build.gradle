@@ -26,14 +26,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support:design:28.0.0'
-
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
     //implementation 'com.google.android.material:material:1.0.0'
-    implementation group: 'com.google.android.material', name: 'material', version: '1.2.0-alpha01'
+    implementation group: 'com.google.android.material', name: 'material', version: '1.2.0-alpha02'
     implementation 'com.android.support:multidex:1.0.3'
     //navigation of bottom
     implementation 'androidx.navigation:navigation-fragment:2.1.0'
@@ -55,6 +54,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:4.42.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
+    //Otp view
     implementation 'com.github.aabhasr1:otpview:1.0.6'
 
     // Dexter runtime permissions

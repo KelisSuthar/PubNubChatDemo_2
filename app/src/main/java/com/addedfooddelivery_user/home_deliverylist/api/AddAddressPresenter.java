@@ -2,8 +2,10 @@ package com.addedfooddelivery_user.home_deliverylist.api;
 
 import android.app.Activity;
 
+import com.addedfooddelivery_user.home_deliverylist.adpter.AddressListAdpter;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 
 public class AddAddressPresenter implements AddAddressConstructor.Presenter, AddAddressConstructor.Model.OnFinishedListener {
 
@@ -49,6 +51,21 @@ public class AddAddressPresenter implements AddAddressConstructor.Presenter, Add
     }
 
     @Override
+    public void onsetDefaultAddFinished(SetDefaultAddResponse response) {
+        addAddView.onsetDefaultAddSuccess(response);
+        addAddView.showLoadingIndicator(false);
+    }
+
+    @Override
+    public void onsetDefaultAddFailure(String response) {
+        if (addAddView != null) {
+            addAddView.showLoadingIndicator(false);
+            addAddView.displayMessage(response);
+            addAddView.onsetDefaultAddailure(response);
+        }
+    }
+
+    @Override
     public void onDestroy() {
         addAddView = null;
         addAddModel = null;
@@ -57,11 +74,11 @@ public class AddAddressPresenter implements AddAddressConstructor.Presenter, Add
 
 
     @Override
-    public void requestAddAddress(Activity activity, String addressType, String addressLine, double latitude, double longitude, String locality) {
+    public void requestAddAddress(Activity activity, String addressType, String addressLine, double latitude, double longitude,String landmark, String locality) {
         if (addAddView != null) {
             addAddView.showLoadingIndicator(true);
         }
-        addAddModel.addAddressData(this,activity,addressType,addressLine,latitude,longitude,locality);
+        addAddModel.addAddressData(this,activity,addressType,addressLine,latitude,longitude,landmark,locality);
     }
 
     @Override
@@ -72,5 +89,16 @@ public class AddAddressPresenter implements AddAddressConstructor.Presenter, Add
         addAddModel.listAddress(this,activity);
     }
 
+    @Override
+    public void requestAddAddress(Activity activity, int addressId) {
 
+    }
+
+
+    public void requestAddAddress(Activity activity, Integer customerAddressID) {
+        if (addAddView != null) {
+            addAddView.showLoadingIndicator(true);
+        }
+        addAddModel.setDefaulAdd(this,customerAddressID);
+    }
 }

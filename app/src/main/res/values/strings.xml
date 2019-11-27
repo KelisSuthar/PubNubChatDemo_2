@@ -296,5 +296,7 @@
     <string name="home">Home</string>
     <string name="address_hint">Ex : Dad\'s place, John\'s Home</string>
     <string name="save_proceed">Confirm Location</string>
+    <string name="screen">SCREEN</string>
+    <string name="title_terms"><![CDATA[Terms & Conditions]]></string>
 
 </resources>

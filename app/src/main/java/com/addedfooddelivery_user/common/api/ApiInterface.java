@@ -1,6 +1,9 @@
 package com.addedfooddelivery_user.common.api;
 
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
+import com.addedfooddelivery_user.home_search.model.CategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
 import com.addedfooddelivery_user.forgottPassword.model.ForgotPassResponse;
 import com.addedfooddelivery_user.home.model.DefaultAddResponse;
@@ -73,19 +76,38 @@ public interface ApiInterface {
             @Field("category") String category,
             @Field("price") String price);
 
+    //view all restaurant list by category
+    @FormUrlEncoded
+    @POST("restaurant_by_category")
+    Call<AllRestCategoryResponse> getAllRestaurantCategory(
+            @Field("foodCategoryName") String foodCategoryName,
+            @Field("sort_by") String sort_by,
+            @Field("direction") String direction,
+            @Field("price") String price);
+
     //add address
     @FormUrlEncoded
     @POST("addDeliveryAddress")
     Call<SaveAddResponse> addAddress(
             @Field("adderessType") String adderessType,
             @Field("adderess") String adderess,
-            @Field("adderessLatitude") Double direction,
-            @Field("adderessLongitude") Double category,
+            @Field("adderessLatitude") Double adderessLatitude,
+            @Field("adderessLongitude") Double adderessLongitude,
+            @Field("landmark") String landmark,
             @Field("adderessCity") String adderessCity);
+
 
     @GET("AddressList")
     Call<ListAddResponse> getAddressList();
 
     @POST("default_address")
     Call<DefaultAddResponse> getDefaultAdd();
+
+    @GET("categoryList")
+    Call<CategoryResponse> getCategoryList();
+
+    //get default address
+    @FormUrlEncoded
+    @POST("setAddressDefault")
+    Call<SetDefaultAddResponse> setDefaultAdd(@Field("customerAddressID") int customerAddressID);
 }

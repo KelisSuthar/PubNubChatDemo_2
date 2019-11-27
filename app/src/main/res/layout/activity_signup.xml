@@ -163,7 +163,7 @@
     </LinearLayout>
 
     <com.addedfooddelivery_user.common.views.CustomTextView
-        android:id="@+id/txtSignup"
+        android:id="@+id/txtTermsCond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

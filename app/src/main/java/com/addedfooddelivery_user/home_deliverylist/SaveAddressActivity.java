@@ -33,14 +33,13 @@ import androidx.core.content.ContextCompat;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.CustomeToast;
-import com.addedfooddelivery_user.common.model.AddressCommon;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
-import com.addedfooddelivery_user.home.api.HomePresenter;
 import com.addedfooddelivery_user.home_deliverylist.api.AddAddressConstructor;
 import com.addedfooddelivery_user.home_deliverylist.api.AddAddressPresenter;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -75,7 +74,7 @@ import static com.addedfooddelivery_user.common.AppConstants.AUTOCOMPLETE_REQUES
 import static com.addedfooddelivery_user.common.AppConstants.PERMISSION_LOCATION_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.CommonGps.openGpsEnableSetting;
 
-public class SaveAddressActivity extends AppCompatActivity implements OnMapReadyCallback, AddAddressConstructor.View {
+public class SaveAddressActivity extends AppCompatActivity implements OnMapReadyCallback, AddAddressConstructor.View, GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraIdleListener {
     @BindView(R.id.backArrow)
     ImageView backArrow;
     @BindView(R.id.ll_map)
@@ -88,8 +87,8 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     ImageView animationLineCartAdd;
     @BindView(R.id.edLocation)
     CustomEditText edaddress;
-    @BindView(R.id.flat_no)
-    CustomEditText flatNo;
+    @BindView(R.id.landmark)
+    CustomEditText landmark;
     @BindView(R.id.type_radiogroup)
     RadioGroup typeRadiogroup;
     @BindView(R.id.home_radio)
@@ -114,7 +113,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     PlacesClient placesClient;
-    String addressType ;
+    String addressType;
 
     AddAddressPresenter addAddressPresenter;
     Dialog dialog;
@@ -131,9 +130,10 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         initPlace();
         addAddressPresenter = new AddAddressPresenter(this);
-        addressType=getResources().getString(R.string.other);
+        addressType = getResources().getString(R.string.other);
         otherRadio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +193,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                     }
                 } else if (radioButton.getText().toString().equalsIgnoreCase(getResources().getString(R.string.other))) {
                     if (otherRadio.isChecked()) {
-                        addressType =getResources().getString(R.string.other);
+                        addressType = getResources().getString(R.string.other);
 
                         //otherAddressHeaderEt.setText(edaddress.getType());
                         otherRadio.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -235,6 +235,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                 getAndSetBundleData(id);
             }
         }
+
 
     }
 
@@ -322,6 +323,7 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
                             addresses.get(0).getAddressLine(0),
                             addresses.get(0).getLatitude(),
                             addresses.get(0).getLongitude(),
+                            landmark.getText().toString().trim(),
                             addresses.get(0).getLocality());
                 }
                 break;
@@ -515,10 +517,38 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
         if (mMap != null) {
             mMap.getUiSettings().setCompassEnabled(false);
             mMap.setBuildingsEnabled(true);
-
+            mMap.setOnCameraMoveListener(this);
+            mMap.setOnCameraIdleListener(this);
             mMap.getUiSettings().setRotateGesturesEnabled(false);
             mMap.getUiSettings().setTiltGesturesEnabled(false);
         }
+      /*  if(mMap!=null) {
+            mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                @Override
+                public void onMarkerDragStart(Marker marker) {
+
+                }
+
+                @Override
+                public void onMarkerDrag(Marker marker) {
+
+                }
+
+                @Override
+                public void onMarkerDragEnd(Marker marker) {
+// for move marker get latlong
+                    LatLng position = marker.getPosition();
+                    geocoder = new Geocoder(SaveAddressActivity.this, Locale.getDefault());
+
+                    try {
+                        addresses = geocoder.getFromLocation(position.latitude, position.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    edaddress.setText(addresses.get(0).getAddressLine(0));
+                }
+            });
+        }*/
 
     }
 
@@ -591,5 +621,36 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     @Override
     public void onListAddressResponseSuccess(ListAddResponse response) {
 // getting address list
+    }
+
+    @Override
+    public void onsetDefaultAddailure(String throwable) {
+        // for set default address
+    }
+
+    @Override
+    public void onsetDefaultAddSuccess(SetDefaultAddResponse response) {
+// for set default address
+    }
+
+    @Override
+    public void onCameraMove() {
+
+    }
+
+    @Override
+    public void onCameraIdle() {
+        CameraPosition cameraPosition = mMap.getCameraPosition();
+
+        geocoder = new Geocoder(SaveAddressActivity.this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(cameraPosition.target.latitude, cameraPosition.target.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (addresses.size() != 0) {
+            edaddress.setText(addresses.get(0).getAddressLine(0));
+        }
     }
 }

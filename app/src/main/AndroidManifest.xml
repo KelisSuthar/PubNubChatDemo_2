@@ -25,7 +25,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".home_deliverylist.SaveAddressActivity"></activity>
+        <activity android:name=".Added.CMSViewActivity"></activity>
+        <activity android:name=".home_deliverylist.SaveAddressActivity" />
         <activity
             android:name=".cart.CartActivity"
             android:screenOrientation="portrait"
@@ -41,7 +42,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".RestaurantList.RestaurantListActivity"
+            android:name=".restaurantList.RestaurantListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
@@ -77,7 +78,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".RestaurantList.FiltersActivity"
+            android:name=".restaurantList.FiltersActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity

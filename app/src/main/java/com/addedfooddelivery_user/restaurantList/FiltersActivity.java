@@ -1,25 +1,30 @@
-package com.addedfooddelivery_user.RestaurantList;
+package com.addedfooddelivery_user.restaurantList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomTextView;
-import com.addedfooddelivery_user.home.MainActivity;
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.addedfooddelivery_user.home_search.api.SearchConstructor;
+import com.addedfooddelivery_user.home_search.api.SearchPresenter;
+import com.addedfooddelivery_user.home_search.model.CategoryData;
+import com.addedfooddelivery_user.home_search.model.CategoryResponse;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
@@ -37,7 +42,7 @@ import static com.addedfooddelivery_user.common.GlobalData.price;
 import static com.addedfooddelivery_user.common.GlobalData.sort_by;
 
 
-public class FiltersActivity extends AppCompatActivity {
+public class FiltersActivity extends AppCompatActivity implements SearchConstructor.View {
     @BindView(R.id.chipsFood)
     ChipGroup chipGroupFood;
     @BindView(R.id.ragSortBy)
@@ -64,17 +69,23 @@ public class FiltersActivity extends AppCompatActivity {
     CustomTextView txtMinPrise;
     @BindView(R.id.txt_max_prise)
     CustomTextView txtMaxPrise;
+    @BindView(R.id.txtCategoryLabel)
+    CustomTextView txtCategoryLabel;
 
-    private ArrayList<String> foodCategoryList = new ArrayList<>();
+    private ArrayList<CategoryData> foodCategoryList = new ArrayList<>();
     private ArrayList<String> selectedCategory = new ArrayList<>();
-
+    SearchPresenter searchPresenter;
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
         ButterKnife.bind(this);
 
-        setFood();
+        searchPresenter = new SearchPresenter(this);
+        searchPresenter.requestCategoryData(FiltersActivity.this);
+
+
         setView();
         rngPrise.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
@@ -173,23 +184,10 @@ public class FiltersActivity extends AppCompatActivity {
 
     private void setFood() {
 
-        foodCategoryList.add("All");
-        foodCategoryList.add("Breakfast");
-        foodCategoryList.add("Meals");
-        foodCategoryList.add("Starters");
-        foodCategoryList.add("Baked Dishes");
-        foodCategoryList.add("Fried Rice");
-        foodCategoryList.add("Accompaniments");
-        foodCategoryList.add("Chinese");
-        foodCategoryList.add("Noodles");
-        foodCategoryList.add("Rice");
-        foodCategoryList.add("Oven");
-
-
         chipGroupFood.removeAllViews();
         if (foodCategoryList != null && foodCategoryList.size() > 0) {
             for (int i = 0; i < foodCategoryList.size(); i++) {
-                final Chip entryChip = getChip(chipGroupFood, foodCategoryList.get(i).toString(), i);
+                final Chip entryChip = getChip(chipGroupFood, foodCategoryList.get(i).getFoodCategoryName(), i);
 
                 chipGroupFood.addView(entryChip);
 
@@ -203,8 +201,8 @@ public class FiltersActivity extends AppCompatActivity {
                             selectedCategory.clear();
                             if (chip.isCheckable()) {
                                 int position = (Integer) chip.getTag();
-                                Log.v("@@@@", foodCategoryList.get(position).toString());
-                                category = foodCategoryList.get(position).toString();
+                                Log.v("@@@@", foodCategoryList.get(position).getFoodCategoryName());
+                                category = foodCategoryList.get(position).getFoodCategoryName();
                             } else {
                                 selectedCategory.remove(chip.getTag().toString());
                             }
@@ -241,10 +239,62 @@ public class FiltersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("editTextValue", "value_here");
-        setResult(RESULT_OK, intent);
+        super.onBackPressed();
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
+    }
+
+    @Override
+    public void onSearchResponseFailure(Throwable throwable) {
+        displayMessage(throwable.getMessage());
+    }
+
+    @Override
+    public void onSearchResponseSuccess(CategoryResponse response) {
+        if (response.getStatus() == 1) {
+            if (foodCategoryList.size() >= 0) {
+                foodCategoryList.clear();
+            }
+            txtCategoryLabel.setVisibility(View.VISIBLE);
+            foodCategoryList.addAll(response.getData());
+            setFood();
+        }
+    }
+
+    @Override
+    public void showLoadingIndicator(boolean isShow) {
+        if (dialog != null) {
+            if (isShow) {
+                dialog.show();
+            } else {
+                dialog.dismiss();
+                dialog.cancel();
+            }
+        }
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        CustomeToast.showToast(
+               this,
+                message,
+                true,
+                getResources().getColor(R.color.white),
+                getResources().getColor(R.color.colorPrimary),
+                true);
+    }
+
+    @Override
+    public void initProgressBar() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.progress_dialog);
+
+        dialog.setCancelable(false);
+    }
+
+    @Override
+    public Activity getContext() {
+        return this;
     }
 }

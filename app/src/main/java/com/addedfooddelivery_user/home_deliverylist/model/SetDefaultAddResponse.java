@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.RestaurantList.model;
+package com.addedfooddelivery_user.home_deliverylist.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,43 +9,43 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllRestaurantResponse implements Parcelable {
+public class SetDefaultAddResponse implements Parcelable {
 
     @SerializedName("status")
     @Expose
     private Integer status;
     @SerializedName("data")
     @Expose
-    private List<AllRestaurantData> data = new ArrayList<AllRestaurantData>();
+    private List<Object> data = new ArrayList<Object>();
     @SerializedName("message")
     @Expose
     private String message;
-    public final static Parcelable.Creator<AllRestaurantResponse> CREATOR = new Creator<AllRestaurantResponse>() {
+    public final static Parcelable.Creator<SetDefaultAddResponse> CREATOR = new Creator<SetDefaultAddResponse>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public AllRestaurantResponse createFromParcel(Parcel in) {
-            return new AllRestaurantResponse(in);
+        public SetDefaultAddResponse createFromParcel(Parcel in) {
+            return new SetDefaultAddResponse(in);
         }
 
-        public AllRestaurantResponse[] newArray(int size) {
-            return (new AllRestaurantResponse[size]);
+        public SetDefaultAddResponse[] newArray(int size) {
+            return (new SetDefaultAddResponse[size]);
         }
 
     };
 
-    protected AllRestaurantResponse(Parcel in) {
+    protected SetDefaultAddResponse(Parcel in) {
         this.status = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        in.readList(this.data, (AllRestaurantData.class.getClassLoader()));
+        in.readList(this.data, (java.lang.Object.class.getClassLoader()));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
      * No args constructor for use in serialization
      */
-    public AllRestaurantResponse() {
+    public SetDefaultAddResponse() {
     }
 
     /**
@@ -53,7 +53,7 @@ public class AllRestaurantResponse implements Parcelable {
      * @param message
      * @param status
      */
-    public AllRestaurantResponse(Integer status, List<AllRestaurantData> data, String message) {
+    public SetDefaultAddResponse(Integer status, List<Object> data, String message) {
         super();
         this.status = status;
         this.data = data;
@@ -68,11 +68,11 @@ public class AllRestaurantResponse implements Parcelable {
         this.status = status;
     }
 
-    public List<AllRestaurantData> getData() {
+    public List<Object> getData() {
         return data;
     }
 
-    public void setData(List<AllRestaurantData> data) {
+    public void setData(List<Object> data) {
         this.data = data;
     }
 

@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantList.RestaurantListActivity;
+import com.addedfooddelivery_user.restaurantList.RestaurantListActivity;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.GlobalData;
 import com.addedfooddelivery_user.common.ReusedMethod;

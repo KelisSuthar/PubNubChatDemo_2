@@ -1,11 +1,12 @@
-package com.addedfooddelivery_user.RestaurantList.api;
+package com.addedfooddelivery_user.restaurantList.api;
 
 import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.common.api.ApiClient;
 import com.addedfooddelivery_user.common.api.ApiInterface;
 
@@ -44,6 +45,37 @@ public class RestaurantApiModel implements RestaurantConstructor.Model {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
                 onFinishedListener.onRestaurantFailure(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getAllRestaurantCategory(OnFinishedListener onFinishedListener, Activity activity, String categoryName, String sort_by, String direction, String price) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<AllRestCategoryResponse> call = apiService.getAllRestaurantCategory(categoryName,sort_by,direction,price);
+        call.enqueue(new Callback<AllRestCategoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AllRestCategoryResponse> call, @NonNull Response<AllRestCategoryResponse> response) {
+                int success;
+
+                if (response.body() != null) {
+                    success = response.body().getStatus();
+                    if (success == 1) {
+                        AllRestCategoryResponse keyResponse = response.body();
+                        onFinishedListener.onRestCategoryFinished(keyResponse);
+                    } else {
+                        onFinishedListener.onRestCategoryFailure(response.body().getMessage());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AllRestCategoryResponse> call, @NonNull Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+                onFinishedListener.onRestCategoryFailure(t.getMessage());
             }
         });
     }

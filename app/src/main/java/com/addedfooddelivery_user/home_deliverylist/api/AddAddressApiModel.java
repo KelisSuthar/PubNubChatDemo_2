@@ -10,6 +10,7 @@ import com.addedfooddelivery_user.common.api.ApiInterface;
 import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,10 +20,10 @@ public class AddAddressApiModel implements AddAddressConstructor.Model {
     private final String TAG = "LoginModel";
 
     @Override
-    public void addAddressData(OnFinishedListener onFinishedListener, Activity activity, String addressType, String addressLine, double latitude, double longitude, String locality) {
+    public void addAddressData(OnFinishedListener onFinishedListener, Activity activity, String addressType, String addressLine, double latitude, double longitude, String landmark,String locality) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<SaveAddResponse> call = apiService.addAddress(addressType,addressLine,latitude,longitude,locality);
+        Call<SaveAddResponse> call = apiService.addAddress(addressType,addressLine,latitude,longitude,landmark,locality);
         call.enqueue(new Callback<SaveAddResponse>() {
             @Override
             public void onResponse(@NonNull Call<SaveAddResponse> call, @NonNull Response<SaveAddResponse> response) {
@@ -79,6 +80,38 @@ public class AddAddressApiModel implements AddAddressConstructor.Model {
             }
         });
     }
+
+    @Override
+    public void setDefaulAdd(OnFinishedListener onFinishedListener, Integer customerAddressID) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<SetDefaultAddResponse> call = apiService.setDefaultAdd(customerAddressID);
+        call.enqueue(new Callback<SetDefaultAddResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SetDefaultAddResponse> call, @NonNull Response<SetDefaultAddResponse> response) {
+                int success;
+
+                if (response.body() != null) {
+                    success = response.body().getStatus();
+                    if (success == 1) {
+                        SetDefaultAddResponse keyResponse = response.body();
+                        onFinishedListener.onsetDefaultAddFinished(keyResponse);
+                    } else {
+                        onFinishedListener.onsetDefaultAddFailure(response.body().getMessage());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SetDefaultAddResponse> call, @NonNull Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+                onFinishedListener.onsetDefaultAddFailure(t.getMessage());
+            }
+        });
+    }
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.addedfooddelivery_user.RestaurantList.adpter;
+package com.addedfooddelivery_user.restaurantList.adpter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
-import com.addedfooddelivery_user.RestaurantList.model.AllRestaurantData;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantData;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;

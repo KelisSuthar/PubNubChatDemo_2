@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.addedfooddelivery_user.Added.CMSViewActivity;
 import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.IntegratorImpl;
@@ -45,8 +46,8 @@ public class SignupActivity extends AppCompatActivity implements SignupConstruct
     CustomEditText edConfirmPassword;
     @BindView(R.id.btSignup)
     CustomButton btSignup;
-    @BindView(R.id.txtSignup)
-    CustomTextView txtSignup;
+    @BindView(R.id.txtTermsCond)
+    CustomTextView txtTermsCond;
     SignupPresenter signupPresenter;
     Dialog dialog;
     String loginType="manual";
@@ -65,7 +66,7 @@ public class SignupActivity extends AppCompatActivity implements SignupConstruct
         initProgressBar();
     }
 
-    @OnClick({R.id.btSignup, R.id.img_back_signup})
+    @OnClick({R.id.btSignup, R.id.img_back_signup,R.id.txtTermsCond})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_signup:
@@ -127,11 +128,17 @@ public class SignupActivity extends AppCompatActivity implements SignupConstruct
                         });
 
                 break;
+            case R.id.txtTermsCond:
+                startActivity(new Intent(SignupActivity.this, CMSViewActivity.class).putExtra(getString(R.string.screen),"signup"));
+                overridePendingTransition(R.anim.leftto, R.anim.right);
+
+                break;
         }
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         //startActivity(new Intent(SignupActivity.this, LoginEmailActivity.class));
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();

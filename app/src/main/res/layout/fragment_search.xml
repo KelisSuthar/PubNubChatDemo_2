@@ -37,7 +37,7 @@
         app:cardElevation="2dp">
 
         <com.addedfooddelivery_user.common.views.CustomEditText
-            android:id="@+id/edEmail"
+            android:id="@+id/edSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10ssp"
@@ -62,7 +62,8 @@
         android:layout_marginStart="@dimen/_15ssp"
         android:layout_marginTop="@dimen/_10ssp"
         android:layout_marginEnd="@dimen/_15ssp"
-        tools:listitem="@layout/row_address_listing" />
+        tools:itemCount="3"
+        tools:listitem="@layout/row_search_listing" />
 
 
 </LinearLayout>
