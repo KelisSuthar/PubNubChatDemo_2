@@ -1,17 +1,16 @@
 package com.addedfooddelivery_user.cart;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user.cart.adpter.CartProductListAdapter;
 import com.addedfooddelivery_user.cart.adpter.ItemLikeListAdpter;
@@ -86,8 +85,8 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private List<ParentData> getList() {
-
         List<ParentData> list_parent = new ArrayList<>();
+       /* List<ParentData> list_parent = new ArrayList<>();
         List<ChildData> list_data_child = new ArrayList<>();
         List<ChildData> list_data_child1 = new ArrayList<>();
 
@@ -99,7 +98,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         list_parent.add(new ParentData("Chinese", list_data_child));
-        list_parent.add(new ParentData("Breakfast", list_data_child1));
+        list_parent.add(new ParentData("Breakfast", list_data_child1));*/
 
 
         return list_parent;

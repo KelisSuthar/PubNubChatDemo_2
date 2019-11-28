@@ -68,7 +68,15 @@ public class TrendingRestaurantListAdpter extends RecyclerView.Adapter<TrendingR
                     .load(trendings.get(position).getItemImage())
                     .into(holder.imgRestaurant);
         }
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, RestDetailsActivity.class)
+                        .putExtra("restaurantID",trendings.get(position).getRestaurantID())
+                        .putExtra("vegType","off"));
+                context.overridePendingTransition(R.anim.rightto, R.anim.left);
+            }
+        });
     }
 
     @Override
@@ -103,13 +111,7 @@ public class TrendingRestaurantListAdpter extends RecyclerView.Adapter<TrendingR
         ViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    context.startActivity(new Intent(context, RestDetailsActivity.class));
-                    context.overridePendingTransition(R.anim.rightto, R.anim.left);
-                }
-            });
+
         }
     }
 }

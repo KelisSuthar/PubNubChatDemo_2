@@ -1,13 +1,16 @@
 package com.addedfooddelivery_user.RestaurantDetails;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,13 +25,22 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.productListAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.ReviewListAdpter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.viewPagerAdapter;
-import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
+import com.addedfooddelivery_user.RestaurantDetails.api.RestDetailsConstructor;
+import com.addedfooddelivery_user.RestaurantDetails.api.RestDetailsPresenter;
+import com.addedfooddelivery_user.RestaurantDetails.model.Categorydetail;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
+import com.addedfooddelivery_user.RestaurantDetails.model.RestDetailsResponse;
+import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantDetails;
+import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantImage;
+import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantReview;
+import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
+import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.SimpleDividerItemDecoration;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.cart.CartActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +52,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
-public class RestDetailsActivity extends AppCompatActivity {
+public class RestDetailsActivity extends AppCompatActivity implements RestDetailsConstructor.View {
+    @BindView(R.id.txtRestName)
+    CustomTextView txtRestName;
+    @BindView(R.id.txtRestItems)
+    CustomTextView txtRestItems;
+    @BindView(R.id.restaurantRating)
+    RatingBar restaurantRating;
+    @BindView(R.id.txtRating)
+    CustomTextView txtRating;
+    @BindView(R.id.txtdeliveryStatus)
+    CustomTextView txtdeliveryStatus;
+    @BindView(R.id.switchVeg)
+    SwitchMaterial switchVeg;
+    @BindView(R.id.txtLabelReview)
+    CustomTextView txtLabelReview;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.app_bar)
@@ -60,12 +86,22 @@ public class RestDetailsActivity extends AppCompatActivity {
     public static CustomTextView txtItemCount;
     public static RelativeLayout rlCartFooter;
     LinearLayoutManager mLayoutManagerReview;
-    private ArrayList<String> reviewList;
+
+
     ReviewListAdpter reviewListAdpter;
+    productListAdapter productListAdapter;
+    viewPagerAdapter adapter;
 
     private static int currentPage = 0;
-    private static final Integer[] XMEN = {R.drawable.person02, R.drawable.person08, R.drawable.food01, R.drawable.food09};
-    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+    private ArrayList<RestaurantDetails> restDetails;
+    private ArrayList<RestaurantImage> restDetailsImages;
+    private ArrayList<RestaurantReview> restReview;
+    RestDetailsPresenter restDetailsPresenter;
+    Dialog dialog;
+    List<ParentData> list;
+    String restId = "";
+    boolean veg = false;
+
 
     private AppBarLayout.OnOffsetChangedListener onOffsetChangedListener = new AppBarLayout.OnOffsetChangedListener() {
         @Override
@@ -91,21 +127,37 @@ public class RestDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         appBarLayout.addOnOffsetChangedListener(onOffsetChangedListener);
         setSupportActionBar(toolbar);
-
+        restId = String.valueOf(getIntent().getIntExtra("restaurantID", 0));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+        restDetails = new ArrayList<>();
+        restDetailsImages = new ArrayList<>();
+        restReview = new ArrayList<>();
+
+        restDetailsPresenter = new RestDetailsPresenter(this);
+
         txtItemCount = findViewById(R.id.txtItemCount);
         rlCartFooter = findViewById(R.id.cart_footer);
-
-        init();
-        setupItemRecycleview();
-        reviewList = new ArrayList<>();
         fillRecords();
-        setRestaurantData();
+        init();
+        setReviewData();
+        switchVeg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    veg = true;
+                    restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "on");
+                } else {
+                    veg = false;
+                    restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
+                }
+            }
+        });
+
     }
 
     @OnClick(R.id.txtViewCart)
@@ -119,15 +171,12 @@ public class RestDetailsActivity extends AppCompatActivity {
     }
 
     private void fillRecords() {
-        reviewList.add("1");
-        reviewList.add("2");
-        reviewList.add("3");
-        reviewList.add("4");
-        reviewList.add("5");
+        veg = false;
+        restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
     }
 
-    private void setRestaurantData() {
-        reviewListAdpter = new ReviewListAdpter(RestDetailsActivity.this, reviewList);
+    private void setReviewData() {
+        reviewListAdpter = new ReviewListAdpter(RestDetailsActivity.this, restReview);
 
         mLayoutManagerReview = new LinearLayoutManager(RestDetailsActivity.this, RecyclerView.VERTICAL, false);
         rcyReviewList.setLayoutManager(mLayoutManagerReview);
@@ -137,42 +186,39 @@ public class RestDetailsActivity extends AppCompatActivity {
         rcyReviewList.setAdapter(reviewListAdpter);
     }
 
-    private void setupItemRecycleview() {
-        List<ParentData> list = getList();
-
+    private void restaurantCategory() {
         rcyProductList.setLayoutManager(new LinearLayoutManager(this));
+        productListAdapter = new productListAdapter(RestDetailsActivity.this, list, new productListAdapter.OnItemClickListener() {
+            @Override
+            public void onUpdateItemClick(int position, View view, int count, int itemID) {
+                restDetailsPresenter.requestUpdateQTY(RestDetailsActivity.this, restId, itemID, count);
+            }
 
-        productListAdapter myAdapter = new productListAdapter(RestDetailsActivity.this, list);
-        rcyProductList.setAdapter(myAdapter);
+            @Override
+            public void onAddItemClick(int position, View view, int count, String itemPrice, int itemID) {
+                restDetailsPresenter.requestAddQTY(RestDetailsActivity.this, restId, itemID,itemPrice, count);
+            }
+        });
+        rcyProductList.setAdapter(productListAdapter);
         rcyProductList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        rcyProductList.setAdapter(myAdapter);
+        rcyProductList.setAdapter(productListAdapter);
 
     }
 
-    private List<ParentData> getList() {
+    private List<ParentData> getList(List<Categorydetail> categorydetails) {
 
         List<ParentData> list_parent = new ArrayList<>();
-        List<ChildData> list_data_child = new ArrayList<>();
-        List<ChildData> list_data_child1 = new ArrayList<>();
-
-        list_data_child.add(new ChildData("Manchurian dry"));
-        list_data_child.add(new ChildData("Vegetable Hakka Noodles"));
-
-        list_data_child1.add(new ChildData("Sweet potato egg casserole"));
-        list_data_child1.add(new ChildData("Almond breakfast smoothie"));
-
-        list_parent.add(new ParentData("Chinese", list_data_child));
-        list_parent.add(new ParentData("Breakfast", list_data_child1));
-
+        for (int i = 0; i < categorydetails.size(); i++) {
+            list_parent.add(new ParentData(categorydetails.get(i).getFoodCategoryName(), categorydetails.get(i).getCategoryList()));
+        }
 
         return list_parent;
     }
 
     private void init() {
-        for (int i = 0; i < XMEN.length; i++)
-            XMENArray.add(XMEN[i]);
 
-        mPager.setAdapter(new viewPagerAdapter(RestDetailsActivity.this, XMENArray));
+        adapter = new viewPagerAdapter(RestDetailsActivity.this, restDetailsImages);
+        mPager.setAdapter(adapter);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
@@ -180,7 +226,7 @@ public class RestDetailsActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == XMEN.length) {
+                if (currentPage == restDetailsImages.size()) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);
@@ -193,30 +239,133 @@ public class RestDetailsActivity extends AppCompatActivity {
                 handler.post(Update);
             }
         }, 2500, 2500);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_rest_details, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_share) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
+    }
+
+    @Override
+    public void onRestDetailsResponseFailure(String throwable) {
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onRestDetailsResponseSuccess(RestDetailsResponse response) {
+        initProgressBar();
+        if (response.getStatus() == 1) {
+            if (restDetails.size() > 0) {
+                restDetails.clear();
+            }
+            if (restDetailsImages.size() > 0) {
+                restDetailsImages.clear();
+            }
+            if (restReview.size() > 0) {
+                restReview.clear();
+            }
+            restDetails.add(response.getData().getRestaurantDetails());
+            setDataRestaurantData(restDetails);
+//for image slider
+            restDetailsImages.addAll(response.getData().getRestaurantImages());
+            adapter.notifyDataSetChanged();
+//for review list
+            restReview.addAll(response.getData().getReview());
+            if (restReview.size() > 0) {
+                txtLabelReview.setVisibility(View.VISIBLE);
+            } else
+                txtLabelReview.setVisibility(View.GONE);
+            reviewListAdpter.notifyDataSetChanged();
+//for restaurant category
+            list = getList(response.getData().getCategorydetails());
+            restaurantCategory();
+            productListAdapter.notifyDataSetChanged();
+
+        }
+    }
+
+    @Override
+    public void onUpdateQTYFailure(String throwable) {
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onUpdateQTYSuccess(QtyAddResponce response) {
+        if (response.getStatus() == 1) {
+            if (veg) {
+                restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "on");
+            } else
+                restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
+        }
+    }
+
+    @Override
+    public void onAddQTYFailure(String throwable) {
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onAddQTYSuccess(QtyAddResponce response) {
+        if (response.getStatus() == 1) {
+            if (veg) {
+                restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "on");
+            } else
+                restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
+        }
+    }
+
+    private void setDataRestaurantData(ArrayList<RestaurantDetails> restDetails) {
+        if (restDetails != null && restDetails.size() != 0) {
+            txtRestName.setText(TextUtils.isEmpty(restDetails.get(0).getRestaurantName().toString()) ? "" : restDetails.get(0).getRestaurantName().toString());
+            txtRestItems.setText(TextUtils.isEmpty(restDetails.get(0).getRestaurantAddress().toString()) ? "" : restDetails.get(0).getRestaurantAddress().toString());
+            txtRating.setText(TextUtils.isEmpty(restDetails.get(0).getRestaurantRatingAVG().toString()) ? "" : restDetails.get(0).getRestaurantRatingAVG().toString());
+            if (restDetails.get(0).getRestaurantRatingAVG() != null) {
+                if (restDetails.get(0).getRestaurantRatingAVG() == 0) {
+                    restaurantRating.setRating((float) 0.0);
+                } else
+                    restaurantRating.setRating(restDetails.get(0).getRestaurantRatingAVG());
+            }
+        }
+    }
+
+    @Override
+    public void showLoadingIndicator(boolean isShow) {
+        if (dialog != null) {
+            if (isShow) {
+                dialog.show();
+            } else {
+                dialog.dismiss();
+                dialog.cancel();
+            }
+        }
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        CustomeToast.showToast(
+                this,
+                message,
+                true,
+                getResources().getColor(R.color.white),
+                getResources().getColor(R.color.colorPrimary),
+                true);
+    }
+
+    @Override
+    public void initProgressBar() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.progress_dialog);
+
+        dialog.setCancelable(false);
+    }
+
+    @Override
+    public Activity getContext() {
+        return this;
     }
 }

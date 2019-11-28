@@ -98,4 +98,6 @@
         <item name="colorControlNormal">@color/text_gray_1</item>
         <item name="colorControlActivated">@color/new_yellow</item>
     </style>
+
+
 </resources>

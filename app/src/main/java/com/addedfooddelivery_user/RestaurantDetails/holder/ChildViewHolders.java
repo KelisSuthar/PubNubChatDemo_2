@@ -38,7 +38,5 @@ public class ChildViewHolders extends ChildViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void setChildText(String name) {
-        txtItemName.setText(name);
-    }
+
 }

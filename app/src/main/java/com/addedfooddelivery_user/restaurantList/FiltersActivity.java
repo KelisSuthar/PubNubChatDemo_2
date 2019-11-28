@@ -176,7 +176,7 @@ public class FiltersActivity extends AppCompatActivity implements SearchConstruc
                 price = "";
                 break;
             case R.id.btFilter:
-                Log.v("Data", sort_by + "__" + direction + "__" + category + "__" + price);
+                Log.v("CategoryDataResponce", sort_by + "__" + direction + "__" + category + "__" + price);
                 onBackPressed();
                 break;
         }

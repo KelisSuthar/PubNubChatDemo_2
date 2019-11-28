@@ -9,16 +9,18 @@ import android.widget.ImageView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantImage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class viewPagerAdapter extends PagerAdapter {
  
-    private ArrayList<Integer> images;
+    private ArrayList<RestaurantImage> images;
     private LayoutInflater inflater;
     private Context context;
  
-    public viewPagerAdapter(Context context, ArrayList<Integer> images) {
+    public viewPagerAdapter(Context context, ArrayList<RestaurantImage> images) {
         this.context = context;
         this.images=images;
         inflater = LayoutInflater.from(context);
@@ -39,7 +41,8 @@ public class viewPagerAdapter extends PagerAdapter {
         View myImageLayout = inflater.inflate(R.layout.slide, view, false);
         ImageView myImage = (ImageView) myImageLayout
                 .findViewById(R.id.image);
-        myImage.setImageResource(images.get(position));
+        Picasso.with(context).load(images.get(position).getRestauantImage()).into(myImage);
+
         view.addView(myImageLayout, 0);
         return myImageLayout;
     }

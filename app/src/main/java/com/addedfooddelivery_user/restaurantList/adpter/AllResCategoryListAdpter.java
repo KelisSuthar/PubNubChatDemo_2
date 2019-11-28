@@ -17,7 +17,6 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryData;
-import com.addedfooddelivery_user.restaurantList.model.AllRestaurantData;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -29,22 +28,22 @@ import butterknife.ButterKnife;
 
 
 public class AllResCategoryListAdpter extends RecyclerView.Adapter<AllResCategoryListAdpter.ViewHolder> {
-    private ArrayList<AllRestCategoryData> allRestaurantData;
+    private ArrayList<AllRestCategoryData> allRestCategoryData;
     private Activity context;
 
     public AllResCategoryListAdpter(Activity context, ArrayList<AllRestCategoryData> notificationModelArrayList) {
         this.context = context;
-        this.allRestaurantData = notificationModelArrayList;
+        this.allRestCategoryData = notificationModelArrayList;
     }
 
     // Add a list of items -- change to type used
     public void addAll(List<AllRestCategoryData> list) {
-        allRestaurantData.addAll(list);
+        allRestCategoryData.addAll(list);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        allRestaurantData.clear();
+        allRestCategoryData.clear();
         notifyDataSetChanged();
     }
 
@@ -57,30 +56,39 @@ public class AllResCategoryListAdpter extends RecyclerView.Adapter<AllResCategor
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtRestauranrName.setText(TextUtils.isEmpty(allRestaurantData.get(position).getRestaurantName()) ? " " : allRestaurantData.get(position).getRestaurantName());
-        holder.txtRestAdd.setText(TextUtils.isEmpty(allRestaurantData.get(position).getRestaurantAddress()) ? " " : allRestaurantData.get(position).getRestaurantAddress());
-       // holder.txtRestaurantTime.setText(TextUtils.isEmpty(allRestaurantData.get(position).getItemPrice()) ? " " : allRestaurantData.get(position).getItemPrice());
-        if (allRestaurantData.get(position).getRestaurantRatingAVG() != 0) {
-            holder.userRating.setRating(allRestaurantData.get(position).getRestaurantRatingAVG());
+        holder.txtRestauranrName.setText(TextUtils.isEmpty(allRestCategoryData.get(position).getRestaurantName()) ? " " : allRestCategoryData.get(position).getRestaurantName());
+        holder.txtRestAdd.setText(TextUtils.isEmpty(allRestCategoryData.get(position).getRestaurantAddress()) ? " " : allRestCategoryData.get(position).getRestaurantAddress());
+       // holder.txtRestaurantTime.setText(TextUtils.isEmpty(allRestCategoryData.get(position).getItemPrice()) ? " " : allRestCategoryData.get(position).getItemPrice());
+        if (allRestCategoryData.get(position).getRestaurantRatingAVG() != 0) {
+            holder.userRating.setRating(allRestCategoryData.get(position).getRestaurantRatingAVG());
         }else
             holder.userRating.setRating((float) 0.0);
 
-        if (allRestaurantData.get(position).getRestaurantImage() != null) {
+        if (allRestCategoryData.get(position).getRestaurantImage() != null) {
             Picasso.with(context)
-                    .load(allRestaurantData.get(position).getRestaurantImage())
+                    .load(allRestCategoryData.get(position).getRestaurantImage())
                     .into(holder.imgAllRestaurant);
         }
-        if (allRestaurantData.get(position).getItemImage() != null) {
+        if (allRestCategoryData.get(position).getItemImage() != null) {
             Picasso.with(context)
-                    .load(allRestaurantData.get(position).getItemImage())
+                    .load(allRestCategoryData.get(position).getItemImage())
                     .into(holder.imgAllRestaurant);
         }
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, RestDetailsActivity.class)
+                        .putExtra("restaurantID", allRestCategoryData.get(position).getRestaurantID())
+                        .putExtra("vegType","off"));
+                context.overridePendingTransition(R.anim.rightto, R.anim.left);
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return allRestaurantData.size();
+        return allRestCategoryData.size();
     }
 
 
@@ -110,13 +118,7 @@ public class AllResCategoryListAdpter extends RecyclerView.Adapter<AllResCategor
         ViewHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    context.startActivity(new Intent(context, RestDetailsActivity.class));
-                    context.overridePendingTransition(R.anim.rightto, R.anim.left);
-                }
-            });
+
         }
 
 

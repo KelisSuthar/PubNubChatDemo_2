@@ -323,7 +323,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     @Override
     public void displayMessage(String message) {
-        if (!(message.equalsIgnoreCase("Data get Successfully."))) {
+        if (!(message.equalsIgnoreCase("CategoryDataResponce get Successfully."))) {
             CustomeToast.showToast(
                     getActivity(),
                     message,

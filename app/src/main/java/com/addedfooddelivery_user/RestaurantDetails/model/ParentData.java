@@ -7,9 +7,9 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import java.util.List;
 
 @SuppressLint("ParcelCreator")
-public class ParentData extends ExpandableGroup<ChildData> {
+public class ParentData extends ExpandableGroup<CategoryList> {
  
-    public ParentData(String title, List<ChildData> items){
+    public ParentData(String title, List<CategoryList> items){
         super(title,items);
     }
 }

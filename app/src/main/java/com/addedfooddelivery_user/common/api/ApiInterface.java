@@ -1,5 +1,7 @@
 package com.addedfooddelivery_user.common.api;
 
+import com.addedfooddelivery_user.RestaurantDetails.model.RestDetailsResponse;
+import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
 import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 import com.addedfooddelivery_user.home_search.model.CategoryResponse;
 import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
@@ -110,4 +112,28 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("setAddressDefault")
     Call<SetDefaultAddResponse> setDefaultAdd(@Field("customerAddressID") int customerAddressID);
+
+    //view  restaurant details
+    @FormUrlEncoded
+    @POST("restaurantDetails")
+    Call<RestDetailsResponse> getRestaurantDetails(
+            @Field("restaurantID") String restaurantID,
+            @Field("vegType") String vegType);
+
+    //add QTY Data
+    @FormUrlEncoded
+    @POST("addCart")
+    Call<QtyAddResponce> addQTY(
+            @Field("restaurantID") String restaurantID,
+            @Field("itemID") int itemID,
+            @Field("itemPrice") String itemPrice,
+            @Field("itemQuantity") int itemQuantity);
+
+    //update QTY Data
+    @FormUrlEncoded
+    @POST("quantityUpdate")
+    Call<QtyAddResponce> updateQty(
+            @Field("restaurantID") String restaurantID,
+            @Field("itemID") int itemID,
+            @Field("itemQuantity") int itemQuantity);
 }

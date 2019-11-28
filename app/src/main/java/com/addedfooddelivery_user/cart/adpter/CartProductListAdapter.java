@@ -2,17 +2,13 @@ package com.addedfooddelivery_user.cart.adpter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.model.ChildData;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
 import com.addedfooddelivery_user.cart.holder.CartChildViewHolders;
 import com.addedfooddelivery_user.cart.holder.CartParentViewHolder;
-import com.addedfooddelivery_user.home.MainActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
@@ -39,6 +35,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
 
     @Override
     public void onBindChildViewHolder(CartChildViewHolders holder, int flatPosition, ExpandableGroup group, int childIndex) {
+      /*  final ChildData childData = ((ParentData) group).getItems().get(childIndex);
         final ChildData childData = ((ParentData) group).getItems().get(childIndex);
 
         holder.setChildText(childData.getName());
@@ -75,7 +72,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
                     holder.tickerView.setText(String.valueOf(count - 1));
                 }
             }
-        });
+        });*/
     }
 
     @Override
