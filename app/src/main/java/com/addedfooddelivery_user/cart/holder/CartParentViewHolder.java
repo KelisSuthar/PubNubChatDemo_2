@@ -46,7 +46,5 @@ public class CartParentViewHolder extends GroupViewHolder {
         // viewParent.setVisibility(View.GONE);
     }
 
-    public void setGroupName(ExpandableGroup groupName) {
-        // textView_parent.setText(groupName.getTitle());
-    }
+
 }

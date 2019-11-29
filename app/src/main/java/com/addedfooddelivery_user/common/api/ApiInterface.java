@@ -2,6 +2,7 @@ package com.addedfooddelivery_user.common.api;
 
 import com.addedfooddelivery_user.RestaurantDetails.model.RestDetailsResponse;
 import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
+import com.addedfooddelivery_user.cart.model.CartDataResponce;
 import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
 import com.addedfooddelivery_user.home_search.model.CategoryResponse;
 import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
@@ -120,7 +121,7 @@ public interface ApiInterface {
             @Field("restaurantID") String restaurantID,
             @Field("vegType") String vegType);
 
-    //add QTY Data
+    //add QTY CartData
     @FormUrlEncoded
     @POST("addCart")
     Call<QtyAddResponce> addQTY(
@@ -129,11 +130,15 @@ public interface ApiInterface {
             @Field("itemPrice") String itemPrice,
             @Field("itemQuantity") int itemQuantity);
 
-    //update QTY Data
+    //update QTY CartData
     @FormUrlEncoded
     @POST("quantityUpdate")
     Call<QtyAddResponce> updateQty(
             @Field("restaurantID") String restaurantID,
             @Field("itemID") int itemID,
             @Field("itemQuantity") int itemQuantity);
+
+    //CartData
+    @POST("cartDetail")
+    Call<CartDataResponce> getCartDetails();
 }

@@ -27,8 +27,9 @@ import com.addedfooddelivery_user.RestaurantDetails.adpter.ReviewListAdpter;
 import com.addedfooddelivery_user.RestaurantDetails.adpter.viewPagerAdapter;
 import com.addedfooddelivery_user.RestaurantDetails.api.RestDetailsConstructor;
 import com.addedfooddelivery_user.RestaurantDetails.api.RestDetailsPresenter;
+import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
 import com.addedfooddelivery_user.RestaurantDetails.model.Categorydetail;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
+import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.RestaurantDetails.model.RestDetailsResponse;
 import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantDetails;
 import com.addedfooddelivery_user.RestaurantDetails.model.RestaurantImage;
@@ -98,7 +99,7 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
     private ArrayList<RestaurantReview> restReview;
     RestDetailsPresenter restDetailsPresenter;
     Dialog dialog;
-    List<ParentData> list;
+    List<ParentCategoryData> list;
     String restId = "";
     boolean veg = false;
 
@@ -160,6 +161,7 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
     }
 
+
     @OnClick(R.id.txtViewCart)
     public void eventClick(View view) {
         switch (view.getId()) {
@@ -196,22 +198,25 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
             @Override
             public void onAddItemClick(int position, View view, int count, String itemPrice, int itemID) {
-                restDetailsPresenter.requestAddQTY(RestDetailsActivity.this, restId, itemID,itemPrice, count);
+
+                restDetailsPresenter.requestAddQTY(RestDetailsActivity.this, restId, itemID, itemPrice, count);
+
             }
         });
         rcyProductList.setAdapter(productListAdapter);
         rcyProductList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         rcyProductList.setAdapter(productListAdapter);
+        productListAdapter.expandAllGroups();
 
     }
 
-    private List<ParentData> getList(List<Categorydetail> categorydetails) {
 
-        List<ParentData> list_parent = new ArrayList<>();
+    private List<ParentCategoryData> getList(List<Categorydetail> categorydetails) {
+
+        List<ParentCategoryData> list_parent = new ArrayList<>();
         for (int i = 0; i < categorydetails.size(); i++) {
-            list_parent.add(new ParentData(categorydetails.get(i).getFoodCategoryName(), categorydetails.get(i).getCategoryList()));
+            list_parent.add(new ParentCategoryData(categorydetails.get(i).getFoodCategoryName(), (ArrayList<CategoryList>) categorydetails.get(i).getCategoryList()));
         }
-
         return list_parent;
     }
 
@@ -257,7 +262,7 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
     @Override
     public void onRestDetailsResponseSuccess(RestDetailsResponse response) {
-        initProgressBar();
+
         if (response.getStatus() == 1) {
             if (restDetails.size() > 0) {
                 restDetails.clear();
@@ -284,12 +289,19 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
             list = getList(response.getData().getCategorydetails());
             restaurantCategory();
             productListAdapter.notifyDataSetChanged();
-
+            if (response.getData().getBillingDetail() != null) {
+                rlCartFooter.setVisibility(View.VISIBLE);
+                setFooterData(String.valueOf(response.getData().getBillingDetail().getTotal()), response.getData().getBillingDetail().getItemTotle());
+            } else rlCartFooter.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onUpdateQTYFailure(String throwable) {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog.cancel();
+        }
         displayMessage(throwable);
     }
 
@@ -300,6 +312,18 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
                 restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "on");
             } else
                 restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
+            if (response.getData() != null) {
+                rlCartFooter.setVisibility(View.VISIBLE);
+                setFooterData(String.valueOf(response.getData().getBillingDetail().getTotleItem()), response.getData().getBillingDetail().getTotle());
+            } else
+                rlCartFooter.setVisibility(View.GONE);
+        }
+    }
+
+    private void setFooterData(String totleItem, String totle) {
+        if (totleItem != null && totle != null) {
+            txtItemCount.setText(TextUtils.isEmpty(totleItem) ? "" : totleItem + " Items");
+            txtItemTotal.setText(TextUtils.isEmpty(totle) ? "" : "$ " + totle);
         }
     }
 
@@ -315,8 +339,15 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
                 restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "on");
             } else
                 restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
+
+            if (response.getData() != null) {
+                rlCartFooter.setVisibility(View.VISIBLE);
+                setFooterData(String.valueOf(response.getData().getBillingDetail().getTotleItem()), response.getData().getBillingDetail().getTotle());
+            } else
+                rlCartFooter.setVisibility(View.GONE);
         }
     }
+
 
     private void setDataRestaurantData(ArrayList<RestaurantDetails> restDetails) {
         if (restDetails != null && restDetails.size() != 0) {

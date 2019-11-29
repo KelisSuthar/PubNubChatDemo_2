@@ -1,7 +1,10 @@
 package com.addedfooddelivery_user.cart;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
+import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
+import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
+import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
 import com.addedfooddelivery_user.cart.adpter.CartProductListAdapter;
 import com.addedfooddelivery_user.cart.adpter.ItemLikeListAdpter;
+import com.addedfooddelivery_user.cart.api.CartConstructor;
+import com.addedfooddelivery_user.cart.api.CartPresenter;
+import com.addedfooddelivery_user.cart.model.CartData;
+import com.addedfooddelivery_user.cart.model.CartDataResponce;
+import com.addedfooddelivery_user.cart.model.CartDetail;
+import com.addedfooddelivery_user.cart.model.ParentCartData;
+import com.addedfooddelivery_user.common.CustomeToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements CartConstructor.View {
     @BindView(R.id.img_back_cart)
     ImageView imgBackCart;
     @BindView(R.id.rcyCartProductList)
@@ -33,20 +45,32 @@ public class CartActivity extends AppCompatActivity {
     CartProductListAdapter myAdapter;
     LinearLayoutManager mLayoutManagerLike;
     private ArrayList<String> itemLikeList;
+    Dialog dialog;
+    CartPresenter cartPresenter;
+    List<ParentCartData> list;
+    List<CartDetail> restaurantDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         ButterKnife.bind(this);
-        setupItemRecycleview();
+
+        cartPresenter = new CartPresenter(CartActivity.this);
         itemLikeList = new ArrayList<>();
-        fillRecords();
+        restaurantDetails = new ArrayList<>();
         setRestaurantData();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cartPresenter.requestCartData(CartActivity.this);
+    }
+
     @OnClick(R.id.img_back_cart)
-    public void eventClick(View view){
-        switch (view.getId()){
+    public void eventClick(View view) {
+        switch (view.getId()) {
             case R.id.img_back_cart:
                 onBackPressed();
                 break;
@@ -63,20 +87,17 @@ public class CartActivity extends AppCompatActivity {
         rcyItemLike.setAdapter(itemLikeAdpter);
     }
 
-    private void fillRecords() {
-        itemLikeList.add("1");
-        itemLikeList.add("2");
-        itemLikeList.add("3");
-        itemLikeList.add("4");
-        itemLikeList.add("5");
-    }
 
     private void setupItemRecycleview() {
-        List<ParentData> list = getList();
+
 
         rcyProductCart.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new CartProductListAdapter(CartActivity.this, list, (ArrayList<CartDetail>) restaurantDetails, new CartProductListAdapter.OnItemClickListener() {
+            @Override
+            public void onUpdateItemClick(int position, View view, int count, int itemID) {
 
-        myAdapter = new CartProductListAdapter(CartActivity.this, list);
+            }
+        });
         rcyProductCart.setAdapter(myAdapter);
         rcyProductCart.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         rcyProductCart.setAdapter(myAdapter);
@@ -84,41 +105,80 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
-    private List<ParentData> getList() {
-        List<ParentData> list_parent = new ArrayList<>();
-       /* List<ParentData> list_parent = new ArrayList<>();
-        List<ChildData> list_data_child = new ArrayList<>();
-        List<ChildData> list_data_child1 = new ArrayList<>();
-
-        list_data_child.add(new ChildData("Manchurian dry"));
-        list_data_child.add(new ChildData("Vegetable Hakka Noodles"));
-
-        list_data_child1.add(new ChildData("Sweet potato egg casserole"));
-        list_data_child1.add(new ChildData("Almond breakfast smoothie"));
-
-
-        list_parent.add(new ParentData("Chinese", list_data_child));
-        list_parent.add(new ParentData("Breakfast", list_data_child1));*/
-
+    private List<ParentCartData> getList(List<CartDetail> cartDetails) {
+        List<ParentCartData> list_parent = new ArrayList<>();
+        for (int i = 0; i < cartDetails.size(); i++) {
+            list_parent.add(new ParentCartData(cartDetails.get(i).getRestaurantName(), cartDetails.get(i).getRestaurantItem()));
+        }
 
         return list_parent;
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        myAdapter.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        myAdapter.onRestoreInstanceState(savedInstanceState);
-    }
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.leftto, R.anim.right);
         finish();
+    }
+
+    @Override
+    public void onCartResponseFailure(Throwable throwable) {
+        displayMessage(throwable.getMessage());
+    }
+
+    @Override
+    public void onCartResponseSuccess(CartDataResponce response) {
+        if (response.getStatus() == 1) {
+            restaurantDetails = response.getData().getCartDetails();
+            list = getList(response.getData().getCartDetails());
+            setupItemRecycleview();
+        }
+    }
+
+    @Override
+    public void onCartUpdateResponseFailure(String throwable) {
+
+    }
+
+    @Override
+    public void onCartUpdateResponseSuccess(QtyAddResponce response) {
+
+    }
+
+    @Override
+    public void showLoadingIndicator(boolean isShow) {
+        if (dialog != null) {
+            if (isShow) {
+                dialog.show();
+            } else {
+                dialog.dismiss();
+                dialog.cancel();
+            }
+        }
+    }
+
+    @Override
+    public void displayMessage(String message) {
+        CustomeToast.showToast(
+                this,
+                message,
+                true,
+                getResources().getColor(R.color.white),
+                getResources().getColor(R.color.colorPrimary),
+                true);
+    }
+
+    @Override
+    public void initProgressBar() {
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.progress_dialog);
+
+        dialog.setCancelable(false);
+    }
+
+    @Override
+    public Activity getContext() {
+        return this;
     }
 }

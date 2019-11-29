@@ -18,8 +18,9 @@ public class RestDetailsPresenter implements RestDetailsConstructor.Presenter, R
 
     @Override
     public void onResDetailsFinished(RestDetailsResponse response) {
-        restDetailsView.onRestDetailsResponseSuccess(response);
         restDetailsView.showLoadingIndicator(false);
+        restDetailsView.onRestDetailsResponseSuccess(response);
+
     }
 
     @Override

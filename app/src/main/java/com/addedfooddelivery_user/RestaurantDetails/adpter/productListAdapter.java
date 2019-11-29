@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
 import com.addedfooddelivery_user.RestaurantDetails.holder.ChildViewHolders;
 import com.addedfooddelivery_user.RestaurantDetails.holder.ParentViewHolder;
 import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentData;
+import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.squareup.picasso.Picasso;
@@ -55,7 +54,7 @@ public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentView
 
     @Override
     public void onBindChildViewHolder(ChildViewHolders holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        CategoryList childData = ((ParentData) group).getItems().get(childIndex);
+        CategoryList childData = ((ParentCategoryData) group).getItems().get(childIndex);
         holder.txtItemName.setText(TextUtils.isEmpty(childData.getItemName().toString()) ? "" : childData.getItemName().toString());
         holder.txtItemPrise.setText(TextUtils.isEmpty(childData.getItemPrice().toString()) ? "" : childData.getItemPrice().toString());
         holder.txtItemDesc.setText(TextUtils.isEmpty(childData.getItemDescription().toString()) ? "" : childData.getItemDescription().toString());
@@ -74,10 +73,12 @@ public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentView
         } else {
             holder.btnAddProduct.setVisibility(View.GONE);
             holder.addItemProduct.setVisibility(View.VISIBLE);
+
         }
         holder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 boolean userLogin;
                 userLogin = SharedPreferenceManager.getBoolean(IS_LOGIN, false);
                 if (userLogin) {
@@ -91,39 +92,38 @@ public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentView
         holder.itemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                holder.itemAdd.setClickable(false);
+                holder.itemAdd.setEnabled(false);
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
-                holder.tickerView.setText(String.valueOf(count + 1));
+               // holder.tickerView.setText(String.valueOf(count + 1));
                 listener.onUpdateItemClick(flatPosition, view, count + 1, childData.getItemID());
-                RestDetailsActivity.txtItemCount.setText(String.valueOf(count + 1 + " Items"));
-                notifyDataSetChanged();
+
             }
         });
         holder.itemMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.itemMinus.setClickable(false);
+                holder.itemMinus.setEnabled(false);
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
-                if (count == 1) {
-
+                listener.onUpdateItemClick(flatPosition, view, count - 1, childData.getItemID());
+               /* if (count == 1) {
                     RestDetailsActivity.rlCartFooter.setVisibility(View.GONE);
                 } else {
-                    holder.tickerView.setText(String.valueOf(count - 1));
+                    //holder.tickerView.setText(String.valueOf(count - 1));
                     listener.onUpdateItemClick(flatPosition, view, count - 1, childData.getItemID());
-                    RestDetailsActivity.txtItemCount.setText(String.valueOf(count - 1 + " Items"));
-                }
+
+                }*/
             }
         });
-        if (childData.getItemQuantity() != 0) {
-            if (!isGroupExpanded(grupo.get(childIndex))) {
-                onGroupClick(expandableList.getFlattenedGroupIndex(ExpandableListPosition.obtain(0, childIndex, 0, 0)));
-            }
-        }
+
 
     }
 
     @Override
     public void onBindGroupViewHolder(ParentViewHolder holder, int flatPosition, ExpandableGroup group) {
         holder.setGroupName(group);
+
 
     }
 
@@ -134,4 +134,11 @@ public class productListAdapter extends ExpandableRecyclerViewAdapter<ParentView
 
     }
 
+    //expand all views
+    public void expandAllGroups() {
+        for (int i = 0; i < grupo.size(); i++) {
+
+            onGroupClick(expandableList.getFlattenedGroupIndex(ExpandableListPosition.obtain(0, i, 0, 0)));
+        }
+    }
 }

@@ -4,12 +4,13 @@ import android.annotation.SuppressLint;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ParcelCreator")
-public class ParentData extends ExpandableGroup<CategoryList> {
+public class ParentCategoryData extends ExpandableGroup<CategoryList> {
  
-    public ParentData(String title, List<CategoryList> items){
+    public ParentCategoryData(String title, ArrayList<CategoryList> items){
         super(title,items);
     }
 }
