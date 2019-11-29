@@ -14,6 +14,8 @@ import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.cart.holder.CartChildViewHolders;
 import com.addedfooddelivery_user.cart.holder.CartParentViewHolder;
 import com.addedfooddelivery_user.cart.model.CartDetail;
+import com.addedfooddelivery_user.cart.model.ParentCartData;
+import com.addedfooddelivery_user.cart.model.RestaurantItem;
 import com.addedfooddelivery_user.common.ReusedMethod;
 import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.squareup.picasso.Picasso;
@@ -51,19 +53,11 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
 
     @Override
     public void onBindChildViewHolder(CartChildViewHolders holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        CategoryList childData = ((ParentCategoryData) group).getItems().get(childIndex);
+        RestaurantItem childData = ((ParentCartData) group).getItems().get(childIndex);
         holder.txtItemName.setText(TextUtils.isEmpty(childData.getItemName().toString()) ? "" : childData.getItemName().toString());
         holder.txtItemPrise.setText(TextUtils.isEmpty(childData.getItemPrice().toString()) ? "" : childData.getItemPrice().toString());
         holder.txtItemDesc.setText(TextUtils.isEmpty(childData.getItemDescription().toString()) ? "" : childData.getItemDescription().toString());
         holder.tickerView.setText(childData.getItemQuantity().toString());
-
-        if (childData.getItemImage() != null && !childData.getItemImage().equalsIgnoreCase("")) {
-            Picasso.with(context)
-                    .load(childData.getItemImage().toString())
-                    .into(holder.imgRestItem);
-        }
-
-
 
         holder.itemAdd.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
 import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
 import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
@@ -95,7 +96,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         myAdapter = new CartProductListAdapter(CartActivity.this, list, (ArrayList<CartDetail>) restaurantDetails, new CartProductListAdapter.OnItemClickListener() {
             @Override
             public void onUpdateItemClick(int position, View view, int count, int itemID) {
-
+                //cartPresenter.requestUpdateCartQTY(CartActivity.this, , itemID, count);
             }
         });
         rcyProductCart.setAdapter(myAdapter);
@@ -137,12 +138,14 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
 
     @Override
     public void onCartUpdateResponseFailure(String throwable) {
-
+        displayMessage(throwable);
     }
 
     @Override
     public void onCartUpdateResponseSuccess(QtyAddResponce response) {
-
+        if (response.getStatus() == 1) {
+            cartPresenter.requestCartData(CartActivity.this);
+        }
     }
 
     @Override

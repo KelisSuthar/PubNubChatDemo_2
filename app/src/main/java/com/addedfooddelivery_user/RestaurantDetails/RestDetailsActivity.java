@@ -262,7 +262,6 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
     @Override
     public void onRestDetailsResponseSuccess(RestDetailsResponse response) {
-
         if (response.getStatus() == 1) {
             if (restDetails.size() > 0) {
                 restDetails.clear();

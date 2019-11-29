@@ -2,6 +2,7 @@ package com.addedfooddelivery_user.RestaurantDetails.model;
 
 import android.annotation.SuppressLint;
 
+import com.addedfooddelivery_user.cart.model.RestaurantItem;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.ArrayList;
