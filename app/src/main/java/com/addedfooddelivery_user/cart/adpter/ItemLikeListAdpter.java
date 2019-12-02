@@ -1,6 +1,7 @@
 package com.addedfooddelivery_user.cart.adpter;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.addedfooddelivery_user.R;
 import com.addedfooddelivery_user.cart.model.MayLike;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.github.siyamed.shapeimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +25,14 @@ import butterknife.ButterKnife;
 
 
 public class ItemLikeListAdpter extends RecyclerView.Adapter<ItemLikeListAdpter.ViewHolder> {
+    private final OnItemClickListener listener;
     private ArrayList<MayLike> mayLikes;
     private Activity context;
 
-    public ItemLikeListAdpter(Activity context, ArrayList<MayLike> notificationModelArrayList) {
+    public ItemLikeListAdpter(Activity context, ArrayList<MayLike> notificationModelArrayList, OnItemClickListener listener) {
         this.context = context;
         this.mayLikes = notificationModelArrayList;
+        this.listener = listener;
 
     }
 
@@ -52,7 +56,20 @@ public class ItemLikeListAdpter extends RecyclerView.Adapter<ItemLikeListAdpter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        MayLike mayLike = mayLikes.get(position);
+        if (mayLike.getItemImage() != null && !mayLike.getItemImage().equalsIgnoreCase("")) {
+            Picasso.with(context)
+                    .load(mayLike.getItemImage())
+                    .into(holder.imgRestLike);
+        }
+        holder.txtRestNameLike.setText(TextUtils.isEmpty(mayLike.getItemName().toString()) ? "" : mayLike.getItemName().toString());
+        holder.txtPriseLike.setText(TextUtils.isEmpty(mayLike.getItemPrice().toString()) ? "" : mayLike.getItemPrice().toString());
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onAddItemClick(position, v);
+            }
+        });
     }
 
     @Override
@@ -62,7 +79,7 @@ public class ItemLikeListAdpter extends RecyclerView.Adapter<ItemLikeListAdpter.
 
 
     public interface OnItemClickListener {
-        void onItemClick(int position, View view);
+        void onAddItemClick(int position, View view);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

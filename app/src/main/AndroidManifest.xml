@@ -25,7 +25,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".Added.CMSViewActivity"></activity>
+        <activity android:name=".cart.CouponListActivity">
+        </activity>
+        <activity android:name=".Added.CMSViewActivity" />
         <activity android:name=".home_deliverylist.SaveAddressActivity" />
         <activity
             android:name=".cart.CartActivity"

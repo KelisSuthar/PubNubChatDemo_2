@@ -1,6 +1,7 @@
 package com.addedfooddelivery_user.common;
 
 public interface AppConstants {
+    int COUPON_ACTIVITY_REQUEST_CODE=100;
     int PERMISSIONS_REQUEST_CODE = 500;
     int REQUEST_ENABLE_CAMERA = 517;
     int REQUEST_ENABLE_MULTIPLE = 518;
@@ -26,4 +27,5 @@ public interface AppConstants {
 
     String IS_LOGIN = "IS_LOGIN";
     String USER_DETAIL_LOGIN = "USER_DETAIL_LOGIN";
+
 }

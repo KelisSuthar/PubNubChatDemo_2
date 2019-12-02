@@ -8,21 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class BillingDetail implements Parcelable {
 
-    @SerializedName("totalAmount")
-    @Expose
-    private String totalAmount;
-    @SerializedName("itemTotle")
-    @Expose
-    private Integer itemTotle;
-    @SerializedName("tax")
-    @Expose
-    private String tax;
-    @SerializedName("deliveryfee")
-    @Expose
-    private String deliveryfee;
-    @SerializedName("to_pay")
-    @Expose
-    private String toPay;
     public final static Parcelable.Creator<BillingDetail> CREATOR = new Creator<BillingDetail>() {
 
 
@@ -38,6 +23,24 @@ public class BillingDetail implements Parcelable {
         }
 
     };
+    @SerializedName("totalAmount")
+    @Expose
+    private String totalAmount;
+    @SerializedName("itemTotle")
+    @Expose
+    private Integer itemTotle;
+    @SerializedName("tax")
+    @Expose
+    private String tax;
+    @SerializedName("deliveryfee")
+    @Expose
+    private String deliveryfee;
+    @SerializedName("to_pay")
+    @Expose
+    private String toPay;
+    @SerializedName("discount")
+    @Expose
+    private String discount;
 
     protected BillingDetail(Parcel in) {
         this.totalAmount = ((String) in.readValue((String.class.getClassLoader())));
@@ -45,6 +48,7 @@ public class BillingDetail implements Parcelable {
         this.tax = ((String) in.readValue((String.class.getClassLoader())));
         this.deliveryfee = ((String) in.readValue((String.class.getClassLoader())));
         this.toPay = ((String) in.readValue((String.class.getClassLoader())));
+        this.discount = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
@@ -52,7 +56,6 @@ public class BillingDetail implements Parcelable {
      */
     public BillingDetail() {
     }
-
     /**
      * @param totalAmount
      * @param deliveryfee
@@ -60,13 +63,26 @@ public class BillingDetail implements Parcelable {
      * @param toPay
      * @param itemTotle
      */
-    public BillingDetail(String totalAmount, Integer itemTotle, String tax, String deliveryfee, String toPay) {
+    public BillingDetail(String totalAmount, Integer itemTotle, String tax, String deliveryfee, String toPay,String discount) {
         super();
         this.totalAmount = totalAmount;
         this.itemTotle = itemTotle;
         this.tax = tax;
         this.deliveryfee = deliveryfee;
         this.toPay = toPay;
+        this.discount=discount;
+    }
+
+    public static Creator<BillingDetail> getCREATOR() {
+        return CREATOR;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 
     public String getTotalAmount() {
@@ -115,6 +131,7 @@ public class BillingDetail implements Parcelable {
         dest.writeValue(tax);
         dest.writeValue(deliveryfee);
         dest.writeValue(toPay);
+        dest.writeValue(discount);
     }
 
     public int describeContents() {

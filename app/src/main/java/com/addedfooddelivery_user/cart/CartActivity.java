@@ -2,11 +2,14 @@ package com.addedfooddelivery_user.cart;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -20,25 +23,44 @@ import com.addedfooddelivery_user.cart.adpter.CartProductListAdapter;
 import com.addedfooddelivery_user.cart.adpter.ItemLikeListAdpter;
 import com.addedfooddelivery_user.cart.api.CartConstructor;
 import com.addedfooddelivery_user.cart.api.CartPresenter;
+import com.addedfooddelivery_user.cart.model.BillingDetail;
 import com.addedfooddelivery_user.cart.model.CartDataResponce;
 import com.addedfooddelivery_user.cart.model.CartDetail;
+import com.addedfooddelivery_user.cart.model.CouponList;
 import com.addedfooddelivery_user.cart.model.MayLike;
 import com.addedfooddelivery_user.cart.model.ParentCartData;
 import com.addedfooddelivery_user.common.CustomeToast;
+import com.addedfooddelivery_user.common.model.CommonResponce;
+import com.addedfooddelivery_user.common.views.CustomTextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.addedfooddelivery_user.common.AppConstants.COUPON_ACTIVITY_REQUEST_CODE;
+
 public class CartActivity extends AppCompatActivity implements CartConstructor.View {
+    private static String currency = "$";
+    @BindView(R.id.txtItemTotla)
+    CustomTextView txtItemTotla;
+    @BindView(R.id.txtRestCharge)
+    CustomTextView txtRestCharge;
+    @BindView(R.id.txtDiscount)
+    CustomTextView txtDiscount;
+    @BindView(R.id.txtdeliveryStatus)
+    CustomTextView txtdeliveryStatus;
+    @BindView(R.id.txtTopay)
+    CustomTextView txtTopay;
+    @BindView(R.id.rl_discount)
+    RelativeLayout rl_discount;
+    @BindView(R.id.txtApplyCoupon)
+    CustomTextView txtApplyCoupon;
     @BindView(R.id.ll_like)
     LinearLayout llLike;
-    @BindView(R.id.rcyLikeItem)
-    RecyclerView rcyLikeItem;
-
     @BindView(R.id.img_back_cart)
     ImageView imgBackCart;
     @BindView(R.id.rcyCartProductList)
@@ -48,12 +70,11 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     ItemLikeListAdpter itemLikeAdpter;
     CartProductListAdapter myAdapter;
     LinearLayoutManager mLayoutManagerLike;
-    private ArrayList<MayLike> itemLikeList;
     Dialog dialog;
     CartPresenter cartPresenter;
     List<ParentCartData> list;
     List<CartDetail> restaurantDetails;
-
+    private ArrayList<MayLike> itemLikeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,17 +96,37 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         cartPresenter.requestCartData(CartActivity.this);
     }
 
-    @OnClick(R.id.img_back_cart)
+    @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_cart:
                 onBackPressed();
                 break;
+            case R.id.txtApplyCoupon:
+                if (txtApplyCoupon.getText().toString().equalsIgnoreCase(getString(R.string.apply_coupon))) {
+                    //apply promo code
+                    Intent intent = new Intent(this, CouponListActivity.class);
+                    startActivityForResult(intent, COUPON_ACTIVITY_REQUEST_CODE);
+                } else {
+                    //remove promo code
+                    cartPresenter.requestRemoveCoupon(CartActivity.this);
+
+                }
+                break;
         }
     }
 
     private void setRestaurantData() {
-        itemLikeAdpter = new ItemLikeListAdpter(CartActivity.this, itemLikeList);
+        itemLikeAdpter = new ItemLikeListAdpter(CartActivity.this, itemLikeList, new ItemLikeListAdpter.OnItemClickListener() {
+            @Override
+            public void onAddItemClick(int position, View view) {
+                cartPresenter.requestAddQTY(CartActivity.this,
+                        String.valueOf(itemLikeList.get(position).getRestaurantID()),
+                        itemLikeList.get(position).getItemID(),
+                        itemLikeList.get(position).getItemPrice(),
+                        1);
+            }
+        });
 
         mLayoutManagerLike = new LinearLayoutManager(CartActivity.this, RecyclerView.HORIZONTAL, false);
         rcyItemLike.setLayoutManager(mLayoutManagerLike);
@@ -121,12 +162,6 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         return list_parent;
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.leftto, R.anim.right);
-        finish();
-    }
 
     @Override
     public void onCartResponseFailure(Throwable throwable) {
@@ -147,25 +182,102 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
             itemLikeList.addAll(response.getData().getMayLike());
             setupItemRecycleview();
             if (itemLikeList.size() > 0) {
-                llLike.setVisibility(View.VISIBLE);
+                // tempery hid functionlity
+                llLike.setVisibility(View.GONE);
             } else {
                 llLike.setVisibility(View.GONE);
             }
+            setCartDetails(response);
             itemLikeAdpter.notifyDataSetChanged();
 
+            if (dialog != null) {
+                dialog.hide();
+            }
         }
+    }
+
+    private void setCartDetails(CartDataResponce response) {
+        BillingDetail billingDetail = response.getData().getBillingDetail();
+        txtItemTotla.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getTotalAmount())) ? "" : (String.format(Locale.getDefault(), "%s %.2f", currency, Double.valueOf(billingDetail.getTotalAmount()))));
+
+        txtRestCharge.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getTax())) ? "" : (String.format(Locale.getDefault(), "%s %.2f", currency, Double.valueOf(billingDetail.getTax()))));
+        if (billingDetail.getDiscount() != null) {
+            rl_discount.setVisibility(View.VISIBLE);
+            txtDiscount.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getDiscount())) ? "" : (String.format(Locale.getDefault(), "%s %.2f", currency, Double.valueOf(billingDetail.getDiscount()))));
+        } else
+            rl_discount.setVisibility(View.GONE);
+        txtdeliveryStatus.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getDeliveryfee())) ? "" : String.valueOf(billingDetail.getDeliveryfee()));
+
+        txtTopay.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getToPay())) ? "" : (String.format(Locale.getDefault(), "%s %.2f", currency, Double.valueOf(billingDetail.getToPay()))));
     }
 
 
     @Override
     public void onCartUpdateResponseFailure(String throwable) {
+        // fot update cart quantity
         displayMessage(throwable);
     }
 
     @Override
     public void onCartUpdateResponseSuccess(QtyAddResponce response) {
+        // fot update cart quantity
         if (response.getStatus() == 1) {
+            cartPresenter.requestCartData(CartActivity.this);
+        }
+    }
 
+    @Override
+    public void onCartAddResponseFailure(String throwable) {
+        // fot may like add
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onCartAddResponseSuccess(QtyAddResponce response) {
+        // fot may like add
+        if (response.getStatus() == 1) {
+            cartPresenter.requestCartData(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onCouponListFailure(String throwable) {
+        //for coupon list data
+    }
+
+    @Override
+    public void onCouponListSuccess(CouponList response) {
+//for coupon list data
+    }
+
+    @Override
+    public void onApplyCouponFailure(String throwable) {
+        //apply Coupon
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onApplyCouponSuccess(CommonResponce response) {
+        //apply Coupon
+        if (response.getStatus() == 1) {
+            if (dialog != null) {
+                dialog.hide();
+            }
+            txtApplyCoupon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_discount, 0, R.drawable.tw__composer_close, 0);
+            cartPresenter.requestCartData(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onRemoveCouponFailure(String throwable) {
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onRemoveCouponSuccess(CommonResponce response) {
+        if (response.getStatus() == 1) {
+            txtApplyCoupon.setText(getString(R.string.apply_coupon));
+            txtApplyCoupon.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_discount, 0, 0, 0);
             cartPresenter.requestCartData(CartActivity.this);
         }
     }
@@ -198,7 +310,6 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.progress_dialog);
-
         dialog.setCancelable(false);
     }
 
@@ -206,4 +317,28 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     public Activity getContext() {
         return this;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == COUPON_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) { // Activity.RESULT_OK
+
+                // get String data from Intent
+                String couponCode = data.getStringExtra("coupon");
+                cartPresenter.requestCoupon(CartActivity.this, couponCode);
+                txtApplyCoupon.setText(couponCode);
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.leftto, R.anim.right);
+        finish();
+    }
+
 }

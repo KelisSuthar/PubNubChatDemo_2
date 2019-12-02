@@ -30,10 +30,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rcyCartProductList"
-                android:background="@color/bg_half_circle"
                 android:layout_marginTop="-5dp"
+                android:background="@color/bg_half_circle"
                 android:orientation="vertical"
-                android:padding="@dimen/_10sdp">
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone">
 
                 <com.addedfooddelivery_user.common.views.CustomTextView
                     android:layout_width="wrap_content"
@@ -77,6 +78,7 @@
                     android:orientation="vertical">
 
                     <com.addedfooddelivery_user.common.views.CustomTextView
+                        android:id="@+id/txtApplyCoupon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_discount"
@@ -87,6 +89,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp"
+
                         app:font_name="montserratMedium" />
 
                 </LinearLayout>
@@ -152,13 +155,43 @@
                     <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/rest_charge"
+                        android:text="@string/tax"
                         android:textColor="@color/text_gray_1"
                         android:textSize="@dimen/_8sdp"
                         app:font_name="montserratMedium" />
 
                     <com.addedfooddelivery_user.common.views.CustomTextView
                         android:id="@+id/txtRestCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/dummy_prise"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_8sdp"
+                        app:font_name="montserratMedium" />
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_discount"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <com.addedfooddelivery_user.common.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discount"
+                        android:textColor="@color/text_gray_1"
+                        android:textSize="@dimen/_8sdp"
+                        app:font_name="montserratMedium" />
+
+                    <com.addedfooddelivery_user.common.views.CustomTextView
+                        android:id="@+id/txtDiscount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -245,11 +278,42 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
-
         <RelativeLayout
+            android:visibility="visible"
+            android:id="@+id/rl_no_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/address_footer"
+            android:paddingBottom="@dimen/_8sdp">
+            <com.addedfooddelivery_user.common.views.CustomButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:height="@dimen/_20sdp"
+                android:background="@drawable/green_rectangle"
+                android:drawableEnd="@drawable/ic_circlerightarrow_white"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="@string/proceed_to_pay"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="@dimen/_5sdp"
+                app:font_name="montserratSemiBold"
+                app:icon="@drawable/ic_circlerightarrow_white"
+                app:iconGravity="end"
+                app:iconPadding="@dimen/_5sdp"
+                app:iconTint="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_selected_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/address_footer"
             android:paddingBottom="@dimen/_8sdp">
 
@@ -358,13 +422,13 @@
                 android:text="@string/proceed_to_pay"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
-                app:cornerRadius="@dimen/_5sdp"
                 app:backgroundTint="@color/green"
+                app:cornerRadius="@dimen/_5sdp"
                 app:font_name="montserratSemiBold"
+                app:icon="@drawable/ic_circlerightarrow_white"
                 app:iconGravity="end"
-                app:iconTint="@color/white"
                 app:iconPadding="@dimen/_5sdp"
-                app:icon="@drawable/ic_circlerightarrow_white"/>
+                app:iconTint="@color/white" />
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

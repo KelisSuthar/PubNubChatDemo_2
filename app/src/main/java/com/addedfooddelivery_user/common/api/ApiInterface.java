@@ -2,18 +2,20 @@ package com.addedfooddelivery_user.common.api;
 
 import com.addedfooddelivery_user.RestaurantDetails.model.RestDetailsResponse;
 import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
-import com.addedfooddelivery_user.cart.model.CartDataResponce;
-import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
-import com.addedfooddelivery_user.home_search.model.CategoryResponse;
-import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
-import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.apiKey.model.GetAPIKeyResponse;
+import com.addedfooddelivery_user.cart.model.CartDataResponce;
+import com.addedfooddelivery_user.cart.model.CouponList;
+import com.addedfooddelivery_user.common.model.CommonResponce;
 import com.addedfooddelivery_user.forgottPassword.model.ForgotPassResponse;
 import com.addedfooddelivery_user.home.model.DefaultAddResponse;
 import com.addedfooddelivery_user.home.model.HomeRestaurantResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.ListAddResponse;
 import com.addedfooddelivery_user.home_deliverylist.model.SaveAddResponse;
+import com.addedfooddelivery_user.home_deliverylist.model.SetDefaultAddResponse;
+import com.addedfooddelivery_user.home_search.model.CategoryResponse;
 import com.addedfooddelivery_user.loginEmail.model.LoginResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestCategoryResponse;
+import com.addedfooddelivery_user.restaurantList.model.AllRestaurantResponse;
 import com.addedfooddelivery_user.signup.model.SignupResponse;
 import com.addedfooddelivery_user.verificationPhone.model.PhoneVerifyResponse;
 import com.addedfooddelivery_user.verifyPhoneOtp.model.PhoneOtpResponse;
@@ -141,4 +143,18 @@ public interface ApiInterface {
     //CartData
     @POST("cartDetail")
     Call<CartDataResponce> getCartDetails();
+
+    //CouponData
+    @POST("getCoupon")
+    Call<CouponList> getCouponData();
+
+    //apply coupon
+    @FormUrlEncoded
+    @POST("applyCoupon")
+    Call<CommonResponce> applyCouponCode(
+            @Field("couponcode") String couponcode);
+
+    //remove coupon
+    @POST("removeCoupon")
+    Call<CommonResponce> removeCouponData();
 }

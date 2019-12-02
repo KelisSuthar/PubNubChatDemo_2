@@ -22,7 +22,7 @@ public class RestDetailsApiModel implements RestDetailsConstructor.Model {
     public void getRestaurantDetails(OnFinishedListener onFinishedListener, Activity activity, String restaurantID, String vegType) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<RestDetailsResponse> call = apiService.getRestaurantDetails(restaurantID,vegType);
+        Call<RestDetailsResponse> call = apiService.getRestaurantDetails(restaurantID, vegType);
         call.enqueue(new Callback<RestDetailsResponse>() {
             @Override
             public void onResponse(@NonNull Call<RestDetailsResponse> call, @NonNull Response<RestDetailsResponse> response) {
@@ -53,7 +53,7 @@ public class RestDetailsApiModel implements RestDetailsConstructor.Model {
     public void updateItemQTY(OnFinishedListener onFinishedListener, Activity activity, String restId, int itemID, int count) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<QtyAddResponce> call = apiService.updateQty(restId,itemID,count);
+        Call<QtyAddResponce> call = apiService.updateQty(restId, itemID, count);
         call.enqueue(new Callback<QtyAddResponce>() {
             @Override
             public void onResponse(@NonNull Call<QtyAddResponce> call, @NonNull Response<QtyAddResponce> response) {
@@ -84,7 +84,7 @@ public class RestDetailsApiModel implements RestDetailsConstructor.Model {
     public void addItemQTY(OnFinishedListener onFinishedListener, Activity activity, String restaurantID, int itemID, String itemPrice, int count) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<QtyAddResponce> call = apiService.addQTY(restaurantID,itemID,itemPrice,count);
+        Call<QtyAddResponce> call = apiService.addQTY(restaurantID, itemID, itemPrice, count);
         call.enqueue(new Callback<QtyAddResponce>() {
             @Override
             public void onResponse(@NonNull Call<QtyAddResponce> call, @NonNull Response<QtyAddResponce> response) {

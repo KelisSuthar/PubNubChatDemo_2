@@ -298,5 +298,10 @@
     <string name="save_proceed">Confirm Location</string>
     <string name="screen">SCREEN</string>
     <string name="title_terms"><![CDATA[Terms & Conditions]]></string>
+    <string name="enter_promo_code">Enter promo code</string>
+    <string name="apply">Apply</string>
+    <string name="available_coupons">Available Coupons</string>
+    <string name="discount">Discount</string>
+    <string name="tax">Tax</string>
 
 </resources>

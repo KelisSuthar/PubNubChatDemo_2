@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".cart.CouponListActivity">
+
+    <ImageView
+        android:id="@+id/imgBackCoupon"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:src="@drawable/tab_backarrow_white"
+        android:tint="@color/colorBlack" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:background="@drawable/bottom_line">
+
+        <com.addedfooddelivery_user.common.views.CustomEditText
+            android:id="@+id/edCoupon"
+            style="@style/custome_et"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toStartOf="@+id/txtApply"
+            android:background="@drawable/bottom_line"
+            android:hint="@string/enter_promo_code"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            app:font_name="montserratMedium" />
+
+        <com.addedfooddelivery_user.common.views.CustomTextView
+            android:id="@+id/txtApply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/apply"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp"
+            app:font_name="montserratSemiBold" />
+    </RelativeLayout>
+
+    <com.addedfooddelivery_user.common.views.CustomTextView
+        android:id="@+id/txtLabelAvilable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@color/bg_half_circle"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/_5sdp"
+        android:text="@string/available_coupons"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        app:font_name="montserratBold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyCouponList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        tools:itemCount="3"
+        tools:listitem="@layout/row_coupon_item_listing"/>
+</LinearLayout>
