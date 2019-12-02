@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.cart.model.MayLike;
 import com.addedfooddelivery_user.common.views.CustomTextView;
 import com.github.siyamed.shapeimageview.RoundedImageView;
 
@@ -22,23 +23,23 @@ import butterknife.ButterKnife;
 
 
 public class ItemLikeListAdpter extends RecyclerView.Adapter<ItemLikeListAdpter.ViewHolder> {
-    private ArrayList<String> listData;
+    private ArrayList<MayLike> mayLikes;
     private Activity context;
 
-    public ItemLikeListAdpter(Activity context, ArrayList<String> notificationModelArrayList) {
+    public ItemLikeListAdpter(Activity context, ArrayList<MayLike> notificationModelArrayList) {
         this.context = context;
-        this.listData = notificationModelArrayList;
+        this.mayLikes = notificationModelArrayList;
 
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<String> list) {
-        listData.addAll(list);
+    public void addAll(List<MayLike> list) {
+        mayLikes.addAll(list);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        listData.clear();
+        mayLikes.clear();
         notifyDataSetChanged();
     }
 
@@ -56,7 +57,7 @@ public class ItemLikeListAdpter extends RecyclerView.Adapter<ItemLikeListAdpter.
 
     @Override
     public int getItemCount() {
-        return listData.size();
+        return mayLikes.size();
     }
 
 

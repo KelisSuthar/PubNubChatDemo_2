@@ -8,16 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.adpter.productListAdapter;
-import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.cart.holder.CartChildViewHolders;
 import com.addedfooddelivery_user.cart.holder.CartParentViewHolder;
 import com.addedfooddelivery_user.cart.model.CartDetail;
 import com.addedfooddelivery_user.cart.model.ParentCartData;
 import com.addedfooddelivery_user.cart.model.RestaurantItem;
-import com.addedfooddelivery_user.common.ReusedMethod;
-import com.addedfooddelivery_user.common.SharedPreferenceManager;
 import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
@@ -25,8 +20,6 @@ import com.thoughtbot.expandablerecyclerview.models.ExpandableListPosition;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.addedfooddelivery_user.common.AppConstants.IS_LOGIN;
 
 public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartParentViewHolder, CartChildViewHolders> {
     List<? extends ExpandableGroup> grupo;
@@ -66,7 +59,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
                 holder.itemAdd.setEnabled(false);
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
                 // holder.tickerView.setText(String.valueOf(count + 1));
-                listener.onUpdateItemClick(flatPosition, view, count + 1, childData.getItemID());
+                listener.onUpdateItemClick(flatPosition, view, group.getTitle(), count + 1, childData.getItemID());
 
             }
         });
@@ -76,7 +69,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
                 holder.itemMinus.setClickable(false);
                 holder.itemMinus.setEnabled(false);
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
-                listener.onUpdateItemClick(flatPosition, view, count - 1, childData.getItemID());
+                listener.onUpdateItemClick(flatPosition, view, group.getTitle(),count - 1, childData.getItemID());
                /* if (count == 1) {
                     RestDetailsActivity.rlCartFooter.setVisibility(View.GONE);
                 } else {
@@ -103,7 +96,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
     @Override
     public void onBindGroupViewHolder(CartParentViewHolder holder, int flatPosition, ExpandableGroup group) {
         for (int i = 0; i < cartDetails.size(); i++) {
-            if (cartDetails.get(i).getRestaurantName().equalsIgnoreCase(group.getTitle())) {
+            if (String.valueOf(cartDetails.get(i).getRestaurantID()).equalsIgnoreCase(group.getTitle())) {
                 CartDetail restDetails = cartDetails.get(i);
                 holder.txtResNameCart.setText(TextUtils.isEmpty(restDetails.getRestaurantName()) ? "" : restDetails.getRestaurantName().toString());
                 holder.txtRestAddressCart.setText(TextUtils.isEmpty(restDetails.getRestaurantAddress()) ? "" : restDetails.getRestaurantAddress().toString());
@@ -118,7 +111,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
 
     }
     public interface OnItemClickListener {
-        void onUpdateItemClick(int position, View view, int count, int itemID);
+        void onUpdateItemClick(int position, View view, String restId, int count, int itemID);
     }
     //expand all views
     public void expandAllGroups() {

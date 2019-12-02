@@ -143,7 +143,7 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
         txtItemCount = findViewById(R.id.txtItemCount);
         rlCartFooter = findViewById(R.id.cart_footer);
-        fillRecords();
+
         init();
         setReviewData();
         switchVeg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -161,6 +161,11 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillRecords();
+    }
 
     @OnClick(R.id.txtViewCart)
     public void eventClick(View view) {
@@ -173,6 +178,7 @@ public class RestDetailsActivity extends AppCompatActivity implements RestDetail
     }
 
     private void fillRecords() {
+        initProgressBar();
         veg = false;
         restDetailsPresenter.requestAPIRestDetails(RestDetailsActivity.this, restId, "off");
     }

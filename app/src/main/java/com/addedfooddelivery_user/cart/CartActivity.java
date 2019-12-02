@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -14,17 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.addedfooddelivery_user.R;
-import com.addedfooddelivery_user.RestaurantDetails.RestDetailsActivity;
-import com.addedfooddelivery_user.RestaurantDetails.model.CategoryList;
-import com.addedfooddelivery_user.RestaurantDetails.model.ParentCategoryData;
 import com.addedfooddelivery_user.RestaurantDetails.model.addQTYResponce.QtyAddResponce;
 import com.addedfooddelivery_user.cart.adpter.CartProductListAdapter;
 import com.addedfooddelivery_user.cart.adpter.ItemLikeListAdpter;
 import com.addedfooddelivery_user.cart.api.CartConstructor;
 import com.addedfooddelivery_user.cart.api.CartPresenter;
-import com.addedfooddelivery_user.cart.model.CartData;
 import com.addedfooddelivery_user.cart.model.CartDataResponce;
 import com.addedfooddelivery_user.cart.model.CartDetail;
+import com.addedfooddelivery_user.cart.model.MayLike;
 import com.addedfooddelivery_user.cart.model.ParentCartData;
 import com.addedfooddelivery_user.common.CustomeToast;
 
@@ -36,6 +34,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CartActivity extends AppCompatActivity implements CartConstructor.View {
+    @BindView(R.id.ll_like)
+    LinearLayout llLike;
+    @BindView(R.id.rcyLikeItem)
+    RecyclerView rcyLikeItem;
+
     @BindView(R.id.img_back_cart)
     ImageView imgBackCart;
     @BindView(R.id.rcyCartProductList)
@@ -45,11 +48,12 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     ItemLikeListAdpter itemLikeAdpter;
     CartProductListAdapter myAdapter;
     LinearLayoutManager mLayoutManagerLike;
-    private ArrayList<String> itemLikeList;
+    private ArrayList<MayLike> itemLikeList;
     Dialog dialog;
     CartPresenter cartPresenter;
     List<ParentCartData> list;
     List<CartDetail> restaurantDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +65,13 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         itemLikeList = new ArrayList<>();
         restaurantDetails = new ArrayList<>();
         setRestaurantData();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        initProgressBar();
         cartPresenter.requestCartData(CartActivity.this);
     }
 
@@ -91,12 +97,12 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
 
     private void setupItemRecycleview() {
 
-
         rcyProductCart.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new CartProductListAdapter(CartActivity.this, list, (ArrayList<CartDetail>) restaurantDetails, new CartProductListAdapter.OnItemClickListener() {
             @Override
-            public void onUpdateItemClick(int position, View view, int count, int itemID) {
-                //cartPresenter.requestUpdateCartQTY(CartActivity.this, , itemID, count);
+            public void onUpdateItemClick(int position, View view, String restId, int count, int itemID) {
+
+                cartPresenter.requestUpdateCartQTY(CartActivity.this, restId, itemID, count);
             }
         });
         rcyProductCart.setAdapter(myAdapter);
@@ -109,7 +115,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     private List<ParentCartData> getList(List<CartDetail> cartDetails) {
         List<ParentCartData> list_parent = new ArrayList<>();
         for (int i = 0; i < cartDetails.size(); i++) {
-            list_parent.add(new ParentCartData(cartDetails.get(i).getRestaurantName(), cartDetails.get(i).getRestaurantItem()));
+            list_parent.add(new ParentCartData(String.valueOf(cartDetails.get(i).getRestaurantID()), cartDetails.get(i).getRestaurantItem()));
         }
 
         return list_parent;
@@ -130,11 +136,26 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     @Override
     public void onCartResponseSuccess(CartDataResponce response) {
         if (response.getStatus() == 1) {
+            if (restaurantDetails.size() > 0) {
+                restaurantDetails.clear();
+            }
+            if (itemLikeList.size() > 0) {
+                itemLikeList.clear();
+            }
             restaurantDetails = response.getData().getCartDetails();
             list = getList(response.getData().getCartDetails());
+            itemLikeList.addAll(response.getData().getMayLike());
             setupItemRecycleview();
+            if (itemLikeList.size() > 0) {
+                llLike.setVisibility(View.VISIBLE);
+            } else {
+                llLike.setVisibility(View.GONE);
+            }
+            itemLikeAdpter.notifyDataSetChanged();
+
         }
     }
+
 
     @Override
     public void onCartUpdateResponseFailure(String throwable) {
@@ -144,6 +165,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     @Override
     public void onCartUpdateResponseSuccess(QtyAddResponce response) {
         if (response.getStatus() == 1) {
+
             cartPresenter.requestCartData(CartActivity.this);
         }
     }
