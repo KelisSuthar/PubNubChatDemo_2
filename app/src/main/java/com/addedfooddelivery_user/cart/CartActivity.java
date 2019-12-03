@@ -94,6 +94,11 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         super.onResume();
         initProgressBar();
         cartPresenter.requestCartData(CartActivity.this);
+        setAddressBottom();
+    }
+
+    private void setAddressBottom() {
+
     }
 
     @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon})

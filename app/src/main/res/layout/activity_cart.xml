@@ -172,15 +172,14 @@
                 </RelativeLayout>
 
 
-
                 <RelativeLayout
                     android:id="@+id/rl_discount"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:visibility="gone">
 
                     <com.addedfooddelivery_user.common.views.CustomTextView
                         android:layout_width="wrap_content"
@@ -277,45 +276,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:visibility="visible"
+        android:orientation="vertical"
+        android:id="@+id/ll_adddress_btn">
+
+        <LinearLayout
             android:id="@+id/rl_no_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/address_footer"
-            android:paddingBottom="@dimen/_8sdp">
-            <com.addedfooddelivery_user.common.views.CustomButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone">
 
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:height="@dimen/_20sdp"
-                android:background="@drawable/green_rectangle"
-                android:drawableEnd="@drawable/ic_circlerightarrow_white"
-                android:drawablePadding="@dimen/_5sdp"
+            <com.addedfooddelivery_user.common.views.CustomButton
+                android:id="@+id/txtAddAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:background="@drawable/email_rectangle"
                 android:gravity="center"
-                android:text="@string/proceed_to_pay"
+                android:text="@string/add_address"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
-                app:backgroundTint="@color/green"
                 app:cornerRadius="@dimen/_5sdp"
                 app:font_name="montserratSemiBold"
-                app:icon="@drawable/ic_circlerightarrow_white"
                 app:iconGravity="end"
                 app:iconPadding="@dimen/_5sdp"
                 app:iconTint="@color/white" />
-        </RelativeLayout>
+
+            <com.addedfooddelivery_user.common.views.CustomButton
+                android:id="@+id/txtSelectAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:background="@drawable/email_rectangle"
+                android:gravity="center"
+                android:text="@string/select_address"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                app:cornerRadius="@dimen/_5sdp"
+                app:font_name="montserratSemiBold"
+                app:iconGravity="end"
+                app:iconPadding="@dimen/_5sdp"
+                app:iconTint="@color/white" />
+        </LinearLayout>
 
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/rl_selected_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/address_footer"
-            android:paddingBottom="@dimen/_8sdp">
+            android:paddingBottom="@dimen/_8sdp"
+            android:visibility="gone">
 
             <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtAddLabel"
