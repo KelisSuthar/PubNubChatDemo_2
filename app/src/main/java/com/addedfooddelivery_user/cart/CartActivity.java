@@ -192,6 +192,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
             } else {
                 llLike.setVisibility(View.GONE);
             }
+            //set other details
             setCartDetails(response);
             itemLikeAdpter.notifyDataSetChanged();
 
