@@ -157,4 +157,12 @@ public interface ApiInterface {
     //remove coupon
     @POST("removeCoupon")
     Call<CommonResponce> removeCouponData();
+
+    //logout
+    @GET("user_Logout")
+    Call<CommonResponce> logout();
+
+    //delete account
+    @GET("deleteAccount")
+    Call<CommonResponce> deleteAccount();
 }

@@ -42,6 +42,16 @@ public class CMSViewActivity extends AppCompatActivity {
                 if (getIntent().getStringExtra(getString(R.string.screen)).equalsIgnoreCase("signup")) {
                     txtTitleCMS.setText(getString(R.string.title_terms));
                     webviewCms.loadUrl(terms);
+                } else if (getIntent().getStringExtra(getString(R.string.screen)).equalsIgnoreCase("setting")) {
+                    if (getIntent().hasExtra(getString(R.string.screen))) {
+                        if (getIntent().getStringExtra("url").equalsIgnoreCase("about")) {
+                            txtTitleCMS.setText(getString(R.string.title_about));
+                            webviewCms.loadUrl(about);
+                        }else if(getIntent().getStringExtra("url").equalsIgnoreCase("privacy")){
+                            txtTitleCMS.setText(getString(R.string.title_privacy));
+                            webviewCms.loadUrl(privacy);
+                        }
+                    }
                 }
             }
         }
