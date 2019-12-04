@@ -10,6 +10,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -211,18 +212,18 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver,
                 new IntentFilter("location"));
 
-            //get default address after call get restaurant data
-            if (SavedAddress != null) {
-                SelectAddress = SavedAddress.get(0).getAddressLine(0);
-                txtAddress.setText(SelectAddress.trim());
-                selectCity = SavedAddress.get(0).getLocality().toString();
-            } else {
-                if (CurrentAddress != null) {
-                    selectCity = CurrentAddress.get(0).getLocality();
-                }
+        //get default address after call get restaurant data
+        if (SavedAddress != null) {
+            SelectAddress = SavedAddress.get(0).getAddressLine(0);
+            txtAddress.setText(SelectAddress.trim());
+            selectCity = SavedAddress.get(0).getLocality().toString();
+        } else {
+            if (CurrentAddress != null) {
+                selectCity = CurrentAddress.get(0).getLocality();
             }
+        }
 
-            homePresenter.requestAPIRestaurant(getActivity(), selectCity);
+        homePresenter.requestAPIRestaurant(getActivity(), selectCity);
 
     }
 
@@ -242,14 +243,14 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
                 }
                 break;
             case R.id.txtViewAllPopular:
-                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType","Popular"));
+                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType", "Popular"));
                 getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
-                rest_type="Popular";
+                rest_type = "Popular";
                 break;
             case R.id.txtViewAllTrending:
-                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType","Trending"));
+                startActivity(new Intent(getContext(), RestaurantListActivity.class).putExtra("restType", "Trending"));
                 getActivity().overridePendingTransition(R.anim.rightto, R.anim.left);
-                rest_type="Trending";
+                rest_type = "Trending";
 
                 break;
 
@@ -303,6 +304,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
         }
 
         GlobalData.SavedAddress = addresses;
+        GlobalData.addressType = TextUtils.isEmpty(response.getData().getAdderessType()) ? "" : String.valueOf(response.getData().getAdderessType());
 
         txtAddress.setText(SavedAddress.get(0).getAddressLine(00));
         homePresenter.requestAPIRestaurant(getActivity(), SavedAddress.get(0).getLocality().toString());
@@ -323,7 +325,7 @@ public class HomeFragement extends Fragment implements HomeConstructor.View {
 
     @Override
     public void displayMessage(String message) {
-        if (!(message.equalsIgnoreCase("CategoryDataResponce get Successfully.")||message.equalsIgnoreCase("Data get Successfully."))) {
+        if (!(message.equalsIgnoreCase("CategoryDataResponce get Successfully.") || message.equalsIgnoreCase("Data get Successfully."))) {
             CustomeToast.showToast(
                     getActivity(),
                     message,

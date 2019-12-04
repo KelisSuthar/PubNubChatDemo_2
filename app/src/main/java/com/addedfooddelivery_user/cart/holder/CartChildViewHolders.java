@@ -12,8 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CartChildViewHolders extends ChildViewHolder {
-    @BindView(R.id.imgRestItem)
-    public ImageView imgRestItem;
+    @BindView(R.id.imgItemType)
+    public ImageView imgItemType;
     @BindView(R.id.txtItemName)
     public CustomTextView txtItemName;
     @BindView(R.id.txtItemDesc)

@@ -330,7 +330,7 @@
             android:layout_height="wrap_content"
             android:background="@color/address_footer"
             android:paddingBottom="@dimen/_8sdp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.addedfooddelivery_user.common.views.CustomTextView
                 android:id="@+id/txtAddLabel"
@@ -345,6 +345,7 @@
                 app:font_name="montserratSemiBold" />
 
             <com.addedfooddelivery_user.common.views.CustomTextView
+                android:id="@+id/txtFooterAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtAddLabel"
@@ -354,6 +355,7 @@
                 android:drawablePadding="@dimen/_5sdp"
                 android:text="Home(Toronato ON M4V 2z2)"
                 android:textAllCaps="false"
+                android:layout_marginEnd="@dimen/_50sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_8sdp"
                 app:font_name="montserratBold" />

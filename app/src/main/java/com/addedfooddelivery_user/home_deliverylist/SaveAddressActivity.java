@@ -31,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.addedfooddelivery_user.R;
+import com.addedfooddelivery_user.cart.CartActivity;
 import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.views.CustomButton;
@@ -569,9 +570,21 @@ public class SaveAddressActivity extends AppCompatActivity implements OnMapReady
     public void onSaveAddressResponseSuccess(SaveAddResponse response) {
         if (response.getStatus() == 1) {
             displayMessage(response.getMessage());
+           /* if(getIntent().hasExtra("screen")){
+                if(getIntent().getStringExtra("screen").equalsIgnoreCase("cart")){
+                    startActivity(new Intent(SaveAddressActivity.this, CartActivity.class));
+                    overridePendingTransition(R.anim.leftto, R.anim.right);
+                    finish();
+                }else {
+                    startActivity(new Intent(SaveAddressActivity.this, DeliveryListActivity.class));
+                    overridePendingTransition(R.anim.leftto, R.anim.right);
+                    finish();
+                }
+            }*/
             startActivity(new Intent(SaveAddressActivity.this, DeliveryListActivity.class));
             overridePendingTransition(R.anim.leftto, R.anim.right);
             finish();
+
         }
     }
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgRestItem"
+            android:id="@+id/imgItemType"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_gravity="center_horizontal"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_toEndOf="@+id/imgRestItem"
+            android:layout_toEndOf="@+id/imgItemType"
             android:text="@string/dummy_item"
             android:textColor="@color/black"
             android:textSize="@dimen/_9ssp"
@@ -43,7 +43,7 @@
             android:layout_marginTop="@dimen/_1sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_toStartOf="@+id/ll_add"
-            android:layout_toEndOf="@+id/imgRestItem"
+            android:layout_toEndOf="@+id/imgItemType"
             android:text="@string/dummy_item_Desc"
             android:textColor="@color/text_gray_1"
             android:textSize="@dimen/_8ssp"

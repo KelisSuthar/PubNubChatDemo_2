@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -31,9 +32,18 @@ import com.addedfooddelivery_user.cart.model.MayLike;
 import com.addedfooddelivery_user.cart.model.ParentCartData;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.model.CommonResponce;
+import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomTextView;
+import com.addedfooddelivery_user.home_deliverylist.DeliveryListActivity;
+import com.addedfooddelivery_user.home_deliverylist.SaveAddressActivity;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,7 +51,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.addedfooddelivery_user.common.AppConstants.AUTOCOMPLETE_REQUEST_CODE;
 import static com.addedfooddelivery_user.common.AppConstants.COUPON_ACTIVITY_REQUEST_CODE;
+import static com.addedfooddelivery_user.common.GlobalData.SavedAddress;
+import static com.addedfooddelivery_user.common.GlobalData.addressType;
+import static com.addedfooddelivery_user.common.ReusedMethod.fields;
 
 public class CartActivity extends AppCompatActivity implements CartConstructor.View {
     private static String currency = "$";
@@ -67,6 +81,21 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     RecyclerView rcyProductCart;
     @BindView(R.id.rcyLikeItem)
     RecyclerView rcyItemLike;
+    @BindView(R.id.txtAddAddress)
+    CustomButton txtAddAddress;
+    @BindView(R.id.txtSelectAddress)
+    CustomButton txtSelectAddress;
+    @BindView(R.id.rl_selected_add)
+    RelativeLayout rlSelectedAdd;
+    @BindView(R.id.rl_no_add)
+    LinearLayout rladdAddress;
+    @BindView(R.id.txtAddLabel)
+    CustomTextView txtAddLabel;
+    @BindView(R.id.txtAddChange)
+    CustomTextView txtAddChange;
+    @BindView(R.id.txtFooterAdd)
+    CustomTextView txtFooterAdd;
+
     ItemLikeListAdpter itemLikeAdpter;
     CartProductListAdapter myAdapter;
     LinearLayoutManager mLayoutManagerLike;
@@ -89,6 +118,8 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -98,10 +129,22 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     }
 
     private void setAddressBottom() {
-
+        if (SavedAddress != null) {
+            if (SavedAddress.size() != 0) {
+                rlSelectedAdd.setVisibility(View.VISIBLE);
+                rladdAddress.setVisibility(View.GONE);
+                txtFooterAdd.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_checked, 0, 0, 0);
+                if (!(addressType.equalsIgnoreCase("")) || !(SavedAddress.get(0).getAddressLine(0).toString().equalsIgnoreCase(""))) {
+                    txtFooterAdd.setText(addressType + " (" + SavedAddress.get(0).getAddressLine(0).toString() + ")");
+                }
+            }
+        } else {
+            rlSelectedAdd.setVisibility(View.GONE);
+            rladdAddress.setVisibility(View.VISIBLE);
+        }
     }
 
-    @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon})
+    @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon,R.id.txtAddChange})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_cart:
@@ -111,12 +154,17 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
                 if (txtApplyCoupon.getText().toString().equalsIgnoreCase(getString(R.string.apply_coupon))) {
                     //apply promo code
                     Intent intent = new Intent(this, CouponListActivity.class);
+                    overridePendingTransition(R.anim.rightto, R.anim.left);
                     startActivityForResult(intent, COUPON_ACTIVITY_REQUEST_CODE);
                 } else {
                     //remove promo code
                     cartPresenter.requestRemoveCoupon(CartActivity.this);
 
                 }
+                break;
+            case R.id.txtAddChange:
+                startActivity(new Intent(CartActivity.this, DeliveryListActivity.class));
+                overridePendingTransition(R.anim.leftto, R.anim.right);
                 break;
         }
     }
@@ -336,6 +384,25 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
                 String couponCode = data.getStringExtra("coupon");
                 cartPresenter.requestCoupon(CartActivity.this, couponCode);
                 txtApplyCoupon.setText(couponCode);
+            }
+        }
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                if (place != null) {
+                    if (place.getId() != null) {
+                        startActivity(new Intent(CartActivity.this, SaveAddressActivity.class)
+                                .putExtra("placeId", place.getId())
+                        .putExtra("screen","cart"));
+                        overridePendingTransition(R.anim.rightto, R.anim.left);
+                    }
+                }
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i("AutoComplete", status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
             }
         }
     }

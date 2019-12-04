@@ -36,6 +36,7 @@ import com.addedfooddelivery_user.common.CommonGps;
 import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.GlobalData;
 import com.addedfooddelivery_user.common.ReusedMethod;
+import com.addedfooddelivery_user.common.model.AddressCommon;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomEditText;
 import com.addedfooddelivery_user.common.views.CustomTextView;
@@ -107,6 +108,7 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
 
     Geocoder geocoder;
     List<Address> addresses;
+    String addType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,14 +140,14 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
             public void onItemClick(int position, View view) {
                 double wayLatitude = Double.parseDouble(addresssList.get(position).getAdderessLatitude());
                 double wayLongitude = Double.parseDouble(addresssList.get(position).getAdderessLongitude());
-
+                addType = addresssList.get(position).getAdderessType();
                 geocoder = new Geocoder(DeliveryListActivity.this, Locale.getDefault());
                 try {
                     addresses = geocoder.getFromLocation(wayLatitude, wayLongitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                addAddressPresenter.requestAddAddress(DeliveryListActivity.this,addresssList.get(position).getCustomerAddressID());
+                addAddressPresenter.requestAddAddress(DeliveryListActivity.this, addresssList.get(position).getCustomerAddressID());
 
             }
         });
@@ -193,7 +195,9 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 if (place != null) {
-                    startActivity(new Intent(DeliveryListActivity.this, SaveAddressActivity.class).putExtra("placeId", place.getId()));
+                    startActivity(new Intent(DeliveryListActivity.this, SaveAddressActivity.class)
+                            .putExtra("placeId", place.getId())
+                            .putExtra("screen","delivery"));
                     overridePendingTransition(R.anim.rightto, R.anim.left);
                 }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
@@ -236,7 +240,7 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
         if (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task -> {
-               if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     FindCurrentPlaceResponse response = task.getResult();
                     List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
 
@@ -327,8 +331,9 @@ public class DeliveryListActivity extends AppCompatActivity implements AddAddres
     @Override
     public void onsetDefaultAddSuccess(SetDefaultAddResponse response) {
         //for set default address
-        if(response.getStatus()==1) {
+        if (response.getStatus() == 1) {
             GlobalData.SavedAddress = addresses;
+            GlobalData.addressType = addType;
             overridePendingTransition(R.anim.leftto, R.anim.right);
             finish();
         }

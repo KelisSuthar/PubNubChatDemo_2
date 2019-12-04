@@ -27,7 +27,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
     ArrayList<CartDetail> cartDetails;
     private final OnItemClickListener listener;
 
-    public CartProductListAdapter(Activity context, List<? extends ExpandableGroup> groups, ArrayList<CartDetail> restaurantDetails,OnItemClickListener listener) {
+    public CartProductListAdapter(Activity context, List<? extends ExpandableGroup> groups, ArrayList<CartDetail> restaurantDetails, OnItemClickListener listener) {
         super(groups);
         this.context = context;
         grupo = groups;
@@ -51,7 +51,11 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
         holder.txtItemPrise.setText(TextUtils.isEmpty(childData.getItemPrice().toString()) ? "" : childData.getItemPrice().toString());
         holder.txtItemDesc.setText(TextUtils.isEmpty(childData.getItemDescription().toString()) ? "" : childData.getItemDescription().toString());
         holder.tickerView.setText(childData.getItemQuantity().toString());
-
+        if (childData.getItemType().equalsIgnoreCase("Veg")) {
+            holder.imgItemType.setImageResource(R.drawable.ic_veg_icons);
+        } else {
+            holder.imgItemType.setImageResource(R.drawable.ic_nonveg_icons);
+        }
         holder.itemAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +73,7 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
                 holder.itemMinus.setClickable(false);
                 holder.itemMinus.setEnabled(false);
                 int count = Integer.parseInt(holder.tickerView.getText().toString());
-                listener.onUpdateItemClick(flatPosition, view, group.getTitle(),count - 1, childData.getItemID());
+                listener.onUpdateItemClick(flatPosition, view, group.getTitle(), count - 1, childData.getItemID());
                /* if (count == 1) {
                     RestDetailsActivity.rlCartFooter.setVisibility(View.GONE);
                 } else {
@@ -79,7 +83,6 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
                 }*/
             }
         });
-
 
 
     }
@@ -110,9 +113,11 @@ public class CartProductListAdapter extends ExpandableRecyclerViewAdapter<CartPa
         }
 
     }
+
     public interface OnItemClickListener {
         void onUpdateItemClick(int position, View view, String restId, int count, int itemID);
     }
+
     //expand all views
     public void expandAllGroups() {
         for (int i = 0; i < grupo.size(); i++) {
