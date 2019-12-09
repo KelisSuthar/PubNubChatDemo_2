@@ -24,7 +24,7 @@ public interface CartConstructor {
 
         void removeCouponData(OnFinishedListener onFinishedListener, Activity activity);
 
-
+        void deleteCart(OnFinishedListener onFinishedListener, Activity activity,String cartId);
 
         interface OnFinishedListener {
             void onCartFinished(CartDataResponce response);
@@ -50,6 +50,10 @@ public interface CartConstructor {
             void onRemoveCouponFinished(CommonResponce response);
 
             void onRemoveCouponListFailure(String response);
+
+            void onDeletCartinished(CommonResponce response);
+
+            void onDeletCartFailure(String response);
 
         }
     }
@@ -80,6 +84,10 @@ public interface CartConstructor {
 
         void onRemoveCouponSuccess(CommonResponce response);
 
+        void onDeleteCartFailure(String throwable);
+
+        void onDeleteCartSuccess(CommonResponce response);
+
 
 
     }
@@ -98,5 +106,8 @@ public interface CartConstructor {
         void requestCoupon(Activity activity,String couponCode);
 
         void requestRemoveCoupon(Activity activity);
+
+
+        void requestDeletCart(Activity activity,String cartId);
     }
 }

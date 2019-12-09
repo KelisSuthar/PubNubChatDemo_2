@@ -158,6 +158,12 @@ public interface ApiInterface {
     @POST("removeCoupon")
     Call<CommonResponce> removeCouponData();
 
+    //delete CartData
+    @FormUrlEncoded
+    @POST("emptyCart")
+    Call<CommonResponce> deleteCartData(
+            @Field("cartID") String cartID);
+
     //logout
     @GET("user_Logout")
     Call<CommonResponce> logout();

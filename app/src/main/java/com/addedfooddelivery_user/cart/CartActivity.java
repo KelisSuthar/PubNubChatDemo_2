@@ -34,6 +34,7 @@ import com.addedfooddelivery_user.common.CustomeToast;
 import com.addedfooddelivery_user.common.model.CommonResponce;
 import com.addedfooddelivery_user.common.views.CustomButton;
 import com.addedfooddelivery_user.common.views.CustomTextView;
+import com.addedfooddelivery_user.home.MainActivity;
 import com.addedfooddelivery_user.home_deliverylist.DeliveryListActivity;
 import com.addedfooddelivery_user.home_deliverylist.SaveAddressActivity;
 import com.google.android.gms.common.api.Status;
@@ -59,6 +60,8 @@ import static com.addedfooddelivery_user.common.ReusedMethod.fields;
 
 public class CartActivity extends AppCompatActivity implements CartConstructor.View {
     private static String currency = "$";
+    @BindView(R.id.txtEmptyCart)
+    CustomTextView txtEmptyCart;
     @BindView(R.id.txtItemTotla)
     CustomTextView txtItemTotla;
     @BindView(R.id.txtRestCharge)
@@ -104,6 +107,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     List<ParentCartData> list;
     List<CartDetail> restaurantDetails;
     private ArrayList<MayLike> itemLikeList;
+    String cartId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,13 +115,13 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         setContentView(R.layout.activity_cart);
         ButterKnife.bind(this);
 
+        initProgressBar();
         cartPresenter = new CartPresenter(CartActivity.this);
         itemLikeList = new ArrayList<>();
         restaurantDetails = new ArrayList<>();
         setRestaurantData();
 
     }
-
 
 
     @Override
@@ -144,7 +148,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         }
     }
 
-    @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon,R.id.txtAddChange})
+    @OnClick({R.id.img_back_cart, R.id.txtApplyCoupon, R.id.txtAddChange, R.id.txtEmptyCart})
     public void eventClick(View view) {
         switch (view.getId()) {
             case R.id.img_back_cart:
@@ -165,6 +169,11 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
             case R.id.txtAddChange:
                 startActivity(new Intent(CartActivity.this, DeliveryListActivity.class));
                 overridePendingTransition(R.anim.leftto, R.anim.right);
+                break;
+            case R.id.txtEmptyCart:
+                if (!cartId.equalsIgnoreCase("")) {
+                    cartPresenter.requestDeletCart(CartActivity.this, cartId);
+                }
                 break;
         }
     }
@@ -231,6 +240,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
                 itemLikeList.clear();
             }
             restaurantDetails = response.getData().getCartDetails();
+            cartId = String.valueOf(restaurantDetails.get(0).getRestaurantItem().get(0).getCartID());
             list = getList(response.getData().getCartDetails());
             itemLikeList.addAll(response.getData().getMayLike());
             setupItemRecycleview();
@@ -240,6 +250,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
             } else {
                 llLike.setVisibility(View.GONE);
             }
+
             //set other details
             setCartDetails(response);
             itemLikeAdpter.notifyDataSetChanged();
@@ -263,6 +274,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
         txtdeliveryStatus.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getDeliveryfee())) ? "" : String.valueOf(billingDetail.getDeliveryfee()));
 
         txtTopay.setText(TextUtils.isEmpty(String.valueOf(billingDetail.getToPay())) ? "" : (String.format(Locale.getDefault(), "%s %.2f", currency, Double.valueOf(billingDetail.getToPay()))));
+
     }
 
 
@@ -337,6 +349,21 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
     }
 
     @Override
+    public void onDeleteCartFailure(String throwable) {
+        displayMessage(throwable);
+    }
+
+    @Override
+    public void onDeleteCartSuccess(CommonResponce response) {
+        if (response.getStatus() == 1) {
+            displayMessage(response.getMessage());
+            startActivity(new Intent(CartActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.leftto, R.anim.right);
+            finish();
+        }
+    }
+
+    @Override
     public void showLoadingIndicator(boolean isShow) {
         if (dialog != null) {
             if (isShow) {
@@ -393,7 +420,7 @@ public class CartActivity extends AppCompatActivity implements CartConstructor.V
                     if (place.getId() != null) {
                         startActivity(new Intent(CartActivity.this, SaveAddressActivity.class)
                                 .putExtra("placeId", place.getId())
-                        .putExtra("screen","cart"));
+                                .putExtra("screen", "cart"));
                         overridePendingTransition(R.anim.rightto, R.anim.left);
                     }
                 }

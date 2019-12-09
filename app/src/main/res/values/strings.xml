@@ -307,5 +307,7 @@
     <string name="add_address">Add Address</string>
     <string name="select_address">Select Address</string>
     <string name="title_privacy">Privacy Policy</string>
+    <string name="empty_cart">Empty Cart</string>
+    <string name="add_card">Add New Card</string>
 
 </resources>

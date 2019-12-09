@@ -148,7 +148,7 @@ public class CouponListActivity extends AppCompatActivity implements CartConstru
 
     @Override
     public void onApplyCouponSuccess(CommonResponce response) {
-       //apply coupon code
+        //apply coupon code
     }
 
     @Override
@@ -159,6 +159,16 @@ public class CouponListActivity extends AppCompatActivity implements CartConstru
     @Override
     public void onRemoveCouponSuccess(CommonResponce response) {
         //remove coupon code
+    }
+
+    @Override
+    public void onDeleteCartFailure(String throwable) {
+        //delete Cart
+    }
+
+    @Override
+    public void onDeleteCartSuccess(CommonResponce response) {
+//delete Cart
     }
 
     @Override

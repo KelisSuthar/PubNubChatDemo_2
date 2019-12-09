@@ -204,6 +204,39 @@ public class CartApiModel implements CartConstructor.Model {
         });
     }
 
+    @Override
+    public void deleteCart(OnFinishedListener onFinishedListener, Activity activity, String cartId) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<CommonResponce> call = apiService.deleteCartData(cartId);
+        call.enqueue(new Callback<CommonResponce>() {
+            @Override
+            public void onResponse(@NonNull Call<CommonResponce> call, @NonNull Response<CommonResponce> response) {
+                int success;
+
+                if (response.body() != null) {
+                    success = response.body().getStatus();
+                    if (success == 1) {
+                        CommonResponce keyResponse = response.body();
+                        onFinishedListener.onDeletCartinished(keyResponse);
+                    } else {
+                        onFinishedListener.onDeletCartFailure(response.body().getMessage());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CommonResponce> call, @NonNull Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+                onFinishedListener.onDeletCartFailure(t.getMessage());
+            }
+        });
+    }
+
+
+
 
 }
 

@@ -108,6 +108,20 @@ public class CartPresenter implements CartConstructor.Presenter, CartConstructor
     }
 
     @Override
+    public void onDeletCartinished(CommonResponce response) {
+        cartView.onDeleteCartSuccess(response);
+        cartView.showLoadingIndicator(false);
+    }
+
+    @Override
+    public void onDeletCartFailure(String t) {
+        if (cartView != null) {
+            cartView.showLoadingIndicator(false);
+            cartView.displayMessage(t);
+        }
+    }
+
+    @Override
     public void onDestroy() {
         cartView = null;
         cartModel = null;
@@ -158,5 +172,13 @@ public class CartPresenter implements CartConstructor.Presenter, CartConstructor
             cartView.showLoadingIndicator(true);
         }
         cartModel.removeCouponData(this, activity);
+    }
+
+    @Override
+    public void requestDeletCart(Activity activity, String cartId) {
+        if (cartView != null) {
+            cartView.showLoadingIndicator(true);
+        }
+        cartModel.deleteCart(this, activity,cartId);
     }
 }
