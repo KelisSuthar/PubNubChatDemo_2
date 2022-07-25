@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
     var editText: TextInputEditText? = null
     private val mMessages: ArrayList<ChatMessages> = ArrayList()
-    private val message_list: ArrayList<PNFetchMessageItem> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -233,20 +232,30 @@ class MainActivity : AppCompatActivity() {
             Appconstants.CHANNEL_NAME, // where to fetch history from
             count = 100 // how many items to fetch
         ).async { result, status ->
+
             result!!.messages.forEach {
                 Log.e("PUB_NUB", it.entry.toString())
             }
         }
-        pubnub!!.listFiles(
-            Appconstants.CHANNEL_NAME
-        ).async { result, status ->
-            if (!status.error && result != null) {
-//                Log.e("PUB_NUB", result.toString())
-            }
-            result!!.data.forEach {
-//                Log.e("PUB_NUB",it.id)
-            }
-        }
+//        pubnub!!.deleteChannelGroup(
+//            Appconstants.CHANNEL_NAME, // where to fetch history from
+//            count = 100 // how many items to fetch
+//        ).async { result, status ->
+//
+//            result!!.messages.forEach {
+//                Log.e("PUB_NUB", it.entry.toString())
+//            }
+//        }
+//        pubnub!!.listFiles(
+//            Appconstants.CHANNEL_NAME
+//        ).async { result, status ->
+//            if (!status.error && result != null) {
+////                Log.e("PUB_NUB", result.toString())
+//            }
+//            result!!.data.forEach {
+////                Log.e("PUB_NUB",it.id)
+//            }
+//        }
         pubnub?.fetchMessages(
             channels = listOf(Appconstants.CHANNEL_NAME)
         )?.async { result, status ->
@@ -254,14 +263,16 @@ class MainActivity : AppCompatActivity() {
                 result!!.channels.forEach { (channel, messages) ->
                     println("Channel: $channel")
                     messages.forEach { messageItem: PNFetchMessageItem ->
-                        message_list.add(messageItem)
                         println(messageItem.message)// actual message payload
 //                        println(messageItem.timetoken) // included by default
 //                        println(messageItem.uuid) // included by default
                         if (messageItem.message.isJsonObject) {
                             val file = messageItem.message.asJsonObject.get("file").asJsonObject
-                            getFileUrl(file.get("name").asString, file.get("id").asString)
-
+                            getFileUrl(
+                                file.get("name").asString,
+                                file.get("id").asString,
+                                messageItem.uuid.toString()
+                            )
                         } else {
                             mMessages.add(
                                 ChatMessages(
@@ -290,7 +301,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFileUrl(name: String, id: String) {
+    private fun getFileUrl(name: String, id: String, uuid: String) {
         pubnub!!.getFileUrl(
             Appconstants.CHANNEL_NAME,
             name,
@@ -301,7 +312,7 @@ class MainActivity : AppCompatActivity() {
                 mMessages.add(
                     ChatMessages(
                         result.url,
-                        "",
+                        uuid,
                         true
                     )
                 )
