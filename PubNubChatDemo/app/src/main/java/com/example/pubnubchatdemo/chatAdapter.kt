@@ -11,29 +11,31 @@ import com.example.pubnubchatdemo.dataclass.ChatMessages
 
 class chatAdapter(var array: ArrayList<ChatMessages>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var MSG = 0
-    var IMG = 1
+    //    var MSG = 0
+//    var IMG = 1
+    var SENDER = 0
+    var RECIEVER = 1
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
         return when (viewType) {
-            MSG -> {
+            SENDER -> {
                 return MessageViewHolder1(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.chat_row_layout_msg, parent, false)
+                        .inflate(R.layout.chat_row_layout_sender_msg, parent, false)
                 )
             }
-            IMG -> {
+            RECIEVER -> {
                 MessageViewHolder2(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.chat_row_layout_img, parent, false)
+                        .inflate(R.layout.chat_row_layout_reciever_msg, parent, false)
                 )
             }
             else -> {
                 return MessageViewHolder1(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.chat_row_layout_msg, parent, false)
+                        .inflate(R.layout.chat_row_layout_sender_msg, parent, false)
                 )
             }
         }
@@ -53,18 +55,18 @@ class chatAdapter(var array: ArrayList<ChatMessages>) :
 
     inner class MessageViewHolder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtSendMsg: TextView = itemView.findViewById(R.id.txtSendMsg)
-        var txtRecieveMsg: TextView = itemView.findViewById(R.id.txtRecieveMsg)
+        var imgRight: ImageView = itemView.findViewById(R.id.imgRight)
 
 
         fun bind(data: ChatMessages, position: Int) {
             txtSendMsg.text = data.msg
-            txtRecieveMsg.text = data.msg
-            if (array[position].sender == Appconstants.UUID) {
-                txtSendMsg.visibility = View.VISIBLE
-                txtRecieveMsg.visibility = View.INVISIBLE
+            imgRight.LoadImg(data.url.toString())
+            if (data.is_image == true) {
+                imgRight.visibility = View.VISIBLE
+                txtSendMsg.visibility = View.GONE
             } else {
-                txtRecieveMsg.visibility = View.VISIBLE
-                txtSendMsg.visibility = View.INVISIBLE
+                imgRight.visibility = View.GONE
+                txtSendMsg.visibility = View.VISIBLE
             }
 
         }
@@ -72,18 +74,20 @@ class chatAdapter(var array: ArrayList<ChatMessages>) :
     }
 
     inner class MessageViewHolder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var txtRecieveMsg: TextView = itemView.findViewById(R.id.txtRecieveMsg)
         var imgLeft: ImageView = itemView.findViewById(R.id.imgLeft)
-        var imgRight: ImageView = itemView.findViewById(R.id.imgRight)
 
         fun bind(data: ChatMessages, position: Int) {
-            imgLeft.LoadImg(data.msg.toString())
-            imgRight.LoadImg(data.msg.toString())
-            if (array[position].sender == Appconstants.UUID) {
-                imgRight.visibility = View.VISIBLE
-                imgLeft.visibility = View.INVISIBLE
+            imgLeft.LoadImg(data.url.toString())
+            txtRecieveMsg.text = data.msg
+
+            if (data.is_image == true) {
+
+                imgLeft.visibility = View.VISIBLE
+                txtRecieveMsg.visibility = View.GONE
             } else {
-                imgRight.visibility = View.VISIBLE
-                imgLeft.visibility = View.INVISIBLE
+                imgLeft.visibility = View.GONE
+                txtRecieveMsg.visibility = View.VISIBLE
             }
 
         }
@@ -91,10 +95,10 @@ class chatAdapter(var array: ArrayList<ChatMessages>) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        val type: Int = if (array[position].is_image == true) {
-            IMG
+        val type: Int = if (array[position].sender == Appconstants.UUID) {
+            SENDER
         } else {
-            MSG
+            RECIEVER
         }
         return type
     }
