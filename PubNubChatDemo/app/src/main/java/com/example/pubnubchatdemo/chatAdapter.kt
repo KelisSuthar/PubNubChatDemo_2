@@ -61,10 +61,10 @@ class chatAdapter(var array: ArrayList<ChatMessages>) :
             txtRecieveMsg.text = data.msg
             if (array[position].sender == Appconstants.UUID) {
                 txtSendMsg.visibility = View.VISIBLE
-                txtRecieveMsg.visibility = View.INVISIBLE
+                txtRecieveMsg.visibility = View.GONE
             } else {
                 txtRecieveMsg.visibility = View.VISIBLE
-                txtSendMsg.visibility = View.INVISIBLE
+                txtSendMsg.visibility = View.GONE
             }
 
         }
@@ -80,10 +80,10 @@ class chatAdapter(var array: ArrayList<ChatMessages>) :
             imgRight.LoadImg(data.msg.toString())
             if (array[position].sender == Appconstants.UUID) {
                 imgRight.visibility = View.VISIBLE
-                imgLeft.visibility = View.INVISIBLE
+                imgLeft.visibility = View.GONE
             } else {
-                imgRight.visibility = View.VISIBLE
-                imgLeft.visibility = View.INVISIBLE
+                imgRight.visibility = View.GONE
+                imgLeft.visibility = View.VISIBLE
             }
 
         }

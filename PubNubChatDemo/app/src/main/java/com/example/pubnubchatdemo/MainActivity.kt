@@ -186,7 +186,8 @@ class MainActivity : AppCompatActivity() {
             Appconstants.CHANNEL_NAME,
             selectedFile!!.absolutePath,
             inputstream,
-            message = null
+            "message_null",
+            shouldStore = true
         )
             .async { result, status ->
 
@@ -207,14 +208,16 @@ class MainActivity : AppCompatActivity() {
                         mMessages.add(
                             ChatMessages(
                                 result?.url,
-                                "",
+                                Appconstants.UUID,
                                 true
                             )
                         )
 
                     }
-                    adapter?.notifyDataSetChanged()
-                    recyclerView?.scrollToPosition(mMessages.size - 1)
+                    runOnUiThread {
+                        adapter?.notifyDataSetChanged()
+                        recyclerView?.scrollToPosition(mMessages.size - 1)
+                    }
                 }
             }
     }
@@ -327,10 +330,6 @@ class MainActivity : AppCompatActivity() {
                     end = all_messages.size
                     addData()
 
-                    adapter?.notifyDataSetChanged()
-
-
-                    recyclerView?.scrollToPosition(mMessages.size - 1)
 
                 }
             } else {
