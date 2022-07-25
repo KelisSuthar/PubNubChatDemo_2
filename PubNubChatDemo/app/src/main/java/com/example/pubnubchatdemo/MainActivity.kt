@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity() {
     var adapter: chatAdapter? = null
     var recyclerView: RecyclerView? = null
     var editText: TextInputEditText? = null
+    var start = 0
+    var end = -1
     private val mMessages: ArrayList<ChatMessages> = ArrayList()
+    private val all_messages: ArrayList<PNFetchMessageItem> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -92,19 +95,44 @@ class MainActivity : AppCompatActivity() {
                 println("Message publisher: ${pnMessageResult.publisher}")
                 println("Message timetoken: ${pnMessageResult.timetoken}")
 
-                runOnUiThread {
+                if (pnMessageResult.message.isJsonObject) {
+                    val file = pnMessageResult.message.asJsonObject.get("file").asJsonObject
+                    pubnub.getFileUrl(
+                        Appconstants.CHANNEL_NAME,
+                        file.get("name").asString,
+                        file.get("id").asString,
+                    ).async { result, status ->
+                        Log.e("PUB_NUB", result!!.url)
+                        if (!status.error && result != null) {
+                            mMessages.add(
+                                ChatMessages(
+                                    result.url,
+                                    pnMessageResult.publisher,
+                                    true
+                                )
+                            )
+
+                        }
+                    }
+                } else {
                     mMessages.add(
                         ChatMessages(
                             pnMessageResult.message.asString,
-                            pnMessageResult.publisher.toString()
+                            pnMessageResult.publisher,
+                            false
                         )
                     )
+                }
+                runOnUiThread {
                     adapter!!.notifyDataSetChanged()
                     recyclerView?.scrollToPosition(mMessages.size - 1)
                 }
             }
 
-            override fun presence(pubnub: PubNub, pnPresenceEventResult: PNPresenceEventResult) {
+            override fun presence(
+                pubnub: PubNub,
+                pnPresenceEventResult: PNPresenceEventResult
+            ) {
                 println("Presence: ${pnPresenceEventResult}")
                 println("Presence event: ${pnPresenceEventResult.event}")
                 println("Presence channel: ${pnPresenceEventResult.channel}")
@@ -262,35 +290,47 @@ class MainActivity : AppCompatActivity() {
             if (!status.error) {
                 result!!.channels.forEach { (channel, messages) ->
                     println("Channel: $channel")
-                    messages.forEach { messageItem: PNFetchMessageItem ->
-                        println(messageItem.message)// actual message payload
-//                        println(messageItem.timetoken) // included by default
-//                        println(messageItem.uuid) // included by default
-                        if (messageItem.message.isJsonObject) {
-                            val file = messageItem.message.asJsonObject.get("file").asJsonObject
-                            getFileUrl(
-                                file.get("name").asString,
-                                file.get("id").asString,
-                                messageItem.uuid.toString()
-                            )
-                        } else {
-                            mMessages.add(
-                                ChatMessages(
-                                    messageItem.message.asString,
-                                    messageItem.uuid.toString(),
-                                    false
-                                )
-                            )
-                        }
+
+//                    messages.forEach { messageItem: PNFetchMessageItem ->
+//                        println(messageItem.message)// actual message payload
+////                        println(messageItem.timetoken) // included by default
+////                        println(messageItem.uuid) // included by default
+//                        if (messageItem.message.isJsonObject) {
+//                            val file = messageItem.message.asJsonObject.get("file").asJsonObject
+////                            getFileUrl(
+////                                file.get("name").asString,
+////                                file.get("id").asString,
+////                                messageItem.uuid.toString()
+////                            )
+//                            Log.i(
+//                                "THIS_APP",
+//                                pubnub!!.getFileUrl(
+//                                    Appconstants.CHANNEL_NAME,
+//                                    file.get("name").asString,
+//                                    file.get("id").asString,
+//                                ).toString()
+//                            )
+//                        } else {
+////                            mMessages.add(
+////                                ChatMessages(
+////                                    messageItem.message.asString,
+////                                    messageItem.uuid.toString(),
+////                                    "", false
+////                                )
+////                            )
+//                        }
+//
+//
+//                    }
+                    all_messages.addAll(messages)
+                    start = 0
+                    end = all_messages.size
+                    addData()
+
+                    adapter?.notifyDataSetChanged()
 
 
-
-                        adapter?.notifyDataSetChanged()
-                    }
-
-//                    recyclerView?.scrollToPosition(adapter!!.itemCount-1)
                     recyclerView?.scrollToPosition(mMessages.size - 1)
-
 
                 }
             } else {
@@ -298,6 +338,32 @@ class MainActivity : AppCompatActivity() {
                 status.exception?.printStackTrace()
             }
 
+        }
+    }
+
+    private fun addData() {
+        if (start == end) {
+            recyclerView!!.post { adapter?.notifyDataSetChanged() }
+            recyclerView?.scrollToPosition(mMessages.size - 1)
+        } else {
+            if (all_messages[start].message.isJsonObject) {
+                val file = all_messages[start].message.asJsonObject.get("file").asJsonObject
+                getFileUrl(
+                    file.get("name").asString,
+                    file.get("id").asString,
+                    all_messages[start].uuid.toString(),
+                )
+            } else {
+                mMessages.add(
+                    ChatMessages(
+                        all_messages[start].message.asString,
+                        all_messages[start].uuid.toString(),
+                        false
+                    )
+                )
+                start += 1
+                addData()
+            }
         }
     }
 
@@ -317,6 +383,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
 
+                start += 1
+                addData()
             }
             recyclerView!!.post { adapter!!.notifyDataSetChanged() }
         }
